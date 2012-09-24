@@ -4,9 +4,8 @@ Project to make an API for my house.  Based on the following:
 
 * [Phidgets SBC](http://www.phidgets.com/) running Debian
 
-* [swagger-node-express](https://github.com/wordnik/swagger-node-express).  Node is so lightweight that it's a great
+* [Swagger for Node Express](https://github.com/wordnik/swagger-node-express).  Node is so lightweight that it's a great
 choice for running on the sbc.
-
 
 ### Getting started
 
