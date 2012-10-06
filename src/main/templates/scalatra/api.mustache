@@ -1,0 +1,76 @@
+package {{package}}
+
+{{#imports}}import {{import}}
+{{/imports}}
+import com.wordnik.swagger.core.ApiPropertiesReader
+import org.scalatra.{ TypedParamSupport, ScalatraServlet }
+import org.scalatra.swagger._
+import org.scalatra.json._
+
+import scala.collection.JavaConverters._
+import org.json4s.{ DefaultFormats, Formats }
+
+import scala.collection.JavaConverters._
+
+class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with JacksonJsonSupport with JValueResult with SwaggerSupport {
+  protected implicit val jsonFormats: Formats = DefaultFormats
+
+  protected val applicationDescription: String = "{{className}}"
+  override protected val applicationName: Option[String] = Some("{{baseName}}")
+
+  def swaggerToModel(cls: Class[_]) = {
+    val docObj = ApiPropertiesReader.read(cls)
+    val name = docObj.getName
+    val fields = for (field <- docObj.getFields.asScala.filter(d => d.paramType != null))
+      yield (field.name -> ModelField(field.name, field.notes, DataType(field.paramType)))
+
+    Model(name, name, fields.toMap)
+  }
+
+  before() {
+    contentType = formats("json")
+    response.headers += ("Access-Control-Allow-Origin" -> "*")
+  }
+
+  {{#operations}}
+  {{#operation}}
+  {{httpMethod}}("{{path}}",
+    summary("{{{summary}}}"),
+    nickname("{{nickname}}"),
+    responseClass("{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}void{{/returnType}}"),
+    endpoint("{{basePart}}"),
+    notes("{{{notes}}}"),
+    parameters(
+      {{#allParams}}
+      {{#queryParameter}}
+      Parameter("{{paramName}}", "{{{description}}}",
+        paramType = ParamType.Query,
+        required = {{required}},
+        allowMultiple = {{allowMultiple}},
+        {{#allowableValues}}allowableValues = AllowableValues("{{{allowableValues}}}"),{{/allowableValues}}
+        defaultValue = {{#defaultValue}}Some({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
+        dataType = DataType("{{dataType}}"))
+      {{/queryParameter}}
+      {{#pathParameter}}
+      Parameter("{{paramName}}", "{{{description}}}",
+        dataType = DataType.String,
+        paramType = ParamType.Path)
+      {{/pathParameter}}
+      {{#headerParameter}}
+      Parameter("{{paramName}}", "{{{description}}}",
+        dataType = DataType("{{dataType}}"),
+        paramType = ParamType.Header)
+      {{/headerParameter}}
+      {{#bodyParameter}}
+      Parameter("{{paramName}}", "{{{description}}}",
+        dataType = DataType("{{dataType}}"),
+        paramType = ParamType.Body)
+      {{/bodyParameter}}
+      {{#hasMore}},{{/hasMore}}{{newline}}
+      {{/allParams}}
+      )) {
+  }
+
+  {{/operation}}
+  {{/operations}}
+}
