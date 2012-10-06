@@ -2,9 +2,9 @@ import AssemblyKeys._ // put this at the top of the file
 
 assemblySettings
 
-organization := "com.example"
+organization := "org.eatbacon"
 
-name := "scalatra-sbt-prototype"
+name := "sfth"
 
 version := "0.1.0-SNAPSHOT"
 
