@@ -4,12 +4,27 @@ Project to make an API for my house.  Based on the following:
 
 * [Phidgets SBC](http://www.phidgets.com/) running Debian
 
-* [Swagger for Node Express](https://github.com/wordnik/swagger-node-express).  Node is so lightweight that it's a great
-choice for running on the sbc.
-
-* [nodePhidgetsAPI](https://github.com/RIAEvangelist/nodePhidgetAPI)
+* [Swagger Scalatra](https://www.scalatra.org).  I was using nodejs first but the phidget support isn't great for it (yet).
 
 ### Getting started
 
-Installing node on the phidget is no simple task.  I followed [these instructions](https://gist.github.com/1574158).  They pretty much work, but you need to install npm from the build folder, not from the npmjs.org script.
+You can build the assembly like this:
+
+```
+cd server
+sbt assembly
+```
+
+You can run the server like this:
+
+```
+cd server/target
+java -jar sfth-assembly-0.1.0-SNAPSHOT.jar
+```
+
+This starts up the server locally.  You can now hit the API via included swagger-ui:
+
+```
+http://localhost:8080/admin
+```
 
