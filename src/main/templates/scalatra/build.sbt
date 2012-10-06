@@ -13,6 +13,7 @@ scalaVersion := "2.9.2"
 classpathTypes ~= (_ + "orbit")
 
 libraryDependencies ++= Seq(
+  "com.phidgets"                 % "phidget"                % "2.1.0",
   "org.scalatra"                 % "scalatra"               % "2.2.0-SNAPSHOT",
   "org.scalatra"                 % "scalatra-scalate"       % "2.2.0-SNAPSHOT",
   "org.scalatra"                 % "scalatra-specs2"        % "2.2.0-SNAPSHOT"     % "test",

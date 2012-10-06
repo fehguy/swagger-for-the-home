@@ -8,6 +8,18 @@ Project to make an API for my house.  Based on the following:
 
 ### Getting started
 
+The Phidget library isn't in a maven repo, so pull it from here:
+
+```
+http://www.phidgets.com/downloads/libraries/phidget21jar.zip
+```
+
+and install it in your local maven repo like such:
+
+```
+mvn install:install-file -DgroupId=com.phidgets -DartifactId=phidget -Dversion=2.1.0 -Dpackaging=jar -Dfile=phidget21.jar
+```
+
 You can build the assembly like this:
 
 ```

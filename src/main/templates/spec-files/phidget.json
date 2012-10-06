@@ -1,0 +1,40 @@
+{
+  "apiVersion":"0.2",
+  "swaggerVersion":"1.1",
+  "basePath":"http://localhost:8002",
+  "resourcePath":"/phidget",
+  "apis":[
+    {
+      "path":"/phidget.{format}/lcd",
+      "description":"Manipulates the LCD",
+      "operations":[
+        {
+          "httpMethod":"POST",
+          "summary":"Updates the LCD",
+          "notes":"",
+          "responseClass":"void",
+          "nickname":"setLcd",
+          "parameters":[
+            {
+              "name":"lineNumber",
+              "description":"Line to update",
+              "paramType":"query",
+              "required":true,
+              "allowMultiple":false,
+              "dataType":"int",
+              "defaultValue":"1"
+            },
+            {
+              "description":"text to send",
+              "paramType":"body",
+              "required":true,
+              "allowMultiple":false,
+              "dataType":"string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models":{}
+}

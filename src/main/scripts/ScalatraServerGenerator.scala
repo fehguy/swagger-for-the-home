@@ -59,6 +59,24 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
     ("admin/lib/underscore-min.js",   outputFolder + "/target/webapp/admin/lib",    "underscore-min.js")
     )
 
+  override def toDefaultValue(datatype: String, v: String): Option[String] = {
+    if (v != "" && v != null) {
+      datatype match {
+        case "int" => Some("\"" + v + "\"")
+        case "long" => Some("\"" + v + "\"")
+        case "double" => Some("\"" + v + "\"")
+        case x if x == "string" || x == "String" => {
+          v match {
+            case e: String => Some("\"" + v + "\"")
+            case _ => None
+          }
+        }
+        case _ => None
+      }
+    } else None
+  }
+
+
   override def processApiMap(m: Map[String, AnyRef]): Map[String, AnyRef] = {
     val mutable = scala.collection.mutable.Map() ++ m
 
