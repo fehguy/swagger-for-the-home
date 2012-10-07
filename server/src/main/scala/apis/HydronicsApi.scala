@@ -4,14 +4,16 @@ import org.eatbacon.model.Zone
 import com.wordnik.swagger.core.ApiPropertiesReader
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
-import org.scalatra.json._
+import org.json4s._
+import JsonDSL._
+import org.scalatra.json.{JValueResult, NativeJsonSupport}
 
 import scala.collection.JavaConverters._
 import org.json4s.{ DefaultFormats, Formats }
 
 import scala.collection.JavaConverters._
 
-class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with JacksonJsonSupport with JValueResult with SwaggerSupport {
+class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with NativeJsonSupport with JValueResult with SwaggerSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "HydronicsApi"

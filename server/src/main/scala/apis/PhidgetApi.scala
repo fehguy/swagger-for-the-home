@@ -3,14 +3,16 @@ package apis
 import com.wordnik.swagger.core.ApiPropertiesReader
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
-import org.scalatra.json._
+import org.json4s._
+import JsonDSL._
+import org.scalatra.json.{JValueResult, NativeJsonSupport}
 
 import scala.collection.JavaConverters._
 import org.json4s.{ DefaultFormats, Formats }
 
 import scala.collection.JavaConverters._
 
-class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with JacksonJsonSupport with JValueResult with SwaggerSupport {
+class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with NativeJsonSupport with JValueResult with SwaggerSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "PhidgetApi"
@@ -48,11 +50,12 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet with Ty
         paramType = ParamType.Query,
         required = true,
         allowMultiple = false,
-        defaultValue = Some("1"),
+        allowableValues = AllowableValues(0,1,2,3),defaultValue = Some("0"),
         dataType = DataType("Int"))
       
       )) {
     PhidgetService.toLcd(params.getOrElse("lineNumber", halt(400)).toInt, params("msg"))
+    ApiResponse("updated LCD text on line " + params("lineNumber"), 200)
   }
 
   get("/lcd/contrast",
@@ -66,11 +69,12 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet with Ty
         paramType = ParamType.Query,
         required = true,
         allowMultiple = false,
-        defaultValue = Some("200"),
+        allowableValues = AllowableValues(Range(0,255, 1)),defaultValue = Some("200"),
         dataType = DataType("Int"))
       
       )) {
     PhidgetService.setContrast(params.getOrElse("value", halt(400)).toInt)
+    ApiResponse("updated LCD contrast", 200)
   }
 
   get("/lcd/backlight",
@@ -84,10 +88,12 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet with Ty
         paramType = ParamType.Query,
         required = true,
         allowMultiple = false,
-        defaultValue = Some("true"),
-        dataType = DataType("String"))
+        allowableValues = AllowableValues(false, true),defaultValue = Some("true"),
+        dataType = DataType("Boolean"))
       
       )) {
-      PhidgetService.setBacklight(params.getOrElse("enabled", halt(400)).toBoolean)
-    }
+    PhidgetService.setBacklight(params.getOrElse("enabled", halt(400)).toBoolean)
+    ApiResponse("updated LCD backlight", 200)
+  }
+
   }
