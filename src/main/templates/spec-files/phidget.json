@@ -22,7 +22,16 @@
               "required":true,
               "allowMultiple":false,
               "dataType":"int",
-              "defaultValue":"1"
+              "defaultValue":"0",
+              "allowableValues":{
+                "valueType":"LIST",
+                "values":[
+                  "0",
+                  "1",
+                  "2",
+                  "3"
+                ]
+              }
             },
             {
               "name":"msg",
@@ -54,7 +63,12 @@
               "required":true,
               "allowMultiple":false,
               "dataType":"int",
-              "defaultValue":"80"
+              "defaultValue":"200",
+              "allowableValues":{
+                "valueType":"RANGE",
+                "min":"0",
+                "max":"255"
+              }
             }
           ]
         }
@@ -77,8 +91,15 @@
               "paramType":"query",
               "required":true,
               "allowMultiple":false,
-              "dataType":"string",
-              "defaultValue":"true"
+              "dataType":"boolean",
+              "defaultValue":"true",
+              "allowableValues":{
+                "valueType":"LIST",
+                "values":[
+                  "true",
+                  "false"
+                ]
+              }
             }
           ]
         }

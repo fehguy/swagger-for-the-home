@@ -5,14 +5,16 @@ package {{package}}
 import com.wordnik.swagger.core.ApiPropertiesReader
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
-import org.scalatra.json._
+import org.json4s._
+import JsonDSL._
+import org.scalatra.json.{JValueResult, NativeJsonSupport}
 
 import scala.collection.JavaConverters._
 import org.json4s.{ DefaultFormats, Formats }
 
 import scala.collection.JavaConverters._
 
-class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with JacksonJsonSupport with JValueResult with SwaggerSupport {
+class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with NativeJsonSupport with JValueResult with SwaggerSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "{{className}}"
@@ -47,7 +49,7 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet with
         paramType = ParamType.Query,
         required = {{required}},
         allowMultiple = {{allowMultiple}},
-        {{#allowableValues}}allowableValues = AllowableValues("{{{allowableValues}}}"),{{/allowableValues}}
+        {{#allowableValues}}allowableValues = {{{allowableValues}}},{{/allowableValues}}
         defaultValue = {{#defaultValue}}Some({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
         dataType = DataType("{{dataType}}"))
       {{/queryParameter}}
