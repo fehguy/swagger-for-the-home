@@ -9,7 +9,7 @@
       "description":"Manipulates the LCD",
       "operations":[
         {
-          "httpMethod":"POST",
+          "httpMethod":"GET",
           "summary":"Updates the LCD",
           "notes":"",
           "responseClass":"void",
@@ -25,11 +25,60 @@
               "defaultValue":"1"
             },
             {
+              "name":"msg",
               "description":"text to send",
-              "paramType":"body",
+              "paramType":"query",
               "required":true,
               "allowMultiple":false,
               "dataType":"string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path":"/phidget.{format}/lcd/contrast",
+      "description":"Manipulates the LCD",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"Updates the LCD",
+          "notes":"",
+          "responseClass":"void",
+          "nickname":"setContrast",
+          "parameters":[
+            {
+              "name":"value",
+              "description":"contrast to set to",
+              "paramType":"query",
+              "required":true,
+              "allowMultiple":false,
+              "dataType":"int",
+              "defaultValue":"80"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path":"/phidget.{format}/lcd/backlight",
+      "description":"Manipulates the LCD backlight",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"Updates the LCD backlight",
+          "notes":"",
+          "responseClass":"void",
+          "nickname":"setBacklight",
+          "parameters":[
+            {
+              "name":"enabled",
+              "description":"turn on or off light",
+              "paramType":"query",
+              "required":true,
+              "allowMultiple":false,
+              "dataType":"string",
+              "defaultValue":"true"
             }
           ]
         }
