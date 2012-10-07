@@ -30,16 +30,19 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet with Ty
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
 
-  post("/lcd",
+  get("/lcd",
     summary("Updates the LCD"),
     nickname("setLcd"),
     responseClass("void"),
     endpoint("lcd"),
     notes(""),
     parameters(
-      Parameter("body", "text to send",
-        dataType = DataType("String"),
-        paramType = ParamType.Body)
+      Parameter("msg", "text to send",
+        paramType = ParamType.Query,
+        required = true,
+        allowMultiple = false,
+        defaultValue = None,
+        dataType = DataType("String"))
       ,
       Parameter("lineNumber", "Line to update",
         paramType = ParamType.Query,
@@ -47,7 +50,44 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet with Ty
         allowMultiple = false,
         defaultValue = Some("1"),
         dataType = DataType("Int"))
+      
       )) {
-      PhidgetService.toLcd(params.getOrElse("lineNumber", halt(400)).toInt, request.body)
+    PhidgetService.toLcd(params.getOrElse("lineNumber", halt(400)).toInt, params("msg"))
+  }
+
+  get("/lcd/contrast",
+    summary("Updates the LCD"),
+    nickname("setContrast"),
+    responseClass("void"),
+    endpoint("lcd/contrast"),
+    notes(""),
+    parameters(
+      Parameter("value", "contrast to set to",
+        paramType = ParamType.Query,
+        required = true,
+        allowMultiple = false,
+        defaultValue = Some("200"),
+        dataType = DataType("Int"))
+      
+      )) {
+    PhidgetService.setContrast(params.getOrElse("value", halt(400)).toInt)
+  }
+
+  get("/lcd/backlight",
+    summary("Updates the LCD backlight"),
+    nickname("setBacklight"),
+    responseClass("void"),
+    endpoint("lcd/backlight"),
+    notes(""),
+    parameters(
+      Parameter("enabled", "turn on or off light",
+        paramType = ParamType.Query,
+        required = true,
+        allowMultiple = false,
+        defaultValue = Some("true"),
+        dataType = DataType("String"))
+      
+      )) {
+      PhidgetService.setBacklight(params.getOrElse("enabled", halt(400)).toBoolean)
     }
   }
