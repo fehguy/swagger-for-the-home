@@ -6,7 +6,10 @@ import com.phidgets.event._
 
 trait AnalogSupport {
 	def getAnalogInputs(value: Option[String]) = {
-
+		value match {
+			case Some(str) => println("body is " + str)
+			case _ =>
+		}
 	}
 
 	println(Phidget.getLibraryVersion())
@@ -19,8 +22,6 @@ trait AnalogSupport {
 			println("error event for " + ee)
 		}
 	})
-
-	initAnalog()
 
 	def initAnalog(): Unit = {
 		analog.openAny()

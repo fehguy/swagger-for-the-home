@@ -45,14 +45,16 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     endpoint("analog/inputs"),
     notes("Gives a list of all analog IO values"),
     parameters(
-      Parameter("body", "text to send",
+      Parameter(name = "body",
+        description = "text to send",
         dataType = DataType("String"),
         paramType = ParamType.Body)
       )) {
-    val body = StringDataType(params.contains("body") match {
-      case true  => params("body")
-      case false => halt(400)
-    })
+    val body = (
+      StringDataType(request.body) match {
+      case e: String => request.body
+      case _ => halt(400)
+      })
     Profile("/analog/inputs (post)", PhidgetApiService.getAnalogInputs(body))
   }
 
@@ -81,11 +83,11 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     val msg = StringDataType(params.contains("msg") match {
       case true  => params("msg")
       case false => halt(400)
-    })
+      })
     val lineNumber = IntDataType(params.contains("lineNumber") match {
       case true  => params("lineNumber")
       case false => "0"
-    })
+      })
     Profile("/lcd (get)", PhidgetApiService.setLcd(msg, lineNumber))
   }
 
@@ -107,7 +109,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     val value = IntDataType(params.contains("value") match {
       case true  => params("value")
       case false => "200"
-    })
+      })
     Profile("/lcd/contrast (get)", PhidgetApiService.setContrast(value))
   }
 
@@ -129,7 +131,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     val enabled = BooleanDataType(params.contains("enabled") match {
       case true  => params("enabled")
       case false => "true"
-    })
+      })
     Profile("/lcd/backlight (get)", PhidgetApiService.setBacklight(enabled))
   }
 }

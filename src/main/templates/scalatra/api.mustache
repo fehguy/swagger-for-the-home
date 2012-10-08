@@ -60,17 +60,20 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
         dataType = DataType("{{dataType}}"))
       {{/queryParameter}}
       {{#pathParameter}}
-      Parameter("{{paramName}}", "{{{description}}}",
+      Parameter(name = "{{paramName}}", 
+        description = "{{{description}}}",
         dataType = DataType.String,
         paramType = ParamType.Path)
       {{/pathParameter}}
       {{#headerParameter}}
-      Parameter("{{paramName}}", "{{{description}}}",
+      Parameter(name = "{{paramName}}",
+        description = "{{{description}}}",
         dataType = DataType("{{dataType}}"),
         paramType = ParamType.Header)
       {{/headerParameter}}
       {{#bodyParameter}}
-      Parameter("{{paramName}}", "{{{description}}}",
+      Parameter(name = "{{paramName}}",
+        description = "{{{description}}}",
         dataType = DataType("{{dataType}}"),
         paramType = ParamType.Body)
       {{/bodyParameter}}{{#hasMore}},{{/hasMore}}
@@ -78,9 +81,26 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
     )) {
     {{#allParams}}
 
-    val {{paramName}} = {{dataType}}DataType(params.contains("{{{paramName}}}") match {
+    val {{paramName}} = {{#bodyParameter}}(
+      {{dataType}}DataType(request.body) match {
+      case e: String => {{#notRequired}}Some({{/notRequired}}request.body{{#notRequired}}){{/notRequired}}{{newline}}
+      case _ => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
+      {{/bodyParameter}}
+      {{#queryParameter}}
+      {{dataType}}DataType(params.contains("{{{paramName}}}") match {
       case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
       case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
+      {{/queryParameter}}
+      {{#pathParameter}}
+      {{dataType}}DataType(params.contains("{{{paramName}}}") match {
+      case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
+      case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
+      {{/pathParameter}}
+      {{#headerParameter}}
+      {{dataType}}DataType(params.contains("{{{paramName}}}") match {
+      case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
+      case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
+      {{/headerParameter}}
     })
     {{/allParams}}
 

@@ -29,8 +29,6 @@ trait LCDSupport {
 		}
 	})
 
-	initLcd()
-
 	def initLcd(): Unit = {
 		lcd.openAny()
 		println("waiting for LCD attachment...")
