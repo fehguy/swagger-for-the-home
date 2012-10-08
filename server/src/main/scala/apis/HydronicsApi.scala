@@ -1,6 +1,7 @@
 package apis
 
 import org.eatbacon.model.Zone
+import services._
 import com.wordnik.swagger.core.ApiPropertiesReader
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
@@ -13,7 +14,12 @@ import org.json4s.{ DefaultFormats, Formats }
 
 import scala.collection.JavaConverters._
 
-class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with NativeJsonSupport with JValueResult with SwaggerSupport {
+class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet 
+      with TypedParamSupport 
+      with NativeJsonSupport 
+      with JValueResult 
+      with SwaggerSupport
+      with DatatypeSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "HydronicsApi"
@@ -41,6 +47,7 @@ class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet with 
     notes("Returns an array of zones"),
     parameters(
       )) {
-  }
+      HydronicsApiService.getZones()
+    }
 
   }

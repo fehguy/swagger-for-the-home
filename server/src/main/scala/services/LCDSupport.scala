@@ -1,29 +1,26 @@
-package apis
+package services
 
 import com.phidgets._
-import com.phidgets.TextLCDPhidget._
 import com.phidgets.event._
 
-case class ApiResponse(msg: String, code: Int)
-
-object PhidgetService {
+trait LCDSupport {
 	println(Phidget.getLibraryVersion())
 
 	var contrast = 200
 	var backlight = true
 	val lcd = new TextLCDPhidget
-	var isAttached = false
+	var lcdAttached = false
 
 	lcd.addAttachListener(new AttachListener() {
 		def attached(ae: AttachEvent) = {
 			println("attachment of " + ae)
-			isAttached = true
+			lcdAttached = true
 		}
 	})
 	lcd.addDetachListener(new DetachListener() {
 		def detached(ae: DetachEvent) = {
 			println("detachment of " + ae)
-			isAttached = false
+			lcdAttached = false
 		}
 	})
 	lcd.addErrorListener(new ErrorListener() {
@@ -53,38 +50,35 @@ object PhidgetService {
     lcd.setScreenSize(8)
     lcd.initialize()
 
-    isAttached = true
+    lcdAttached = true
 
     setContrast(contrast)
     setBacklight(backlight)
 	}
 
-//	PhidgetService.setBacklight(params.getOrElse("enabled", halt(400)).toBoolean)
 	def setBacklight(enabled: Boolean) = {
-		if(!isAttached)
+		if(!lcdAttached)
 			initLcd()
 		backlight = enabled
 		lcd.setBacklight(backlight)
 	}
 
-//	PhidgetService.setContrast(params.getOrElse("value", halt(400)).toInt)
 	def setContrast(value: Int) = {
-		if(!isAttached)
+		if(!lcdAttached)
 			initLcd()
 		contrast = value
     lcd.setContrast(contrast)
 	}
 
-//	PhidgetService.toLcd(params.getOrElse("lineNumber", halt(400)).toInt, params("msg"))
-	def toLcd(lineNumber: Int, msg: String) = {
-		if(!isAttached)
+	def setLcd(value: String, lineNumber: Int) = {
+		if(!lcdAttached)
 			initLcd()
-		println("updating " + lineNumber + " to " + msg)
-    lcd.setDisplayString(lineNumber, msg)
+		println("updating " + lineNumber + " to " + value)
+    lcd.setDisplayString(lineNumber, value)
 	}
 
-	def close = {
-		isAttached = false
+	def disconnectLcd = {
+		lcdAttached = false
 		lcd.close()
-	}
+	}	
 }
