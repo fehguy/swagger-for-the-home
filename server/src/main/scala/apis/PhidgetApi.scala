@@ -1,6 +1,8 @@
 package apis
 
-import org.eatbacon.model.AnalogIO
+import models.AnalogIO
+import com.wordnik.util.perf._
+
 import services._
 import com.wordnik.swagger.core.ApiPropertiesReader
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
@@ -19,7 +21,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       with NativeJsonSupport 
       with JValueResult 
       with SwaggerSupport
-      with DatatypeSupport {
+      with SwaggerDatatypeConversionSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "PhidgetApi"
@@ -39,103 +41,98 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
 
-  get("/analog/inputs",
+  post("/analog/inputs",
     summary("returns all inputs"),
     nickname("getAnalogInputs"),
     responseClass("LIST[AnalogIO]"),
     endpoint("analog/inputs"),
-    notes(""),
+    notes("Gives a list of all analog IO values"),
     parameters(
-      Parameter("test", "text to send",
-        paramType = ParamType.Query,
-        required = false,
-        allowMultiple = false,
-        defaultValue = None,
-        dataType = DataType("String"))
-      
-    )) {
-      val test = StringDataType(params.contains("test") match {
-        case true  => Some(params("test"))
-        case false => None
-      })
-      PhidgetApiService.getAnalogInputs(test)
-    }
+      Parameter("body", "text to send",
+        dataType = DataType("String"),
+        paramType = ParamType.Body)
+      )) {
+    val body = StringDataType(params.contains("body") match {
+      case true  => params("body")
+      case false => halt(400)
+    })
+    Profile("/analog/inputs (post)", PhidgetApiService.getAnalogInputs(body))
+  }
 
   get("/lcd",
     summary("Updates the LCD"),
     nickname("setLcd"),
     responseClass("void"),
     endpoint("lcd"),
-    notes(""),
+    notes("Pass a line number and string to update on the LCD"),
     parameters(
-      Parameter("msg", "text to send",
+      Parameter(name = "msg", 
+        description = "text to send",
         paramType = ParamType.Query,
         required = true,
         allowMultiple = false,
         defaultValue = None,
         dataType = DataType("String"))
-      ,
-    Parameter("lineNumber", "Line to update",
+      ,Parameter(name = "lineNumber", 
+        description = "Line to update",
         paramType = ParamType.Query,
         required = true,
         allowMultiple = false,
         allowableValues = AllowableValues(0,1,2,3),defaultValue = Some("0"),
         dataType = DataType("Int"))
-      
-    )) {
-      val msg = StringDataType(params.contains("msg") match {
-        case true  => params("msg")
-        case false => halt(400)
-      })
-      val lineNumber = IntDataType(params.contains("lineNumber") match {
-        case true  => params("lineNumber")
-        case false => "0"
-      })
-      PhidgetApiService.setLcd(msg, lineNumber)
-    }
+      )) {
+    val msg = StringDataType(params.contains("msg") match {
+      case true  => params("msg")
+      case false => halt(400)
+    })
+    val lineNumber = IntDataType(params.contains("lineNumber") match {
+      case true  => params("lineNumber")
+      case false => "0"
+    })
+    Profile("/lcd (get)", PhidgetApiService.setLcd(msg, lineNumber))
+  }
 
   get("/lcd/contrast",
     summary("Updates the LCD"),
     nickname("setContrast"),
     responseClass("void"),
     endpoint("lcd/contrast"),
-    notes(""),
+    notes("The contrast is darkest at 0 and brightest at 255"),
     parameters(
-      Parameter("value", "contrast to set to",
+      Parameter(name = "value", 
+        description = "contrast to set to",
         paramType = ParamType.Query,
         required = true,
         allowMultiple = false,
         allowableValues = AllowableValues(Range(0,255, 1)),defaultValue = Some("200"),
         dataType = DataType("Int"))
-      
-    )) {
-      val value = IntDataType(params.contains("value") match {
-        case true  => params("value")
-        case false => "200"
-      })
-      PhidgetApiService.setContrast(value)
-    }
+      )) {
+    val value = IntDataType(params.contains("value") match {
+      case true  => params("value")
+      case false => "200"
+    })
+    Profile("/lcd/contrast (get)", PhidgetApiService.setContrast(value))
+  }
 
   get("/lcd/backlight",
     summary("Updates the LCD backlight"),
     nickname("setBacklight"),
     responseClass("void"),
     endpoint("lcd/backlight"),
-    notes(""),
+    notes("Backlight is either on or off"),
     parameters(
-      Parameter("enabled", "turn on or off light",
+      Parameter(name = "enabled", 
+        description = "turn on or off light",
         paramType = ParamType.Query,
         required = true,
         allowMultiple = false,
         allowableValues = AllowableValues(true,false),defaultValue = Some("true"),
         dataType = DataType("Boolean"))
-      
-    )) {
-      val enabled = BooleanDataType(params.contains("enabled") match {
-        case true  => params("enabled")
-        case false => "true"
-      })
-      PhidgetApiService.setBacklight(enabled)
-    }
-
+      )) {
+    val enabled = BooleanDataType(params.contains("enabled") match {
+      case true  => params("enabled")
+      case false => "true"
+    })
+    Profile("/lcd/backlight (get)", PhidgetApiService.setBacklight(enabled))
   }
+}

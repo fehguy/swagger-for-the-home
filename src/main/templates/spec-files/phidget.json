@@ -9,16 +9,16 @@
       "description":"reads analog inputs",
       "operations":[
         {
-          "httpMethod":"GET",
+          "httpMethod":"POST",
           "summary":"returns all inputs",
-          "notes":"",
+          "notes":"Gives a list of all analog IO values",
           "responseClass":"LIST[AnalogIO]",
           "nickname":"getAnalogInputs",
           "parameters":[
             {
               "name":"test",
               "description":"text to send",
-              "paramType":"query",
+              "paramType":"body",
               "required":false,
               "allowMultiple":false,
               "dataType":"string"
@@ -34,7 +34,7 @@
         {
           "httpMethod":"GET",
           "summary":"Updates the LCD",
-          "notes":"",
+          "notes":"Pass a line number and string to update on the LCD",
           "responseClass":"void",
           "nickname":"setLcd",
           "parameters":[
@@ -75,7 +75,7 @@
         {
           "httpMethod":"GET",
           "summary":"Updates the LCD",
-          "notes":"",
+          "notes":"The contrast is darkest at 0 and brightest at 255",
           "responseClass":"void",
           "nickname":"setContrast",
           "parameters":[
@@ -104,7 +104,7 @@
         {
           "httpMethod":"GET",
           "summary":"Updates the LCD backlight",
-          "notes":"",
+          "notes":"Backlight is either on or off",
           "responseClass":"void",
           "nickname":"setBacklight",
           "parameters":[

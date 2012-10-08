@@ -2,7 +2,7 @@ package apis
 
 case class ApiResponse(msg: String, code: Int)
 
-trait DatatypeSupport {
+trait SwaggerDatatypeConversionSupport {
 	def IntDataType(obj: String): Int = obj.toInt
 
 	def BooleanDataType(obj: String): Boolean = obj.toBoolean

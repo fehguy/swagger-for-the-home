@@ -2,6 +2,9 @@ package {{package}}
 
 {{#imports}}import {{import}}
 {{/imports}}
+
+import com.wordnik.util.perf._
+
 import services._
 import com.wordnik.swagger.core.ApiPropertiesReader
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
@@ -20,7 +23,7 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
       with NativeJsonSupport 
       with JValueResult 
       with SwaggerSupport
-      with DatatypeSupport {
+      with SwaggerDatatypeConversionSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "{{className}}"
@@ -39,9 +42,9 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
     contentType = formats("json")
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
-
-  {{#operations}}
-  {{#operation}}
+{{#operations}}
+{{#operation}}
+  {{newline}}
   {{httpMethod}}("{{path}}",
     summary("{{{summary}}}"),
     nickname("{{nickname}}"),
@@ -51,11 +54,12 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
     parameters(
       {{#allParams}}
       {{#queryParameter}}
-      Parameter("{{paramName}}", "{{{description}}}",
+      Parameter(name = "{{paramName}}", 
+        description = "{{{description}}}",
         paramType = ParamType.Query,
         required = {{required}},
         allowMultiple = {{allowMultiple}},
-        {{#allowableValues}}allowableValues = {{{allowableValues}}},{{/allowableValues}}
+        {{#allowableValues}}allowableValues = {{{allowableValues}}},{{newline}}{{/allowableValues}}
         defaultValue = {{#defaultValue}}Some({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
         dataType = DataType("{{dataType}}"))
       {{/queryParameter}}
@@ -73,21 +77,19 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
       Parameter("{{paramName}}", "{{{description}}}",
         dataType = DataType("{{dataType}}"),
         paramType = ParamType.Body)
-      {{/bodyParameter}}
-      {{#hasMore}},{{/hasMore}}{{newline}}
+      {{/bodyParameter}}{{#hasMore}},{{/hasMore}}
     {{/allParams}}
     )) {
-      {{#allParams}}
+    {{#allParams}}
 
-      val {{paramName}} = {{dataType}}DataType(params.contains("{{{paramName}}}") match {
-        case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
-        case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
-      })
-      {{/allParams}}
+    val {{paramName}} = {{dataType}}DataType(params.contains("{{{paramName}}}") match {
+      case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
+      case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
+    })
+    {{/allParams}}
 
-      {{className}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}})
-    }
-
-  {{/operation}}
-  {{/operations}}
+    Profile("{{path}} ({{httpMethod}})", {{className}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}))
+  }
+{{/operation}}
+{{/operations}}
 }

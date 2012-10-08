@@ -12,7 +12,7 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
   // where to write generated code
   override def destinationDir = outputFolder + "/src/main/scala"
 
-  override def modelPackage = Some("org.eatbacon.model")
+  override def modelPackage = Some("models")
 
   override def packageName = "org.eatbacon.app"
 
