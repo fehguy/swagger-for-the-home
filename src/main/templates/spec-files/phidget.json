@@ -5,6 +5,29 @@
   "resourcePath":"/phidget",
   "apis":[
     {
+      "path":"/phidget.{format}/analog/inputs",
+      "description":"reads analog inputs",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"returns all inputs",
+          "notes":"",
+          "responseClass":"LIST[AnalogIO]",
+          "nickname":"getAnalogInputs",
+          "parameters":[
+            {
+              "name":"test",
+              "description":"text to send",
+              "paramType":"query",
+              "required":false,
+              "allowMultiple":false,
+              "dataType":"string"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "path":"/phidget.{format}/lcd",
       "description":"Manipulates the LCD",
       "operations":[
@@ -106,5 +129,17 @@
       ]
     }
   ],
-  "models":{}
+  "models":{
+    "AnalogIO":{
+      "id":"AnalogIO",
+      "properties":{
+        "position":{
+          "type":"int"
+        },
+        "value":{
+          "type":"double"
+        }
+      }
+    }
+  }
 }

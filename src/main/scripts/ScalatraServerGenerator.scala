@@ -68,9 +68,11 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
           val paramList = k._2.asInstanceOf[List[_]]
           paramList.foreach(param => {
             val map = param.asInstanceOf[scala.collection.mutable.HashMap[String, AnyRef]]
+            if(map.contains("required")) {
+              if(map("required") == "false") map += "notRequired" -> "true"
+            }
             if(map.contains("allowableValues")) {
               val allowableValues = map("allowableValues")
-              println(map("swaggerDataType") + ", " + allowableValues)
               val quote = map("swaggerDataType") match {
                 case "string" => "\""
                 case _ => ""

@@ -2,6 +2,7 @@ package {{package}}
 
 {{#imports}}import {{import}}
 {{/imports}}
+import services._
 import com.wordnik.swagger.core.ApiPropertiesReader
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
@@ -14,7 +15,12 @@ import org.json4s.{ DefaultFormats, Formats }
 
 import scala.collection.JavaConverters._
 
-class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet with TypedParamSupport with NativeJsonSupport with JValueResult with SwaggerSupport {
+class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet 
+      with TypedParamSupport 
+      with NativeJsonSupport 
+      with JValueResult 
+      with SwaggerSupport
+      with DatatypeSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "{{className}}"
@@ -69,9 +75,18 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet with
         paramType = ParamType.Body)
       {{/bodyParameter}}
       {{#hasMore}},{{/hasMore}}{{newline}}
+    {{/allParams}}
+    )) {
+      {{#allParams}}
+
+      val {{paramName}} = {{dataType}}DataType(params.contains("{{{paramName}}}") match {
+        case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
+        case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
+      })
       {{/allParams}}
-      )) {
-  }
+
+      {{className}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}})
+    }
 
   {{/operation}}
   {{/operations}}
