@@ -21,7 +21,7 @@
               "paramType":"body",
               "required":false,
               "allowMultiple":false,
-              "dataType":"string"
+              "dataType":"AnalogIO"
             }
           ]
         }

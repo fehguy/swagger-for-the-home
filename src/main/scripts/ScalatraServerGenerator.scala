@@ -97,7 +97,6 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
                 case Some(s) => map += "allowableValues" -> s
                 case _ =>
               }
-              println("default value: " + map.getOrElse("defaultValue", "not found!"))
             }
           })
         }

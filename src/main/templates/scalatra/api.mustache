@@ -81,9 +81,8 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
     )) {
     {{#allParams}}
 
-    val {{paramName}} = {{#bodyParameter}}(
-      {{dataType}}DataType(request.body) match {
-      case e: String => {{#notRequired}}Some({{/notRequired}}request.body{{#notRequired}}){{/notRequired}}{{newline}}
+    val {{paramName}} = {{#bodyParameter}}(parsedBody.extract[{{dataType}}] match {
+      case e: {{dataType}} => {{#notRequired}}Some({{/notRequired}}e{{#notRequired}}){{/notRequired}}{{newline}}
       case _ => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
       {{/bodyParameter}}
       {{#queryParameter}}

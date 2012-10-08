@@ -47,12 +47,11 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     parameters(
       Parameter(name = "body",
         description = "text to send",
-        dataType = DataType("String"),
+        dataType = DataType("AnalogIO"),
         paramType = ParamType.Body)
       )) {
-    val body = (
-      StringDataType(request.body) match {
-      case e: String => request.body
+    val body = (parsedBody.extract[AnalogIO] match {
+      case e: AnalogIO => e
       case _ => halt(400)
       })
     Profile("/analog/inputs (post)", PhidgetApiService.getAnalogInputs(body))

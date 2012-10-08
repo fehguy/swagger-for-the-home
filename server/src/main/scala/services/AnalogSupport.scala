@@ -1,15 +1,14 @@
 package services
 
+import models._
+
 import com.phidgets._
 import com.phidgets.AnalogPhidget
 import com.phidgets.event._
 
 trait AnalogSupport {
-	def getAnalogInputs(value: Option[String]) = {
-		value match {
-			case Some(str) => println("body is " + str)
-			case _ =>
-		}
+	def getAnalogInputs(value: AnalogIO) = {
+		println("model is " + value)
 	}
 
 	println(Phidget.getLibraryVersion())
