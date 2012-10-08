@@ -1,18 +1,15 @@
 package apis
 
 import models.Zone
-import com.wordnik.util.perf._
-
 import services._
+import com.wordnik.util.perf._
 import com.wordnik.swagger.core.ApiPropertiesReader
+
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
 import org.json4s._
-import JsonDSL._
+import org.json4s.JsonDSL._
 import org.scalatra.json.{JValueResult, NativeJsonSupport}
-
-import scala.collection.JavaConverters._
-import org.json4s.{ DefaultFormats, Formats }
 
 import scala.collection.JavaConverters._
 
