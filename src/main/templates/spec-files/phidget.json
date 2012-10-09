@@ -9,18 +9,29 @@
       "description":"reads analog inputs",
       "operations":[
         {
-          "httpMethod":"POST",
+          "httpMethod":"GET",
           "summary":"returns all inputs",
           "notes":"Gives a list of all analog IO values",
           "responseClass":"LIST[AnalogIO]",
-          "nickname":"getAnalogInputs",
+          "nickname":"getAnalogInputs"
+        }
+      ]
+    },
+    {
+      "path":"/phidget.{format}/analog/output",
+      "description":"sets analog outputs",
+      "operations":[
+        {
+          "httpMethod":"POST",
+          "summary":"sets an output",
+          "notes":"Sets the specified IO",
+          "responseClass":"AnalogIO",
+          "nickname":"setAnalogOutput",
           "parameters":[
             {
-              "name":"test",
-              "description":"text to send",
+              "description":"analog IO value to set",
               "paramType":"body",
-              "required":false,
-              "allowMultiple":false,
+              "required":true,
               "dataType":"AnalogIO"
             }
           ]
