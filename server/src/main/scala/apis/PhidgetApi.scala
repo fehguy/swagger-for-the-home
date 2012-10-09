@@ -38,15 +38,26 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
 
-  post("/analog/inputs",
+  get("/analog/inputs",
     summary("returns all inputs"),
     nickname("getAnalogInputs"),
     responseClass("LIST[AnalogIO]"),
     endpoint("analog/inputs"),
     notes("Gives a list of all analog IO values"),
     parameters(
+      )) {
+    Profile("/analog/inputs (get)", PhidgetApiService.getAnalogInputs())
+  }
+
+  post("/analog/output",
+    summary("sets an output"),
+    nickname("setAnalogOutput"),
+    responseClass("AnalogIO"),
+    endpoint("analog/output"),
+    notes("Sets the specified IO"),
+    parameters(
       Parameter(name = "body",
-        description = "text to send",
+        description = "analog IO value to set",
         dataType = DataType("AnalogIO"),
         paramType = ParamType.Body)
       )) {
@@ -54,7 +65,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       case e: AnalogIO => e
       case _ => halt(400)
       })
-    Profile("/analog/inputs (post)", PhidgetApiService.getAnalogInputs(body))
+    Profile("/analog/output (post)", PhidgetApiService.setAnalogOutput(body))
   }
 
   get("/lcd",

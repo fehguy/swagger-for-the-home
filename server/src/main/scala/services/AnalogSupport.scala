@@ -7,8 +7,15 @@ import com.phidgets.AnalogPhidget
 import com.phidgets.event._
 
 trait AnalogSupport {
-	def getAnalogInputs(value: AnalogIO) = {
-		println("model is " + value)
+	def getAnalogInputs() = {
+		(for(i <- (0 until 8))
+			yield AnalogIO(i, analog.getVoltage(i))
+		).toList
+	}
+
+	def setAnalogOutput(io: AnalogIO) = {
+		if(!analogAttached) initAnalog()
+		analog.setVoltage(io.position, io.value)
 	}
 
 	println(Phidget.getLibraryVersion())
@@ -29,7 +36,6 @@ trait AnalogSupport {
 
 		println("Phidget Information")
 		println("====================================");
-		// println("Library Version: "+ analog.getLibraryVersion())
 		println("Version: " + analog.getDeviceVersion())
 		println("Name: " + analog.getDeviceName())
 		println("Serial #: " + analog.getSerialNumber())
