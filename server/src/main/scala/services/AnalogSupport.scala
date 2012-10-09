@@ -7,7 +7,13 @@ import com.phidgets.AnalogPhidget
 import com.phidgets.event._
 
 trait AnalogSupport {
+	println(Phidget.getLibraryVersion())
+
+	val analog = new AnalogPhidget
+	var analogAttached = false
+
 	def getAnalogInputs() = {
+		if(!analogAttached) initAnalog()
 		(for(i <- (0 until 8))
 			yield AnalogIO(i, analog.getVoltage(i))
 		).toList
@@ -18,21 +24,28 @@ trait AnalogSupport {
 		analog.setVoltage(io.position, io.value)
 	}
 
-	println(Phidget.getLibraryVersion())
-
-	val analog = new AnalogPhidget
-	var analogAttached = false
-
-	analog.addErrorListener(new ErrorListener() {
-		def error(ee: ErrorEvent) = {
-			println("error event for " + ee)
-		}
-	})
-
 	def initAnalog(): Unit = {
 		analog.openAny()
-		println("waiting for LCD attachment...")
+		println("waiting for analog attachment...")
 		analog.waitForAttachment()
+
+		analog.addAttachListener(new AttachListener() {
+			def attached(ae: AttachEvent) = {
+				println("attachment of " + ae)
+				analogAttached = true
+			}
+		})
+		analog.addDetachListener(new DetachListener() {
+			def detached(ae: DetachEvent) = {
+				println("detachment of " + ae)
+				analogAttached = false
+			}
+		})
+		analog.addErrorListener(new ErrorListener() {
+			def error(ee: ErrorEvent) = {
+				println("error event for " + ee)
+			}
+		})
 
 		println("Phidget Information")
 		println("====================================");

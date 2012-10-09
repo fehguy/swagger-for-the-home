@@ -63,6 +63,8 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
       Parameter(name = "{{paramName}}", 
         description = "{{{description}}}",
         dataType = DataType.String,
+        {{#allowableValues}}allowableValues = {{{allowableValues}}},{{newline}}{{/allowableValues}}
+        defaultValue = {{#defaultValue}}Some({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
         paramType = ParamType.Path)
       {{/pathParameter}}
       {{#headerParameter}}

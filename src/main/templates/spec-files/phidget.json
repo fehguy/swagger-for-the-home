@@ -18,21 +18,58 @@
       ]
     },
     {
-      "path":"/phidget.{format}/analog/output",
-      "description":"sets analog outputs",
+      "path":"/phidget.{format}/digital/output",
+      "description":"sets digital outputs",
       "operations":[
         {
           "httpMethod":"POST",
           "summary":"sets an output",
           "notes":"Sets the specified IO",
-          "responseClass":"AnalogIO",
-          "nickname":"setAnalogOutput",
+          "responseClass":"DigitalIO",
+          "nickname":"setDigitalOutput",
           "parameters":[
             {
-              "description":"analog IO value to set",
+              "description":"digital IO value to set",
               "paramType":"body",
               "required":true,
-              "dataType":"AnalogIO"
+              "dataType":"DigitalIO"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path":"/phidget.{format}/digital/output/{position}",
+      "description":"gets digital output state",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"gets an output state",
+          "notes":"Gets the specified IO",
+          "responseClass":"DigitalIO",
+          "nickname":"getDigitalOutputState",
+          "parameters":[
+            {
+              "name":"position",
+              "description":"positon to fetch",
+              "paramType":"path",
+              "required":true,
+              "dataType":"int",
+              "allowMultiple":false,
+              "defaultValue":"0",
+              "allowableValues":{
+                "valueType":"LIST",
+                "values":[
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7"
+                ]
+              }
             }
           ]
         }
@@ -149,6 +186,17 @@
         },
         "value":{
           "type":"double"
+        }
+      }
+    },
+    "DigitalIO":{
+      "id":"DigitalIO",
+      "properties":{
+        "position":{
+          "type":"int"
+        },
+        "value":{
+          "type":"boolean"
         }
       }
     }

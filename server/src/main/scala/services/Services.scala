@@ -1,4 +1,5 @@
 package services
 
-object PhidgetApiService extends LCDSupport with AnalogSupport
+object PhidgetApiService extends LCDSupport
+		with InterfaceKitSupport
 object HydronicsApiService extends HydronicSupport

@@ -1,6 +1,7 @@
 package apis
 
 import models.AnalogIO
+import models.DigitalIO
 import services._
 import com.wordnik.util.perf._
 import com.wordnik.swagger.core.ApiPropertiesReader
@@ -49,23 +50,43 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     Profile("/analog/inputs (get)", PhidgetApiService.getAnalogInputs())
   }
 
-  post("/analog/output",
+  post("/digital/output",
     summary("sets an output"),
-    nickname("setAnalogOutput"),
-    responseClass("AnalogIO"),
-    endpoint("analog/output"),
+    nickname("setDigitalOutput"),
+    responseClass("DigitalIO"),
+    endpoint("digital/output"),
     notes("Sets the specified IO"),
     parameters(
       Parameter(name = "body",
-        description = "analog IO value to set",
-        dataType = DataType("AnalogIO"),
+        description = "digital IO value to set",
+        dataType = DataType("DigitalIO"),
         paramType = ParamType.Body)
       )) {
-    val body = (parsedBody.extract[AnalogIO] match {
-      case e: AnalogIO => e
+    val body = (parsedBody.extract[DigitalIO] match {
+      case e: DigitalIO => e
       case _ => halt(400)
       })
-    Profile("/analog/output (post)", PhidgetApiService.setAnalogOutput(body))
+    Profile("/digital/output (post)", PhidgetApiService.setDigitalOutput(body))
+  }
+
+  get("/digital/output/:position",
+    summary("gets an output state"),
+    nickname("getDigitalOutputState"),
+    responseClass("DigitalIO"),
+    endpoint("digital/output/{position}"),
+    notes("Gets the specified IO"),
+    parameters(
+      Parameter(name = "position", 
+        description = "positon to fetch",
+        dataType = DataType.String,
+        allowableValues = AllowableValues(0,1,2,3,4,5,6,7),defaultValue = Some("0"),
+        paramType = ParamType.Path)
+      )) {
+    val position = IntDataType(params.contains("position") match {
+      case true  => params("position")
+      case false => "0"
+      })
+    Profile("/digital/output/:position (get)", PhidgetApiService.getDigitalOutputState(position))
   }
 
   get("/lcd",
