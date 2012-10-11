@@ -3,7 +3,6 @@ package services
 import models._
 
 import com.phidgets._
-import com.phidgets.AnalogPhidget
 import com.phidgets.event._
 
 trait InterfaceKitSupport {
@@ -12,10 +11,12 @@ trait InterfaceKitSupport {
 	val ifk = new InterfaceKitPhidget
 	var ifkAttached = false
 
+	def bitsToVoltage(input: Int): Double = input.toDouble * 1000.0 / 4095.0
+
 	def getAnalogInputs() = {
 		if(!ifkAttached) initIntefaceKit()
 		(for(i <- (0 until 8))
-			yield AnalogIO(i, ifk.getSensorValue(i))
+			yield AnalogIO(i, bitsToVoltage(ifk.getSensorValue(i)))
 		).toList
 	}
 
@@ -25,6 +26,7 @@ trait InterfaceKitSupport {
 	}
 
 	def getDigitalOutputState(position: Int) = {
+		if(!ifkAttached) initIntefaceKit()
 		DigitalIO(position, ifk.getOutputState(position))
 	}
 

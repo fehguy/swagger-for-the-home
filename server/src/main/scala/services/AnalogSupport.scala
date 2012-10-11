@@ -12,10 +12,12 @@ trait AnalogSupport {
 	val analog = new AnalogPhidget
 	var analogAttached = false
 
+	def bitsToVoltage(input: Double): Double = input.toDouble * 1000.0 / 4095.0
+
 	def getAnalogInputs() = {
 		if(!analogAttached) initAnalog()
 		(for(i <- (0 until 8))
-			yield AnalogIO(i, analog.getVoltage(i))
+			yield AnalogIO(i, bitsToVoltage(analog.getVoltage(i)))
 		).toList
 	}
 
