@@ -19,9 +19,11 @@ libraryDependencies ++= Seq(
   "org.scalatra"                 % "scalatra-specs2"        % "2.2.0-SNAPSHOT"      % "test",
   "org.scalatra"                 % "scalatra-swagger"       % "2.2.0-SNAPSHOT",
   "org.scalatra"                 % "scalatra-json"          % "2.2.0-SNAPSHOT",
-  "org.json4s"                  %% "json4s-jackson"         % "3.0.0-SNAPSHOT",
+  "org.json4s"                  %% "json4s-jackson"         % "3.1.0-SNAPSHOT",
+  "org.mongodb"                  % "mongo-java-driver"      % "2.9.1",
   "com.wordnik"                  % "swagger-core_2.9.1"     % "1.1.1-SNAPSHOT",
-  "com.wordnik"                  % "common-utils_2.9.1"     % "1.1.3",
+  "com.wordnik"                  % "mongo-utils_2.9.1"      % "1.1.3",
+  "com.novus"                   %% "salat"                  % "1.9.1",
   "org.eclipse.jetty"            % "jetty-webapp"           % "8.1.7.v20120910"     % "compile",
   "org.eclipse.jetty.orbit"      % "javax.servlet"          % "3.0.0.v201112011016" % "compile;provided;test" artifacts (Artifact("javax.servlet", "jar", "jar"))
 )

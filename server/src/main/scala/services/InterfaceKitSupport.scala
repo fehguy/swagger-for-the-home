@@ -1,6 +1,7 @@
 package services
 
 import models._
+import apis.ApiResponse
 
 import com.phidgets._
 import com.phidgets.event._
@@ -23,6 +24,8 @@ trait InterfaceKitSupport {
 	def setDigitalOutput(io: DigitalIO) = {
 		if(!ifkAttached) initIntefaceKit()
 		ifk.setOutputState(io.position, io.value)
+
+		ApiResponse("set output on " + io, 200)
 	}
 
 	def getDigitalOutputState(position: Int) = {

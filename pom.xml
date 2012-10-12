@@ -157,7 +157,7 @@
   </dependencies>
   <repositories />
   <properties>
-    <swagger-codegen-version>2.0.0-SNAPSHOT</swagger-codegen-version>
+    <swagger-codegen-version>2.0.0</swagger-codegen-version>
     <scala-version>2.9.1-1</scala-version>
   </properties>
 </project>

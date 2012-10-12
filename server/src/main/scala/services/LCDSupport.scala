@@ -1,5 +1,7 @@
 package services
 
+import apis.ApiResponse
+
 import com.phidgets._
 import com.phidgets.event._
 
@@ -7,7 +9,7 @@ trait LCDSupport {
 	println(Phidget.getLibraryVersion())
 
 	var contrast = 200
-	var backlight = true
+	var backlight = false
 	val lcd = new TextLCDPhidget
 	var lcdAttached = false
 
@@ -59,6 +61,8 @@ trait LCDSupport {
 			initLcd()
 		backlight = enabled
 		lcd.setBacklight(backlight)
+
+		ApiResponse("set backlight enabled to " + enabled, 200)
 	}
 
 	def setContrast(value: Int) = {
@@ -66,13 +70,16 @@ trait LCDSupport {
 			initLcd()
 		contrast = value
     lcd.setContrast(contrast)
+
+		ApiResponse("set contrast to " + value, 200)
 	}
 
 	def setLcd(value: String, lineNumber: Int) = {
 		if(!lcdAttached)
 			initLcd()
-		println("updating " + lineNumber + " to " + value)
     lcd.setDisplayString(lineNumber, value)
+
+		ApiResponse("set lcd line " + lineNumber + " to " + value, 200)
 	}
 
 	def disconnectLcd = {
