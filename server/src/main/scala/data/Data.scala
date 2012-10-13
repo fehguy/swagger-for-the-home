@@ -16,7 +16,6 @@ object Data {
 
   def save(io: AnalogIO) = {
   	val dbo = grater[AnalogIO].asDBObject(io)
-
   	dbo.put("_id", io.position + "-" + getTimestampString)
   	db.getCollection("analog").save(dbo)
   }

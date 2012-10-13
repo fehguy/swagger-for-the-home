@@ -1,3 +1,4 @@
+import services._
 import {{apiPackage}}._
 import {{package}}._
 import javax.servlet.ServletContext
@@ -13,6 +14,8 @@ class ScalatraBootstrap extends LifeCycle {
       {{/apis}}
 
       context mount (new ResourcesApp, "/*")
+
+      HydronicSupport.startUpdate
     } catch {
       case e: Throwable => e.printStackTrace()
     }

@@ -12,12 +12,12 @@ trait InterfaceKitSupport {
 	val ifk = new InterfaceKitPhidget
 	var ifkAttached = false
 
-	def bitsToVoltage(input: Int): Double = input.toDouble * 1000.0 / 4095.0
+	def bitsToVoltage(input: Int): Double = input.toDouble * 5.0 / 4095.0 * 100.0
 
 	def getAnalogInputs() = {
 		if(!ifkAttached) initIntefaceKit()
 		(for(i <- (0 until 8))
-			yield AnalogIO(i, bitsToVoltage(ifk.getSensorValue(i)))
+			yield AnalogIO(i, bitsToVoltage(ifk.getSensorRawValue(i)))
 		).toList
 	}
 
