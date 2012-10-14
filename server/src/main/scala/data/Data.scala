@@ -16,12 +16,13 @@ object Data {
 
   def save(io: AnalogIO) = {
   	val dbo = grater[AnalogIO].asDBObject(io)
-  	dbo.put("_id", io.position + "-" + getTimestampString)
+    dbo.put("_id", "%d_%s".format(io.position, getTimestampString))
+    dbo.put("ts", System.currentTimeMillis)
   	db.getCollection("analog").save(dbo)
   }
 
   def getTimestampString: String = {
-    val dateFormatter = new SimpleDateFormat("yyyyMMddHHmmss")
+    val dateFormatter = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
     dateFormatter.format(new java.util.Date)
   }
 }

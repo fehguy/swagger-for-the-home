@@ -17,16 +17,22 @@ object HydronicSupport {
 	def startUpdate = {
 		saveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
 			def run() {
-				val analog = PhidgetApiService.getAnalogInputs()(7)
-				Data.save(analog)
+				val inputs = PhidgetApiService.getAnalogInputs()
+				inputs.foreach(analog => {
+					if(analog.value > 0.1)
+						Data.save(analog)
+				})
 			}
 		}))
 
-		lcdCancellable = Some(system.scheduler.schedule(5 second, Duration.create(.5, TimeUnit.SECONDS), new Runnable {
+		lcdCancellable = Some(system.scheduler.schedule(5 second, Duration.create(20, TimeUnit.SECONDS), new Runnable {
 			def run() {
-				val analog = PhidgetApiService.getAnalogInputs()(7)
-				val msg = "Temp is %.1f F" format(analog.value)
-				PhidgetApiService.setLcd(msg, 0)
+				val inputs = PhidgetApiService.getAnalogInputs()
+				inputs.foreach(analog => {
+					val msg = "Channel %d is %.1f F" format(analog.position, analog.value)
+					PhidgetApiService.setLcd(msg, 0)
+					Thread.sleep(2000)
+				})
 			}
 		}))
 	}
