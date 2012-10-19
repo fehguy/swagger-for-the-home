@@ -20,7 +20,7 @@ object HydronicSupport {
 				val inputs = PhidgetApiService.getAnalogInputs()
 				inputs.foreach(analog => {
 					if(analog.value > 0.1)
-						Data.save(analog)
+						AnalogDao.save(analog)
 				})
 			}
 		}))
@@ -39,5 +39,21 @@ object HydronicSupport {
 }
 
 trait HydronicSupport {
-	def getZones() = {}
+	def getZones(limit:Option[Int] = Some(50), resolution: String) = {
+		AnalogDao.findAll(resolutionToMs(resolution), limit.getOrElse(50))
+	}
+
+	def getZone(channel: Int, limit:Option[Int] = Some(50), resolution: String) = {
+		AnalogDao.findByChannel(channel, resolutionToMs(resolution), limit.getOrElse(50))
+	}
+
+	def resolutionToMs(str: String): Long = {
+		str match {
+			case "hour" => 60* 1000 * 60
+			case "day" => 24 * 60* 1000 * 60
+			case "week" => 7 * 24 * 60* 1000 * 60
+			case _ => 60 * 1000
+		}
+	}
 }
+

@@ -1,6 +1,7 @@
 package apis
 
 import models.Zone
+import models.AnalogIO
 import services._
 import com.wordnik.util.perf._
 import com.wordnik.swagger.core.ApiPropertiesReader
@@ -45,7 +46,71 @@ class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet
     endpoint("zones"),
     notes("Returns an array of zones"),
     parameters(
+      Parameter(name = "limit", 
+        description = "max values to fetch",
+        paramType = ParamType.Query,
+        required = false,
+        allowMultiple = false,
+        defaultValue = None,
+        dataType = DataType("Int"))
+      ,Parameter(name = "resolution", 
+        description = "fetch resolution",
+        paramType = ParamType.Query,
+        required = true,
+        allowMultiple = false,
+        defaultValue = Some("hour"),
+        dataType = DataType("String"))
       )) {
-    Profile("/zones (get)", HydronicsApiService.getZones())
+    val limit = IntDataType(params.contains("limit") match {
+      case true  => Some(params("limit"))
+      case false => None
+      })
+    val resolution = StringDataType(params.contains("resolution") match {
+      case true  => params("resolution")
+      case false => "hour"
+      })
+    Profile("/zones (get)", HydronicsApiService.getZones(limit, resolution))
+  }
+
+  get("/zone/:zoneId",
+    summary("Gets a specific zone"),
+    nickname("getZone"),
+    responseClass("List[AnalogIO]"),
+    endpoint("zone/{zoneId}"),
+    notes("Returns an array of zones"),
+    parameters(
+      Parameter(name = "zoneId", 
+        description = "zone to fetch for",
+        dataType = DataType.String,
+        defaultValue = None,
+        paramType = ParamType.Path)
+      ,Parameter(name = "limit", 
+        description = "max values to fetch",
+        paramType = ParamType.Query,
+        required = false,
+        allowMultiple = false,
+        defaultValue = None,
+        dataType = DataType("Int"))
+      ,Parameter(name = "resolution", 
+        description = "fetch resolution",
+        paramType = ParamType.Query,
+        required = true,
+        allowMultiple = false,
+        defaultValue = Some("hour"),
+        dataType = DataType("String"))
+      )) {
+    val zoneId = IntDataType(params.contains("zoneId") match {
+      case true  => params("zoneId")
+      case false => halt(400)
+      })
+    val limit = IntDataType(params.contains("limit") match {
+      case true  => Some(params("limit"))
+      case false => None
+      })
+    val resolution = StringDataType(params.contains("resolution") match {
+      case true  => params("resolution")
+      case false => "hour"
+      })
+    Profile("/zone/:zoneId (get)", HydronicsApiService.getZone(zoneId, limit, resolution))
   }
 }

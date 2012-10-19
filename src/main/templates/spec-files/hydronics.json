@@ -13,7 +13,66 @@
           "summary":"Get all zones",
           "notes":"Returns an array of zones",
           "responseClass":"List[Zone]",
-          "nickname":"getZones"
+          "nickname":"getZones",
+          "parameters":[
+            {
+              "name":"limit",
+              "description":"max values to fetch",
+              "paramType":"query",
+              "required":false,
+              "allowMultiple":false,
+              "dataType":"int"
+            },
+            {
+              "name":"resolution",
+              "description":"fetch resolution",
+              "paramType":"query",
+              "required":true,
+              "allowMultiple":false,
+              "defaultValue":"hour",
+              "dataType":"string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path":"/hydronics.{format}/zone/{zoneId}",
+      "description":"Get all zones",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"Gets a specific zone",
+          "notes":"Returns an array of zones",
+          "responseClass":"List[AnalogIO]",
+          "nickname":"getZone",
+          "parameters":[
+            {
+              "name":"zoneId",
+              "description":"zone to fetch for",
+              "paramType":"path",
+              "required":true,
+              "allowMultiple":false,
+              "dataType":"int"
+            },
+            {
+              "name":"limit",
+              "description":"max values to fetch",
+              "paramType":"query",
+              "required":false,
+              "allowMultiple":false,
+              "dataType":"int"
+            },
+            {
+              "name":"resolution",
+              "description":"fetch resolution",
+              "paramType":"query",
+              "required":true,
+              "allowMultiple":false,
+              "defaultValue":"hour",
+              "dataType":"string"
+            }
+          ]
         }
       ]
     }

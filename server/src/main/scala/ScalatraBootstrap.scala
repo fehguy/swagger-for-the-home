@@ -1,5 +1,5 @@
-import apis._
 import services._
+import apis._
 import org.eatbacon.app._
 import javax.servlet.ServletContext
 import org.scalatra.LifeCycle

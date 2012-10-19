@@ -17,7 +17,7 @@ trait InterfaceKitSupport {
 	def getAnalogInputs() = {
 		if(!ifkAttached) initIntefaceKit()
 		(for(i <- (0 until 8))
-			yield AnalogIO(i, bitsToVoltage(ifk.getSensorRawValue(i)))
+			yield AnalogIO(new java.util.Date, i, bitsToVoltage(ifk.getSensorRawValue(i)))
 		).toList
 	}
 

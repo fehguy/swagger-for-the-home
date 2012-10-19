@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
   "org.scalatra"                 % "scalatra-specs2"        % "2.2.0-SNAPSHOT"      % "test",
   "org.scalatra"                 % "scalatra-swagger"       % "2.2.0-SNAPSHOT",
   "org.scalatra"                 % "scalatra-json"          % "2.2.0-SNAPSHOT",
-  "org.json4s"                  %% "json4s-jackson"         % "3.0.0-SNAPSHOT",
+  "org.json4s"                  %% "json4s-jackson"         % "3.0.0",
   "org.mongodb"                  % "mongo-java-driver"      % "2.9.1",
   "com.wordnik"                  % "swagger-core_2.9.1"     % "1.1.1-SNAPSHOT",
   "com.wordnik"                  % "mongo-utils_2.9.1"      % "1.1.3",
@@ -32,6 +32,8 @@ libraryDependencies ++= Seq(
 resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"
 
 resolvers += "Sonatype OSS Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
+
+resolvers += "Sonatype OSS Releases" at "http://oss.sonatype.org/content/repositories/releases/"
 
 mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
   {

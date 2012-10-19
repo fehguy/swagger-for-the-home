@@ -186,6 +186,9 @@
         },
         "value":{
           "type":"double"
+        },
+        "timestamp":{
+          "type":"Date"
         }
       }
     },
