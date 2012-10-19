@@ -83,7 +83,7 @@
   });
   $(window).load(function() {
     $.ajax({
-      url: "/hydronics/zones?resolution=hour&limit=50"
+      url: "/hydronics/zones?resolution=hour&limit=500"
     }).done(function ( data ) {
       dispatchMessage(data);
     });

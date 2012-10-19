@@ -14,8 +14,12 @@ import com.novus.salat._
 import com.novus.salat.global._
 import com.mongodb.casbah.Imports._
 
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeUnit._
+
 import scala.collection.mutable.{ListBuffer, HashMap}
 import scala.collection.JavaConverters._
+import scala.math._
 
 object AnalogDao extends TimestampGenerator {
   val db = MongoDBConnectionManager.getConnection(
@@ -44,6 +48,66 @@ object AnalogDao extends TimestampGenerator {
       dbo.remove("ts")
       db.getCollection("analog").save(dbo)
     }
+  }
+
+  val keyPoints = List(
+    MINUTES.convert(15, TimeUnit.MINUTES),
+    HOURS.convert(1, TimeUnit.HOURS),
+    DAYS.convert(1, TimeUnit.DAYS)
+  )
+
+  def aggregate(position: Int, resolution: Long, lastTimestamp: Date) = {
+    val query = BasicDBObjectBuilder.start(Map(
+      "timestamp" -> new BasicDBObject("$gte", lastTimestamp),
+      "position" -> position
+    ).asJava).get
+
+    val cur = db.getCollection("analog").find(query).sort(new BasicDBObject("timestamp", 1))
+    val endTimestamp = lastTimestamp.getTime + resolution
+
+    var done = false
+    var recordsInspected = 0
+    val records = new ListBuffer[AnalogIO]
+    while(!done && cur.hasNext){
+      recordsInspected += 1
+      val dbo = cur.next.asInstanceOf[BasicDBObject]
+      val event = grater[AnalogIO].asObject(dbo)
+      if(event.timestamp.getTime >= endTimestamp) 
+        done = true
+      else
+        records += event
+    }
+    val average = records.map(_.value).sum / records.length
+    val stddev = stdDev(records.map(_.value.toDouble).toList, average)
+    (position, average, stddev, recordsInspected)
+  }
+
+  def squaredDifference(value1: Double, value2: Double) = pow(value1 - value2, 2.0)
+
+  def stdDev(list: List[Double], average: Double) = list.isEmpty match {
+    case false => {
+      val squared = list.foldLeft(0.0)(_ + squaredDifference(_, average))
+      sqrt(squared / list.length.toDouble)
+    }
+    case true => 0.0
+  }
+
+  def aggregates: Map[Long, Option[Date]] = {
+    val output = new HashMap[Long, Option[Date]]
+
+    keyPoints.foreach(p => {
+      val coll = "analog_" + (p / (1000 * 60).toInt)
+      val cur = db.getCollection(coll).find().sort(new BasicDBObject("_id", -1)).limit(1)
+
+      if(cur.hasNext) {
+        val event = grater[AnalogIO].asObject(cur.next)
+        output += p -> Some(event.timestamp)
+      }
+      else
+        output += p -> None
+    })
+
+    output.toMap
   }
 
   def findAll(resolution: Long, limit: Int) = {

@@ -9,10 +9,10 @@ import akka.util.duration._
 import java.util.concurrent.TimeUnit
 
 object HydronicSupport {
+  val system = ActorSystem("HydronicScheduler")
 	var saveCancellable: Option[Cancellable] = None
 	var lcdCancellable: Option[Cancellable] = None
-  val system = ActorSystem("HydronicScheduler")
-
+	var aggregationCancellable: Option[Cancellable] = None
 
 	def startUpdate = {
 		saveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
@@ -35,16 +35,24 @@ object HydronicSupport {
 				})
 			}
 		}))
+
+		aggregationCancellable = Some(system.scheduler.schedule(5 second, Duration.create(5, TimeUnit.MINUTES), new Runnable {
+			def run() {
+				val keyPoints = AnalogDao.aggregates
+
+				
+			}
+		}))
 	}
 }
 
 trait HydronicSupport {
-	def getZones(limit:Option[Int] = Some(50), resolution: String) = {
-		AnalogDao.findAll(resolutionToMs(resolution), limit.getOrElse(50))
+	def getZones(limit:Option[Int] = Some(5), resolution: String) = {
+		AnalogDao.findAll(resolutionToMs(resolution), limit.getOrElse(5))
 	}
 
-	def getZone(channel: Int, limit:Option[Int] = Some(50), resolution: String) = {
-		AnalogDao.findByChannel(channel, resolutionToMs(resolution), limit.getOrElse(50))
+	def getZone(channel: Int, limit:Option[Int] = Some(5), resolution: String) = {
+		AnalogDao.findByChannel(channel, resolutionToMs(resolution), limit.getOrElse(5))
 	}
 
 	def resolutionToMs(str: String): Long = {
