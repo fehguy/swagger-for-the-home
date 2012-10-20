@@ -16,7 +16,7 @@ object HydronicSupport {
 
 	def startUpdate = {
 		saveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
-			def run() {
+			def run() = {
 				val inputs = PhidgetApiService.getAnalogInputs()
 				inputs.foreach(analog => {
 					if(analog.value > 0.1)
@@ -26,7 +26,7 @@ object HydronicSupport {
 		}))
 
 		lcdCancellable = Some(system.scheduler.schedule(5 second, Duration.create(20, TimeUnit.SECONDS), new Runnable {
-			def run() {
+			def run() = {
 				val inputs = PhidgetApiService.getAnalogInputs()
 				inputs.foreach(analog => {
 					val msg = "Channel %d is %.1f F" format(analog.position, analog.value)
@@ -37,10 +37,8 @@ object HydronicSupport {
 		}))
 
 		aggregationCancellable = Some(system.scheduler.schedule(5 second, Duration.create(5, TimeUnit.MINUTES), new Runnable {
-			def run() {
-				val keyPoints = AnalogDao.aggregates
-
-				
+			def run() = {
+				AnalogDao.computeAverages
 			}
 		}))
 	}
@@ -48,7 +46,7 @@ object HydronicSupport {
 
 trait HydronicSupport {
 	def getZones(limit:Option[Int] = Some(5), resolution: String) = {
-		AnalogDao.findAll(resolutionToMs(resolution), limit.getOrElse(5))
+		AnalogDao.findAggregates(resolutionToMs(resolution), limit.getOrElse(5))
 	}
 
 	def getZone(channel: Int, limit:Option[Int] = Some(5), resolution: String) = {
@@ -60,7 +58,7 @@ trait HydronicSupport {
 			case "hour" => 60* 1000 * 60
 			case "day" => 24 * 60* 1000 * 60
 			case "week" => 7 * 24 * 60* 1000 * 60
-			case _ => 60 * 1000
+			case _ => 15 * 1000 * 60
 		}
 	}
 }

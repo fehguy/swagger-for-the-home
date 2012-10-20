@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Wordnik Monitor</title>
+<title>Temperature Monitor</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script type="text/javascript" src="hc/highcharts.js"></script>
 <script type="text/javascript" src="lib/jquery-1.8.0.min.js"></script>
@@ -19,7 +19,7 @@
         var name = "zone_" + o.position;
         if(c.name == name) {
           var time = new Date(o.timestamp).getTime();
-          var y = o.value;
+          var y = o.average;
           c.addPoint([time, y], true, false);
         }
       });
@@ -83,7 +83,7 @@
   });
   $(window).load(function() {
     $.ajax({
-      url: "/hydronics/zones?resolution=hour&limit=50"
+      url: "/hydronics/zones?resolution=hour&limit=500"
     }).done(function ( data ) {
       dispatchMessage(data);
     });

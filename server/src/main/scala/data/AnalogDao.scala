@@ -21,9 +21,17 @@ import scala.collection.mutable.{ListBuffer, HashMap}
 import scala.collection.JavaConverters._
 import scala.math._
 
+case class AnalogAggregationPoint(position: Int, average: Double, stdDev: Double, timestamp: Date)
+
 object AnalogDao extends TimestampGenerator {
   val db = MongoDBConnectionManager.getConnection(
     Configurator("dbuser"), Configurator("dbhost"), Configurator.asInt("dbport"), Configurator("database"), Configurator("dbuser"), Configurator("dbpassword"), SchemaType.READ_WRITE)
+
+  val keyPoints = List(
+    MILLISECONDS.convert(15, TimeUnit.MINUTES),
+    MILLISECONDS.convert(1, TimeUnit.HOURS),
+    MILLISECONDS.convert(1, TimeUnit.DAYS)
+  )
 
   def save(io: AnalogIO) = {
   	val dbo = grater[AnalogIO].asDBObject(io)
@@ -31,30 +39,58 @@ object AnalogDao extends TimestampGenerator {
   	db.getCollection("analog").save(dbo)
   }
 
-  /**
-   * just a routine to fix older data
-   **/
-  def updateData = {
-    val cur = db.getCollection("analog").find()
+  def computeAverages = {
+    val sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
+    val r = List(4,6,7)
+ 
+    keyPoints.foreach(keyPoint => {
+      r.foreach(pos => {
+        println("compiuting average for pos " + pos + ", resolution " + keyPoint)
 
-    while(cur.hasNext){
-      val dbo = cur.next.asInstanceOf[BasicDBObject]
-
-      // fix old data
-      dbo.getOrElse("timestamp", {
-        val date = new Date(dbo.get("ts").toString.toLong)
-        dbo.put("timestamp", date)
+        var startTime = getAggregate(pos, keyPoint) match {
+          case Some(s) => s.timestamp.getTime
+          case None => sdf.parse("2012-10-14:01:00:00").getTime
+        }
+        while(startTime < System.currentTimeMillis) {
+          val date = new Date(startTime)
+          val data = aggregate(pos, keyPoint, date)
+          if(data._3 > 0){
+            val agg = AnalogAggregationPoint(data._2, data._3, data._4, date)
+            val dbo = grater[AnalogAggregationPoint].asDBObject(agg)
+            dbo.put("_id", "%d_%s".format(data._2, timestampString(Some(date))))
+            val coll = "analog_" + (keyPoint / (1000 * 60).toInt)
+            db.getCollection(coll).save(dbo)
+            println("saved " + dbo)
+          }
+          startTime += keyPoint
+        }
       })
-      dbo.remove("ts")
-      db.getCollection("analog").save(dbo)
-    }
+    })
   }
 
-  val keyPoints = List(
-    MINUTES.convert(15, TimeUnit.MINUTES),
-    HOURS.convert(1, TimeUnit.HOURS),
-    DAYS.convert(1, TimeUnit.DAYS)
-  )
+  def getAggregate(position: Int, resolution: Long, timestamp: Option[Date] = None) = {
+    val query = {
+      timestamp match {
+        case Some(timestamp) => {
+          BasicDBObjectBuilder.start(Map(
+            "timestamp" -> new BasicDBObject("$gte", timestamp),
+            "position" -> position
+          ).asJava).get
+        }
+        case None => {
+          BasicDBObjectBuilder.start(Map(
+            "position" -> position
+          ).asJava).get
+        }
+      }
+    }
+
+    val coll = "analog_" + (resolution / (1000 * 60).toInt)
+    val cur = db.getCollection(coll).find(query).sort(new BasicDBObject("_id", -1)).limit(1)
+
+    if(cur.hasNext) Some(grater[AnalogAggregationPoint].asObject(cur.next))
+    else None
+  }
 
   def aggregate(position: Int, resolution: Long, lastTimestamp: Date) = {
     val query = BasicDBObjectBuilder.start(Map(
@@ -72,14 +108,15 @@ object AnalogDao extends TimestampGenerator {
       recordsInspected += 1
       val dbo = cur.next.asInstanceOf[BasicDBObject]
       val event = grater[AnalogIO].asObject(dbo)
-      if(event.timestamp.getTime >= endTimestamp) 
-        done = true
-      else
-        records += event
+      if(event.timestamp.getTime >= endTimestamp) done = true
+      else records += event
     }
-    val average = records.map(_.value).sum / records.length
+    val average = records.length match {
+      case 0 => 0.0
+      case _ => records.map(_.value).sum / records.length
+    }
     val stddev = stdDev(records.map(_.value.toDouble).toList, average)
-    (position, average, stddev, recordsInspected)
+    (lastTimestamp, position, average, stddev, recordsInspected)
   }
 
   def squaredDifference(value1: Double, value2: Double) = pow(value1 - value2, 2.0)
@@ -100,7 +137,7 @@ object AnalogDao extends TimestampGenerator {
       val cur = db.getCollection(coll).find().sort(new BasicDBObject("_id", -1)).limit(1)
 
       if(cur.hasNext) {
-        val event = grater[AnalogIO].asObject(cur.next)
+        val event = grater[AnalogAggregationPoint].asObject(cur.next)
         output += p -> Some(event.timestamp)
       }
       else
@@ -110,11 +147,40 @@ object AnalogDao extends TimestampGenerator {
     output.toMap
   }
 
+  def findAggregates(resolution: Long, limit: Int) = {
+    val coll = "analog_" + (resolution / (1000 * 60).toInt)
+    val cur = db.getCollection(coll).find().sort(new BasicDBObject("timestamp", -1))
+
+    val output = new ListBuffer[AnalogAggregationPoint]
+    var done = false
+    val countsPerZone = new HashMap[Int, Int].empty
+
+    var recordsInspected = 0
+    while(!done && cur.hasNext) {
+      recordsInspected += 1
+      val dbo = cur.next.asInstanceOf[BasicDBObject]
+      val event = grater[AnalogAggregationPoint].asObject(dbo)
+      val eventTs = event.timestamp.getTime
+      val c = countsPerZone.getOrElse(event.position, 0) + 1
+      if(c < limit) {
+        countsPerZone += event.position -> c
+        output += event
+      }
+      if(countsPerZone.map(m => m._2).min > limit) {
+        println("done with limit " + countsPerZone)
+        done = true
+      }
+    }
+    output.toList.sortWith(_.timestamp.getTime < _.timestamp.getTime)
+  }
+
   def findAll(resolution: Long, limit: Int) = {
     val query = BasicDBObjectBuilder.start(Map(
       "timestamp" -> new BasicDBObject("$gte", new Date(System.currentTimeMillis() - (resolution * limit)))
     ).asJava).get
-    val cur = db.getCollection("analog").find(query).sort(new BasicDBObject("_id", -1))
+
+    val coll = "analog"
+    val cur = db.getCollection(coll).find(query).sort(new BasicDBObject("_id", -1))
 
     var lastTsPerZone = new HashMap[Int, Long].empty
     val output = new ListBuffer[AnalogIO]

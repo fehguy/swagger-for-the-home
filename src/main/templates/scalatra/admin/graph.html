@@ -19,7 +19,7 @@
         var name = "zone_" + o.position;
         if(c.name == name) {
           var time = new Date(o.timestamp).getTime();
-          var y = o.value;
+          var y = o.average;
           c.addPoint([time, y], true, false);
         }
       });
@@ -83,7 +83,7 @@
   });
   $(window).load(function() {
     $.ajax({
-      url: "/hydronics/zones?resolution=hour&limit=50"
+      url: "/hydronics/zones?resolution=hour&limit=500"
     }).done(function ( data ) {
       dispatchMessage(data);
     });

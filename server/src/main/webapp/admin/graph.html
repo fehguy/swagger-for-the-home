@@ -19,7 +19,7 @@
         var name = "zone_" + o.position;
         if(c.name == name) {
           var time = new Date(o.timestamp).getTime();
-          var y = o.value;
+          var y = o.average;
           c.addPoint([time, y], true, false);
         }
       });

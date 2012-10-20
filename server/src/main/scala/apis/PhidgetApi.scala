@@ -47,7 +47,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
     notes("Gives a list of all analog IO values"),
     parameters(
       )) {
-    Profile("/analog/inputs (get)", PhidgetApiService.getAnalogInputs())
+    Profile("/analog/inputs (get)", PhidgetApiService.getAnalogInputs(), true)
   }
 
   post("/digital/output",
@@ -66,7 +66,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       case e: DigitalIO => e
       case _ => halt(400)
       })
-    Profile("/digital/output (post)", PhidgetApiService.setDigitalOutput(body))
+    Profile("/digital/output (post)", PhidgetApiService.setDigitalOutput(body), true)
   }
 
   get("/digital/output/:position",
@@ -86,7 +86,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       case true  => params("position")
       case false => "0"
       })
-    Profile("/digital/output/:position (get)", PhidgetApiService.getDigitalOutputState(position))
+    Profile("/digital/output/:position (get)", PhidgetApiService.getDigitalOutputState(position), true)
   }
 
   get("/lcd",
@@ -119,7 +119,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       case true  => params("lineNumber")
       case false => "0"
       })
-    Profile("/lcd (get)", PhidgetApiService.setLcd(msg, lineNumber))
+    Profile("/lcd (get)", PhidgetApiService.setLcd(msg, lineNumber), true)
   }
 
   get("/lcd/contrast",
@@ -141,7 +141,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       case true  => params("value")
       case false => "200"
       })
-    Profile("/lcd/contrast (get)", PhidgetApiService.setContrast(value))
+    Profile("/lcd/contrast (get)", PhidgetApiService.setContrast(value), true)
   }
 
   get("/lcd/backlight",
@@ -163,6 +163,6 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       case true  => params("enabled")
       case false => "true"
       })
-    Profile("/lcd/backlight (get)", PhidgetApiService.setBacklight(enabled))
+    Profile("/lcd/backlight (get)", PhidgetApiService.setBacklight(enabled), true)
   }
 }

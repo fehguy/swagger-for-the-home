@@ -69,7 +69,7 @@ class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet
       case true  => params("resolution")
       case false => "hour"
       })
-    Profile("/zones (get)", HydronicsApiService.getZones(limit, resolution))
+    Profile("/zones (get)", HydronicsApiService.getZones(limit, resolution), true)
   }
 
   get("/zone/:zoneId",
@@ -111,6 +111,6 @@ class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet
       case true  => params("resolution")
       case false => "hour"
       })
-    Profile("/zone/:zoneId (get)", HydronicsApiService.getZone(zoneId, limit, resolution))
+    Profile("/zone/:zoneId (get)", HydronicsApiService.getZone(zoneId, limit, resolution), true)
   }
 }

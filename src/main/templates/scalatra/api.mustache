@@ -105,7 +105,7 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
     })
     {{/allParams}}
 
-    Profile("{{path}} ({{httpMethod}})", {{className}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}))
+    Profile("{{path}} ({{httpMethod}})", {{className}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}), true)
   }
 {{/operation}}
 {{/operations}}
