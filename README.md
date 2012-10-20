@@ -40,3 +40,12 @@ This starts up the server locally.  You can now hit the API via included swagger
 http://localhost:8080/admin
 ```
 
+### Making it yours
+
+This server uses the [Swagger Codegen](https://github.com/wordnik/swagger-codegen) project to generate the scalatra server.  You can 
+repeat this process by running the `./bin/server.sh` command--the codegen will read from `src/main/scripts/ScalatraServerGenerator.scala`,
+which in turn uses templates inside `src/main/templates/scalatra` for the code generation.  The swagger spec files located in `src/main/templates/spec-files`.
+
+When running the `./bin/server.sh` command, the codegen will read the spec files and generate a server from them.  That means the server
+itself is defined by the spec files, and the code is generated from them.  To avoid overwriting the actual implementation on every api change,
+the codegen delegates the logic to a service tier, which is also defined in the templates.
