@@ -1,6 +1,7 @@
 package services
 
 import data._
+import apis._
 
 import akka.actor._
 import akka.util.Duration
@@ -33,6 +34,8 @@ object HydronicSupport {
 					PhidgetApiService.setLcd(msg, 0)
 					Thread.sleep(2000)
 				})
+				println("freed " + MemoryManager.gc(2) + " bytes")
+				MemoryManager.status
 			}
 		}))
 
@@ -54,6 +57,7 @@ trait HydronicSupport {
 	}
 
 	def resolutionToMs(str: String): Long = {
+		println(str)
 		str match {
 			case "hour" => 60* 1000 * 60
 			case "day" => 24 * 60* 1000 * 60

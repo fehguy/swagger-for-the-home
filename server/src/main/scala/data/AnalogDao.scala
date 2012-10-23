@@ -45,7 +45,7 @@ object AnalogDao extends TimestampGenerator {
  
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {
-        println("compiuting average for pos " + pos + ", resolution " + keyPoint)
+        println("computing average for pos " + pos + ", resolution " + keyPoint)
 
         var startTime = getAggregate(pos, keyPoint) match {
           case Some(s) => s.timestamp.getTime

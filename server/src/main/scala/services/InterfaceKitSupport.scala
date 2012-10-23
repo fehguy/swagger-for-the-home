@@ -1,6 +1,7 @@
 package services
 
 import models._
+import config._
 import apis.ApiResponse
 
 import com.phidgets._
@@ -34,7 +35,11 @@ trait InterfaceKitSupport {
 	}
 
 	def initIntefaceKit(): Unit = {
-		ifk.openAny()
+		Configurator("analog") match {
+			case "" => ifk.openAny()
+			case e:String => ifk.open(e.toInt)
+		}
+
 		println("waiting for interface kit attachment...")
 		ifk.waitForAttachment()
 
