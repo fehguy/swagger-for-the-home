@@ -36,6 +36,7 @@ trait LCDSupport {
 		println("waiting for LCD attachment...")
 		lcd.waitForAttachment()
 
+/*
 		println("Phidget Information")
 		println("====================================")
 		println("Version: " + lcd.getDeviceVersion())
@@ -45,6 +46,7 @@ trait LCDSupport {
 		println("# Columns: " + lcd.getColumnCount())
 
     println("# Screens: " + lcd.getScreenCount())
+*/
 
     lcd.setScreen(0)
     lcd.setScreenSize(8)

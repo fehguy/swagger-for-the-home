@@ -18,6 +18,64 @@
       ]
     },
     {
+      "path":"/phidget.{format}/relay/output",
+      "description":"sets relay outputs",
+      "operations":[
+        {
+          "httpMethod":"POST",
+          "summary":"sets an output",
+          "notes":"Sets the specified IO",
+          "responseClass":"DigitalIO",
+          "nickname":"setRelayOutput",
+          "parameters":[
+            {
+              "description":"digital IO value to set",
+              "paramType":"body",
+              "required":true,
+              "dataType":"DigitalIO"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path":"/phidget.{format}/relay/output/{position}",
+      "description":"gets relay output state",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"gets an output state",
+          "notes":"Gets the specified IO",
+          "responseClass":"DigitalIO",
+          "nickname":"getRelayOutput",
+          "parameters":[
+            {
+              "name":"position",
+              "description":"positon to fetch",
+              "paramType":"path",
+              "required":true,
+              "dataType":"int",
+              "allowMultiple":false,
+              "defaultValue":"0",
+              "allowableValues":{
+                "valueType":"LIST",
+                "values":[
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "path":"/phidget.{format}/digital/output",
       "description":"sets digital outputs",
       "operations":[

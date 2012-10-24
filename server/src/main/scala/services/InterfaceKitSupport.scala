@@ -36,8 +36,14 @@ trait InterfaceKitSupport {
 
 	def initIntefaceKit(): Unit = {
 		Configurator("analog") match {
-			case "" => ifk.openAny()
-			case e:String => ifk.open(e.toInt)
+			case "" => {
+				println("waiting for interface kit attachment (default) ...")
+				ifk.openAny()
+			}
+			case e:String => {
+				println("waiting for interface kit attachment (id " + e + ") ...")
+				ifk.open(e.toInt)
+			}
 		}
 
 		println("waiting for interface kit attachment...")
