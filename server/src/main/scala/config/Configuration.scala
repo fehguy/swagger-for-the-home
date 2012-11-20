@@ -23,6 +23,11 @@ object Configurator {
 
 	def asInt(i:String) = apply(i).toInt
 
+	def hasConfig(i:String) = _config match {
+		case c: Configuration => c.values.contains(i)
+		case _ => false
+	}
+
 	def reload = {
 		_config = {
 			val file = new File(configFile)

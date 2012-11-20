@@ -41,7 +41,7 @@ object AnalogDao extends TimestampGenerator {
 
   def computeAverages = {
     val sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
-    val r = List(4,6,7)
+    val r = List(0,1,4,6,7)
  
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {

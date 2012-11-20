@@ -13,8 +13,10 @@
 
   function dispatchMessage(obj) {
     var values = {};
+    var d = new Date();
+
     obj.forEach(function(o){
-      var time = new Date(o.timestamp).getTime();
+      var time = new Date(o.timestamp).getTime() - d.getTimezoneOffset() * 60000;
       var y = o.average;
       if(values[o.position]) {
         values[o.position].push([time, y]);
@@ -109,7 +111,7 @@
       resolution = "hour"
 
     $.ajax({
-      url: "/hydronics/zones?resolution=" + resolution + "&limit=100"
+      url: "/hydronics/zones?resolution=" + resolution + "&limit=500"
     }).done(function ( data ) {
       dispatchMessage(data);
     });
