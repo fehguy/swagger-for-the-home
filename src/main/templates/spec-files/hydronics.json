@@ -82,10 +82,12 @@
       "id":"Zone",
       "properties":{
         "id":{
-          "type":"long"
+          "type":"long",
+          "required":"true"
         },
         "name":{
-          "type":"string"
+          "type":"string",
+          "required":"true"
         }
       }
     }

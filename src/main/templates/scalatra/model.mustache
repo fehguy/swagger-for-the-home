@@ -10,7 +10,7 @@ case class {{classname}} (
 
   {{#description}}/* {{description}} */
   {{/description}}
-  {{name}}: {{datatype}}{{#hasMore}},{{newline}}  {{/hasMore}}
+  {{name}}: {{#notRequired}}Option[{{/notRequired}}{{datatype}}{{#notRequired}}]{{/notRequired}}{{#notRequired}} = None{{/notRequired}}{{#hasMore}},{{newline}}  {{/hasMore}}
   {{/vars}}
 )
 {{/model}}

@@ -27,6 +27,7 @@
           "notes":"Sets the specified IO",
           "responseClass":"DigitalIO",
           "nickname":"setRelayOutput",
+          "defaultValue":"{\n  \"position\": 0,\n  \"value\": false\n}",
           "parameters":[
             {
               "description":"digital IO value to set",
@@ -240,13 +241,20 @@
       "id":"AnalogIO",
       "properties":{
         "position":{
-          "type":"int"
+          "type":"int",
+          "required":"true"
         },
         "value":{
-          "type":"double"
+          "type":"double",
+          "required":"true"
         },
         "timestamp":{
-          "type":"Date"
+          "type":"Date",
+          "required":"true"
+        },
+        "name":{
+          "type":"String",
+          "required":"false"
         }
       }
     },
@@ -254,10 +262,15 @@
       "id":"DigitalIO",
       "properties":{
         "position":{
-          "type":"int"
+          "type":"int",
+          "required":"true"
         },
         "value":{
-          "type":"boolean"
+          "type":"boolean",
+          "required":"true"
+        },
+        "timestamp":{
+          "type":"Date"
         }
       }
     }
