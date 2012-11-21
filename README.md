@@ -112,6 +112,52 @@ Make it a daemon by copying the init script into /etc/init.d then
 update-rc.d sfth defaults
 ```
 
+### Configuration
+
+The app looks for a single JSON file called config.json in the working directory.  This
+contains key-value pairs for simple configurations, as well as a mapping between zones, device IDs, and friendly names.
+
+For example:
+
+```json
+{
+  "values":{
+    "saveDigitalOutputs":"true",
+    "saveAnalogData":"true",
+    "updateLcd":"true",
+    "aggregate":"enabled",
+    "dbhost":"localhost",
+    "dbport":"27017",
+    "dbuser":"username",
+    "dbpassword":"password",
+    "database":"my_database"
+  },
+  "inputZones": [
+    {
+      "logicalPosition": 0,
+      "deviceId": "ABCD",
+      "position": 0,
+      "name": "kids room"
+    },
+    {
+      "logicalPosition": 1,
+      "deviceId": "ABCD",
+      "position": 1,
+      "name": "garage"
+    },
+    {
+      "logicalPosition": 4,
+      "deviceId": "EFGH",
+      "position": 0,
+      "name": "guest house"
+    }
+  ]
+}
+```
+
+Note the `logicalPosition` is a unique position for inputs which is somewhat arbitrary--it is used for identification in the mongodb database.  The `deviceId` is the serial number of the phidget input board.  This is because you need more than 8 inputs, right?
+
+
 ### Making it yours
 
 This server uses the [Swagger Codegen](https://github.com/wordnik/swagger-codegen) project to generate the scalatra server.  You can 
