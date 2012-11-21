@@ -33,19 +33,19 @@ trait AnalogSupport {
 
 		analog.addAttachListener(new AttachListener() {
 			def attached(ae: AttachEvent) = {
-				println("attachment of " + ae)
+				println("Analog attachment of " + ae)
 				analogAttached = true
 			}
 		})
 		analog.addDetachListener(new DetachListener() {
 			def detached(ae: DetachEvent) = {
-				println("detachment of " + ae)
+				println("Analog detachment of " + ae)
 				analogAttached = false
 			}
 		})
 		analog.addErrorListener(new ErrorListener() {
 			def error(ee: ErrorEvent) = {
-				println("error event for " + ee)
+				println("Analog event for " + ee)
 			}
 		})
 

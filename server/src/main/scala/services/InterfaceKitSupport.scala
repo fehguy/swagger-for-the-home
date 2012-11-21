@@ -7,82 +7,70 @@ import apis.ApiResponse
 import com.phidgets._
 import com.phidgets.event._
 
-trait InterfaceKitSupport {
-	println(Phidget.getLibraryVersion())
+trait InterfaceKitSupport extends AnalogConversion {
+	val interfaceKitDeviceIdMap: Map[String, List[InputZone]] = Configurator.inputZones.groupBy(_.deviceId)
+	val ifks: Map[String, InterfaceKitPhidget] = initInterfaceKit(interfaceKitDeviceIdMap.keySet)
 
-	val ifk = new InterfaceKitPhidget
-	var ifkAttached = false
-
-	def bitsToVoltage(input: Int): Double = input.toDouble * 5.0 / 4095.0 * 100.0
+	def inputs() = interfaceKitDeviceIdMap.map(m => m._2).flatten.toList
 
 	def getAnalogInputs() = {
-		if(!ifkAttached) initIntefaceKit()
-		(for(i <- (0 until 8))
-			yield AnalogIO(new java.util.Date, i, bitsToVoltage(ifk.getSensorRawValue(i)))
+		(for(input <- inputs())
+			yield AnalogIO(new java.util.Date, 
+				input.position, 
+				bitsToVoltage(ifks(input.deviceId).getSensorRawValue(input.position)),
+				Some(input.name))
 		).toList
 	}
 
+	/**
+	 * sets the output value for the digital IO based on logical position
+	 **/
 	def setDigitalOutput(io: DigitalIO) = {
-		if(!ifkAttached) initIntefaceKit()
-		ifk.setOutputState(io.position, io.value)
-
+		interfaceKitDeviceIdMap.map(m => {
+			inputs.filter(input => input.logicalPosition == io.position).foreach(i => {
+				ifks(i.deviceId).setOutputState(io.position, io.value)
+			})
+		})
 		ApiResponse("set output on " + io, 200)
 	}
 
-	def getDigitalOutputState(position: Int) = {
-		if(!ifkAttached) initIntefaceKit()
-		DigitalIO(position, ifk.getOutputState(position))
+	/**
+	 * gets output state for the given logical position
+	 **/
+	def getDigitalOutputState(logicalPosition: Int): DigitalIO = {
+		(for(input <- inputs())
+			yield DigitalIO(logicalPosition, ifks(input.deviceId).getOutputState(input.position))
+		).head
 	}
 
-	def initIntefaceKit(): Unit = {
-		Configurator("analog") match {
-			case "" => {
-				println("waiting for interface kit attachment (default) ...")
-				ifk.openAny()
-			}
-			case e:String => {
-				println("waiting for interface kit attachment (id " + e + ") ...")
-				ifk.open(e.toInt)
-			}
-		}
-
-		println("waiting for interface kit attachment...")
-		ifk.waitForAttachment()
-
-		ifk.addAttachListener(new AttachListener() {
-			def attached(ae: AttachEvent) = {
-				println("attachment of " + ae)
-				ifkAttached = true
-			}
-		})
-		ifk.addDetachListener(new DetachListener() {
-			def detached(ae: DetachEvent) = {
-				println("detachment of " + ae)
-				ifkAttached = false
-			}
-		})
-		ifk.addErrorListener(new ErrorListener() {
-			def error(ee: ErrorEvent) = {
-				println("error event for " + ee)
-			}
-		})
-
-		println("Phidget Information")
-		println("====================================");
-		println("Version: " + ifk.getDeviceVersion())
-		println("Name: " + ifk.getDeviceName())
-		println("Serial #: " + ifk.getSerialNumber())
-		println("# Digital Outputs: " + ifk.getOutputCount())
-
-		(0 until ifk.getOutputCount).foreach(i => {
-			ifk.setOutputState(i, false)
-		})
-
-    ifkAttached = true
+	/**
+	 * initializes all boards
+	 **/
+	def initInterfaceKit(ids: Set[String]): Map[String, InterfaceKitPhidget] = {
+		(for(id <- ids) yield {
+			println("initializing id " + id)
+			val ifk = new InterfaceKitPhidget
+			ifk.open(id.toInt)
+			ifk.addAttachListener(new AttachListener() {
+				def attached(ae: AttachEvent) = {
+					println("InterfaceKit " + id + " attachment of " + ae)
+				}
+			})
+			ifk.addDetachListener(new DetachListener() {
+				def detached(ae: DetachEvent) = {
+					println("InterfaceKit " + id + " detachment of " + ae)
+				}
+			})
+			ifk.addErrorListener(new ErrorListener() {
+				def error(ee: ErrorEvent) = {
+					println("InterfaceKit " + id + " " + ee)
+				}
+			})
+			(id, ifk)
+		}).toMap
 	}
 
 	def disconnectAnalog = {
-		ifkAttached = false
-		ifk.close()
+		ifks.map(m => m._2.close())
 	}
 }

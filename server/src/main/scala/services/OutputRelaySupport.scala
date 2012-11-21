@@ -23,7 +23,14 @@ trait OutputRelaySupport {
 		DigitalIO(position, relay.getOutputState(position))
 	}
 
-	def initRelay(): Unit = {
+	def getRelayOutputs: List[DigitalIO]= {
+		if(!relayAttached) initRelay()
+		(for(position <- 0 to 7) yield {
+			getRelayOutput(position)
+		}).toList
+	}
+
+	def initRelay(): Boolean = {
 		Configurator("relay") match {
 			case "" => {
 				println("waiting for output relay attachment (default) ...")
@@ -39,23 +46,25 @@ trait OutputRelaySupport {
 
 		relay.addAttachListener(new AttachListener() {
 			def attached(ae: AttachEvent) = {
-				println("attachment of " + ae)
+				println("Output relay attachment of " + ae)
 				relayAttached = true
 			}
 		})
 		relay.addDetachListener(new DetachListener() {
 			def detached(ae: DetachEvent) = {
-				println("detachment of " + ae)
+				println("Output relay detachment of " + ae)
 				relayAttached = false
 			}
 		})
 		relay.addErrorListener(new ErrorListener() {
 			def error(ee: ErrorEvent) = {
-				println("error event for " + ee)
+				println("Output relay error event for " + ee)
 			}
 		})
+		println("Relay serial #: " + relay.getSerialNumber())
 
     relayAttached = true
+    relayAttached
 	}
 
 	def disconnectRelay = {

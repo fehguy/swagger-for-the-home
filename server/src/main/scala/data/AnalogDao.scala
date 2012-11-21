@@ -6,7 +6,6 @@ import models._
 import com.wordnik.mongo.connection._
 import com.mongodb.BasicDBObjectBuilder
 
-import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.regex.Pattern
 
@@ -14,6 +13,7 @@ import com.novus.salat._
 import com.novus.salat.global._
 import com.mongodb.casbah.Imports._
 
+import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit._
 
@@ -24,8 +24,7 @@ import scala.math._
 case class AnalogAggregationPoint(position: Int, average: Double, stdDev: Double, timestamp: Date)
 
 object AnalogDao extends TimestampGenerator {
-  val db = MongoDBConnectionManager.getConnection(
-    Configurator("dbuser"), Configurator("dbhost"), Configurator.asInt("dbport"), Configurator("database"), Configurator("dbuser"), Configurator("dbpassword"), SchemaType.READ_WRITE)
+  val db = MongoDBConnectionManager.getConnection("phidgets", SchemaType.READ_WRITE)
 
   val keyPoints = List(
     MILLISECONDS.convert(15, TimeUnit.MINUTES),
@@ -36,6 +35,7 @@ object AnalogDao extends TimestampGenerator {
   def save(io: AnalogIO) = {
   	val dbo = grater[AnalogIO].asDBObject(io)
     dbo.put("_id", "%d_%s".format(io.position, timestampString()))
+    dbo.remove("name")
   	db.getCollection("analog").save(dbo)
   }
 
@@ -45,8 +45,6 @@ object AnalogDao extends TimestampGenerator {
  
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {
-        println("computing average for pos " + pos + ", resolution " + keyPoint)
-
         var startTime = getAggregate(pos, keyPoint) match {
           case Some(s) => s.timestamp.getTime
           case None => sdf.parse("2012-10-14:01:00:00").getTime
@@ -60,7 +58,6 @@ object AnalogDao extends TimestampGenerator {
             dbo.put("_id", "%d_%s".format(data._2, timestampString(Some(date))))
             val coll = "analog_" + (keyPoint / (1000 * 60).toInt)
             db.getCollection(coll).save(dbo)
-            println("saved " + dbo)
           }
           startTime += keyPoint
         }
@@ -233,15 +230,5 @@ object AnalogDao extends TimestampGenerator {
       if(output.size >= limit) done = true
     }
     output.toList
-  }
-}
-
-trait TimestampGenerator {
-  def timestampString(date: Option[Date] = None): String = {
-    val dateFormatter = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
-    dateFormatter.format(date match {
-      case Some(date) => date
-      case None => new Date
-    })
   }
 }

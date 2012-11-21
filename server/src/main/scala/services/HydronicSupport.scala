@@ -12,14 +12,15 @@ import java.util.concurrent.TimeUnit
 
 object HydronicSupport {
   val system = ActorSystem("HydronicScheduler")
-	var saveCancellable: Option[Cancellable] = None
+	var analogSaveCancellable: Option[Cancellable] = None
+	var digitalSaveCancellable: Option[Cancellable] = None
 	var lcdCancellable: Option[Cancellable] = None
 	var aggregationCancellable: Option[Cancellable] = None
 
 	def startUpdate = {
-		Configurator.hasConfig("saveData") match {
+		Configurator.hasConfig("saveAnalogData") match {
 			case true => {
-				saveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
+				analogSaveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
 					def run() = {
 						val inputs = PhidgetApiService.getAnalogInputs()
 						inputs.foreach(analog => {
@@ -28,7 +29,19 @@ object HydronicSupport {
 					}
 				}))
 			}
-			case _ => println("saving data disabled")
+			case _ => println("saving analog inputs disabled")
+		}
+
+		Configurator.hasConfig("saveDigitalOutputs") match {
+			case true => {
+				analogSaveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
+					def run() = {
+						val inputs = PhidgetApiService.getRelayOutputs
+						inputs.foreach(io => DigitalDao.save(io))
+					}
+				}))
+			}
+			case _ => println("saving digital outputs disabled")
 		}
 
 		Configurator.hasConfig("updateLcd") match {

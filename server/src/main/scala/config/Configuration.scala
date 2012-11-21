@@ -1,5 +1,7 @@
 package config
 
+import models._
+
 import org.json4s._
 import org.json4s.jackson.Serialization._
 import org.json4s.jackson.JsonMethods._
@@ -28,6 +30,16 @@ object Configurator {
 		case _ => false
 	}
 
+	def load(input: String): Configuration = {
+		val str = parse(input)
+		_config = str.extract[Configuration]
+		_config
+	}
+
+	def inputZones = _config.inputZones
+
+	def outputZones = _config.outputZones
+
 	def reload = {
 		_config = {
 			val file = new File(configFile)
@@ -43,14 +55,16 @@ object Configurator {
 				Configuration.default
 			}
 			else {
-				val str = parse(Source.fromFile(file).mkString)
-				str.extract[Configuration]
+				load(Source.fromFile(file).mkString)
 			}
 		}
 	}
 }
 
-case class Configuration(values:Map[String, String])
+case class Configuration(
+	values:Map[String, String],
+	inputZones: List[InputZone] = List.empty,
+	outputZones: List[OutputZone] = List.empty)
 
 object Configuration {
 	def default = Configuration(Map(

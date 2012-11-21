@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "com.phidgets"                 % "phidget"                % "2.1.0",
   "org.scalatra"                 % "scalatra"               % "2.2.0-SNAPSHOT",
   "org.scalatra"                 % "scalatra-specs2"        % "2.2.0-SNAPSHOT"      % "test",
+  "org.scalatest"               %% "scalatest"              % "1.6.1"               % "test",
   "org.scalatra"                 % "scalatra-swagger"       % "2.2.0-SNAPSHOT",
   "org.scalatra"                 % "scalatra-json"          % "2.2.0-SNAPSHOT",
   "org.json4s"                  %% "json4s-jackson"         % "3.0.0",

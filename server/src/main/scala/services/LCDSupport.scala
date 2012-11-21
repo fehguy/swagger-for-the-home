@@ -15,19 +15,19 @@ trait LCDSupport {
 
 	lcd.addAttachListener(new AttachListener() {
 		def attached(ae: AttachEvent) = {
-			println("attachment of " + ae)
+			println("LCD attachment of " + ae)
 			lcdAttached = true
 		}
 	})
 	lcd.addDetachListener(new DetachListener() {
 		def detached(ae: DetachEvent) = {
-			println("detachment of " + ae)
+			println("LCD detachment of " + ae)
 			lcdAttached = false
 		}
 	})
 	lcd.addErrorListener(new ErrorListener() {
 		def error(ee: ErrorEvent) = {
-			println("error event for " + ee)
+			println("LCD error event for " + ee)
 		}
 	})
 
