@@ -27,11 +27,11 @@
           "notes":"Sets the specified IO",
           "responseClass":"DigitalIO",
           "nickname":"setRelayOutput",
-          "defaultValue":"{\n  \"position\": 0,\n  \"value\": false\n}",
           "parameters":[
             {
               "description":"digital IO value to set",
               "paramType":"body",
+              "defaultValue":"{\"position\":0,\"value\":true}",
               "required":true,
               "dataType":"DigitalIO"
             }
