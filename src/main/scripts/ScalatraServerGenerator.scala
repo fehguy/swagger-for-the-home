@@ -53,7 +53,7 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
             case _ => None
           }
         }
-        case _ => None
+        case _ => Some("\"" + v.replaceAll("\"","\\\\\"") + "\"")
       }
     } else None
   }

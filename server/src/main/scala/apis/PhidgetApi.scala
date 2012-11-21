@@ -60,12 +60,17 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       Parameter(name = "body",
         description = "digital IO value to set",
         dataType = DataType("DigitalIO"),
-        defaultValue = None,
+        defaultValue = Some("{\"position\":0,\"value\":true}"),
         paramType = ParamType.Body)
       )) {
-    val body = (parsedBody.extract[DigitalIO] match {
-      case e: DigitalIO => e
-      case _ => halt(400)
+    val body = ({
+      val str = parsedBody match {
+        case e: JValue => e
+        case _ => parse("{\"position\":0,\"value\":true}")}
+
+      str.extract[DigitalIO] match {
+        case e: DigitalIO => e
+        case _ => halt(400)}
       })
     Profile("/relay/output (post)", PhidgetApiService.setRelayOutput(body), true)
   }
@@ -103,9 +108,14 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
         defaultValue = None,
         paramType = ParamType.Body)
       )) {
-    val body = (parsedBody.extract[DigitalIO] match {
-      case e: DigitalIO => e
-      case _ => halt(400)
+    val body = ({
+      val str = parsedBody match {
+        case e: JValue => e
+        case _ => JNothing}
+
+      str.extract[DigitalIO] match {
+        case e: DigitalIO => e
+        case _ => halt(400)}
       })
     Profile("/digital/output (post)", PhidgetApiService.setDigitalOutput(body), true)
   }

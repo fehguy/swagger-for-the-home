@@ -12,6 +12,7 @@ trait OutputRelaySupport {
 	var relayAttached = false
 
 	def setRelayOutput(io: DigitalIO) = {
+		println(io)
 		if(!relayAttached) initRelay()
 		relay.setOutputState(io.position, io.value)
 
