@@ -60,6 +60,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       Parameter(name = "body",
         description = "digital IO value to set",
         dataType = DataType("DigitalIO"),
+        defaultValue = None,
         paramType = ParamType.Body)
       )) {
     val body = (parsedBody.extract[DigitalIO] match {
@@ -99,6 +100,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       Parameter(name = "body",
         description = "digital IO value to set",
         dataType = DataType("DigitalIO"),
+        defaultValue = None,
         paramType = ParamType.Body)
       )) {
     val body = (parsedBody.extract[DigitalIO] match {
