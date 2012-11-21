@@ -58,6 +58,20 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
     } else None
   }
 
+  override def processModelMap(m: Map[String, AnyRef]) = {
+    val lb = m("vars").asInstanceOf[ListBuffer[HashMap[String, String]]]
+    //  TODO: want the vars ordered by required => optional
+    lb.foreach(l => {
+      if(l.contains("required")) {
+        l("required") match {
+          case "true" =>
+          case "false" => l += "notRequired" -> "true"
+        }
+      }
+    })
+    m.toMap
+  }
+
 
   override def processApiMap(m: Map[String, AnyRef]): Map[String, AnyRef] = {
     val mutable = scala.collection.mutable.Map() ++ m
