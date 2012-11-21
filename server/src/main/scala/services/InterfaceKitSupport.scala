@@ -16,9 +16,9 @@ trait InterfaceKitSupport extends AnalogConversion {
 	def getAnalogInputs() = {
 		(for(input <- inputs())
 			yield AnalogIO(new java.util.Date, 
-				input.position, 
-				bitsToVoltage(ifks(input.deviceId).getSensorRawValue(input.position)),
-				Some(input.name))
+				input.position,
+				Some(input.name),
+				bitsToVoltage(ifks(input.deviceId).getSensorRawValue(input.position)))
 		).toList
 	}
 
@@ -39,7 +39,7 @@ trait InterfaceKitSupport extends AnalogConversion {
 	 **/
 	def getDigitalOutputState(logicalPosition: Int): DigitalIO = {
 		(for(input <- inputs())
-			yield DigitalIO(logicalPosition, ifks(input.deviceId).getOutputState(input.position))
+			yield DigitalIO(None, logicalPosition, ifks(input.deviceId).getOutputState(input.position))
 		).head
 	}
 

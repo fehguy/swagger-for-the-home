@@ -20,7 +20,7 @@ trait OutputRelaySupport {
 
 	def getRelayOutput(position: Int) = {
 		if(!relayAttached) initRelay()
-		DigitalIO(position, relay.getOutputState(position))
+		DigitalIO(None, position, relay.getOutputState(position))
 	}
 
 	def getRelayOutputs: List[DigitalIO]= {
