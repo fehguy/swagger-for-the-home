@@ -43,6 +43,7 @@ object Configurator {
 	def reload = {
 		_config = {
 			val file = new File(configFile)
+			println(file.getAbsolutePath)
 			if(!file.exists){
 				val pw = new java.io.PrintWriter(file)
 				try{

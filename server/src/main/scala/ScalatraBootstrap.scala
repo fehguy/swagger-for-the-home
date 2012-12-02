@@ -1,6 +1,9 @@
 import services._
 import apis._
 import org.eatbacon.app._
+
+import com.wordnik.mongo.connection._
+import config._
 import javax.servlet.ServletContext
 import org.scalatra.LifeCycle
 
@@ -12,6 +15,14 @@ class ScalatraBootstrap extends LifeCycle {
       context mount (new HydronicsApi, "/hydronics/*")
       context mount (new PhidgetApi, "/phidget/*")
       context mount (new ResourcesApp, "/*")
+
+      MongoDBConnectionManager.getConnection("phidgets", 
+        Configurator("dbhost"), 
+        Configurator.asInt("dbport"), 
+        Configurator("database"), 
+        Configurator("dbuser"), 
+        Configurator("dbpassword"), 
+        SchemaType.READ_WRITE)
 
       HydronicSupport.startUpdate
     } catch {

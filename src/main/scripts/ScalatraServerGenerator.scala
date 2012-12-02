@@ -62,6 +62,7 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
     val lb = m("vars").asInstanceOf[ListBuffer[HashMap[String, String]]]
     //  TODO: want the vars ordered by required => optional
     lb.foreach(l => {
+      println(l("name"))
       if(l.contains("required")) {
         l("required") match {
           case "true" =>

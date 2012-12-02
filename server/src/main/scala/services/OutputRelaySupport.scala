@@ -7,31 +7,41 @@ import apis.ApiResponse
 import com.phidgets._
 import com.phidgets.event._
 
+import scala.collection.mutable.HashMap
+
+object OutputRelaySupport {
+	var relays: HashMap[String, InterfaceKitPhidget] = HashMap.empty
+	var relay:InterfaceKitPhidget = new InterfaceKitPhidget
+}
+
 trait OutputRelaySupport {
-	val relay = new InterfaceKitPhidget
-	var relayAttached = false
+	var relayAttached = {
+		Configurator.hasConfig("relay") match {
+			case true => initRelay
+			case false => {
+				println("relay disabled")
+				false
+			}
+		}
+	}
 
 	def setRelayOutput(io: DigitalIO) = {
-		println(io)
-		if(!relayAttached) initRelay()
-		relay.setOutputState(io.position, io.value)
-
+		OutputRelaySupport.relay.setOutputState(io.position, io.value)
 		ApiResponse("set output on " + io.position + " to " + io.value, 200)
 	}
 
 	def getRelayOutput(position: Int) = {
-		if(!relayAttached) initRelay()
-		DigitalIO(None, position, relay.getOutputState(position))
+		DigitalIO(None, position, OutputRelaySupport.relay.getOutputState(position))
 	}
 
 	def getRelayOutputs: List[DigitalIO]= {
-		if(!relayAttached) initRelay()
 		(for(position <- 0 to 7) yield {
 			getRelayOutput(position)
 		}).toList
 	}
 
 	def initRelay(): Boolean = {
+		val relay = OutputRelaySupport.relay
 		Configurator("relay") match {
 			case "" => {
 				println("waiting for output relay attachment (default) ...")
@@ -47,13 +57,13 @@ trait OutputRelaySupport {
 
 		relay.addAttachListener(new AttachListener() {
 			def attached(ae: AttachEvent) = {
-				println("Output relay attachment of " + ae)
+				// println("Output relay attachment of " + ae)
 				relayAttached = true
 			}
 		})
 		relay.addDetachListener(new DetachListener() {
 			def detached(ae: DetachEvent) = {
-				println("Output relay detachment of " + ae)
+				// println("Output relay detachment of " + ae)
 				relayAttached = false
 			}
 		})
@@ -63,13 +73,10 @@ trait OutputRelaySupport {
 			}
 		})
 		println("Relay serial #: " + relay.getSerialNumber())
-
-    relayAttached = true
-    relayAttached
+    true
 	}
 
 	def disconnectRelay = {
-		relayAttached = false
-		relay.close()
+		OutputRelaySupport.relay.close()
 	}
 }

@@ -41,7 +41,7 @@ object AnalogDao extends TimestampGenerator {
 
   def computeAverages = {
     val sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
-    val r = List(0,1,4,6,7)
+    val r = List(0,1,4,6,7,10,15)
  
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {
@@ -89,6 +89,7 @@ object AnalogDao extends TimestampGenerator {
     else None
   }
 
+  // oops!  need an indexed query on this
   def aggregate(position: Int, resolution: Long, lastTimestamp: Date) = {
     val query = BasicDBObjectBuilder.start(Map(
       "timestamp" -> new BasicDBObject("$gte", lastTimestamp),

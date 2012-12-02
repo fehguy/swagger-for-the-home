@@ -242,19 +242,23 @@
       "properties":{
         "position":{
           "type":"int",
-          "required":"true"
+          "required":"true",
+          "order":"0"
         },
         "value":{
           "type":"double",
-          "required":"true"
+          "required":"true",
+          "order":"1"
         },
         "timestamp":{
           "type":"Date",
-          "required":"true"
+          "required":"true",
+          "order":"2"
         },
         "name":{
           "type":"String",
-          "required":"false"
+          "required":"false",
+          "order":"3"
         }
       }
     },
@@ -263,14 +267,17 @@
       "properties":{
         "position":{
           "type":"int",
-          "required":"true"
+          "required":"true",
+          "order":"0"
         },
         "value":{
           "type":"boolean",
-          "required":"true"
+          "required":"true",
+          "order":"1"
         },
         "timestamp":{
-          "type":"Date"
+          "type":"Date",
+          "order":"2"
         }
       }
     }

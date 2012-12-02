@@ -10,6 +10,9 @@ import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
 import org.json4s._
 import org.json4s.JsonDSL._
+import org.json4s.jackson.JsonMethods._
+
+
 import org.scalatra.json.{JValueResult, NativeJsonSupport}
 
 import scala.collection.JavaConverters._
@@ -20,7 +23,7 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
       with JValueResult 
       with SwaggerSupport
       with SwaggerDatatypeConversionSupport {
-  protected implicit val jsonFormats: Formats = DefaultFormats
+  implicit val jsonFormats = DefaultFormats
 
   protected val applicationDescription: String = "PhidgetApi"
   override protected val applicationName: Option[String] = Some("phidget")
@@ -35,7 +38,6 @@ class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
 
   before() {
-    contentType = formats("json")
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
 

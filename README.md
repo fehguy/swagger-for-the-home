@@ -49,6 +49,18 @@ You'll need to install libusb before building, though!
 sudo apt-get install libusb-dev
 ```
 
+If you can't get libusb, you can follow this path:
+
+```
+wget http://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.9/libusb-1.0.9.tar.bz2
+tar xjf libusb-1.0.9.tar.bz2
+cd libusb-1.0.9
+
+./configure
+make
+sudo make install
+```
+
 The Phidget drivers then need to be installed in the OS.  You can grab them from source here:
 
 ```
@@ -157,6 +169,12 @@ For example:
 
 Note the `logicalPosition` is a unique position for inputs which is somewhat arbitrary--it is used for identification in the mongodb database.  The `deviceId` is the serial number of the phidget input board.  This is because you need more than 8 inputs, right?
 
+
+### Troubleshooting
+I've spent hours because of these issues.  Hope it helps.
+
+#### The call to open() hangs forever.  What gives?
+Look at this [link](http://www.lothar.com/Projects/Phidgets/) for info on configuring udev to properly allow access to the USB devices.  Also try running your program as root.
 
 ### Making it yours
 

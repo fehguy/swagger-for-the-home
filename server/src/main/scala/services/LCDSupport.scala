@@ -1,5 +1,6 @@
 package services
 
+import config._
 import apis.ApiResponse
 
 import com.phidgets._
@@ -11,7 +12,12 @@ trait LCDSupport {
 	var contrast = 200
 	var backlight = false
 	val lcd = new TextLCDPhidget
-	var lcdAttached = false
+	var lcdAttached = {
+		Configurator.hasConfig("updateLcd") match {
+			case true => initLcd
+			case false => false
+		}
+	}
 
 	lcd.addAttachListener(new AttachListener() {
 		def attached(ae: AttachEvent) = {
@@ -31,22 +37,10 @@ trait LCDSupport {
 		}
 	})
 
-	def initLcd(): Unit = {
+	def initLcd(): Boolean = {
 		lcd.openAny()
 		println("waiting for LCD attachment...")
 		lcd.waitForAttachment()
-
-/*
-		println("Phidget Information")
-		println("====================================")
-		println("Version: " + lcd.getDeviceVersion())
-		println("Name: " + lcd.getDeviceName())
-		println("Serial #: " + lcd.getSerialNumber())
-		println("# Rows: " + lcd.getRowCount())
-		println("# Columns: " + lcd.getColumnCount())
-
-    println("# Screens: " + lcd.getScreenCount())
-*/
 
     lcd.setScreen(0)
     lcd.setScreenSize(8)
@@ -56,11 +50,12 @@ trait LCDSupport {
 
     setContrast(contrast)
     setBacklight(backlight)
+		println("attached LCD: " + lcd.getScreenCount + " " + lcd.getRowCount + "x" + lcd.getColumnCount)
+
+    true
 	}
 
 	def setBacklight(enabled: Boolean) = {
-		if(!lcdAttached)
-			initLcd()
 		backlight = enabled
 		lcd.setBacklight(backlight)
 
@@ -68,8 +63,6 @@ trait LCDSupport {
 	}
 
 	def setContrast(value: Int) = {
-		if(!lcdAttached)
-			initLcd()
 		contrast = value
     lcd.setContrast(contrast)
 
@@ -77,15 +70,12 @@ trait LCDSupport {
 	}
 
 	def setLcd(value: String, lineNumber: Int) = {
-		if(!lcdAttached)
-			initLcd()
     lcd.setDisplayString(lineNumber, value)
 
 		ApiResponse("set lcd line " + lineNumber + " to " + value, 200)
 	}
 
 	def disconnectLcd = {
-		lcdAttached = false
 		lcd.close()
 	}	
 }

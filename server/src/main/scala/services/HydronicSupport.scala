@@ -20,12 +20,15 @@ object HydronicSupport {
 	def startUpdate = {
 		Configurator.hasConfig("saveAnalogData") match {
 			case true => {
-				analogSaveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
+				analogSaveCancellable = Some(system.scheduler.schedule(15 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
 					def run() = {
+						println("save analog")
 						val inputs = PhidgetApiService.getAnalogInputs()
 						inputs.foreach(analog => {
+							println("saving data for " + analog.position + ", value " + analog.value)
 							if(analog.value > 0.1) AnalogDao.save(analog)
 						})
+						println("done saving")
 					}
 				}))
 			}
@@ -36,6 +39,7 @@ object HydronicSupport {
 			case true => {
 				analogSaveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
 					def run() = {
+						println("update outputs")
 						val inputs = PhidgetApiService.getRelayOutputs
 						inputs.foreach(io => DigitalDao.save(io))
 					}
@@ -46,8 +50,9 @@ object HydronicSupport {
 
 		Configurator.hasConfig("updateLcd") match {
 			case true => {
-				lcdCancellable = Some(system.scheduler.schedule(5 second, Duration.create(20, TimeUnit.SECONDS), new Runnable {
+				lcdCancellable = Some(system.scheduler.schedule(45 second, Duration.create(20, TimeUnit.SECONDS), new Runnable {
 					def run() = {
+						println("update LCD")
 						val inputs = PhidgetApiService.getAnalogInputs()
 						inputs.foreach(analog => {
 							val msg = "Channel %d is %.1f F" format(analog.position, analog.value)

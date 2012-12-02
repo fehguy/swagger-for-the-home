@@ -1,6 +1,9 @@
 import services._
 import {{apiPackage}}._
 import {{package}}._
+
+import config._
+import com.wordnik.mongo.connection._
 import javax.servlet.ServletContext
 import org.scalatra.LifeCycle
 
@@ -14,6 +17,14 @@ class ScalatraBootstrap extends LifeCycle {
       {{/apis}}
 
       context mount (new ResourcesApp, "/*")
+
+      MongoDBConnectionManager.getConnection("phidgets", 
+        Configurator("dbhost"), 
+        Configurator.asInt("dbport"), 
+        Configurator("database"), 
+        Configurator("dbuser"), 
+        Configurator("dbpassword"), 
+        SchemaType.READ_WRITE)
 
       HydronicSupport.startUpdate
     } catch {
