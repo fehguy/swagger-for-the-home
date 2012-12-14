@@ -4,6 +4,8 @@ assemblySettings
 
 organization := "org.eatbacon"
 
+mainClass in assembly := Some("JettyMain")
+
 name := "sfth"
 
 version := "0.1.0-SNAPSHOT"

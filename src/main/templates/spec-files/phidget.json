@@ -5,6 +5,19 @@
   "resourcePath":"/phidget",
   "apis":[
     {
+      "path":"/hydronics.{format}/reset",
+      "description":"resets the phidget",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"resets the phidget",
+          "notes":"",
+          "responseClass":"void",
+          "nickname":"resetPhidget"
+        }
+      ]
+    },
+    {
       "path":"/phidget.{format}/analog/inputs",
       "description":"reads analog inputs",
       "operations":[
