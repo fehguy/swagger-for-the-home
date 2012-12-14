@@ -113,4 +113,15 @@ class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet
       })
     Profile("/zone/:zoneId (get)", HydronicsApiService.getZone(zoneId, limit, resolution), true)
   }
+
+  get("/reset",
+    summary("resets the phidget"),
+    nickname("resetPhidget"),
+    responseClass("void"),
+    endpoint("reset"),
+    notes(""),
+    parameters(
+      )) {
+    Profile("/reset (get)", HydronicsApiService.resetPhidget(), true)
+  }
 }

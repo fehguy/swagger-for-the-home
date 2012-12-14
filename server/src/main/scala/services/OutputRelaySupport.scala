@@ -11,7 +11,7 @@ import scala.collection.mutable.HashMap
 
 object OutputRelaySupport {
 	var relays: HashMap[String, InterfaceKitPhidget] = HashMap.empty
-	var relay:InterfaceKitPhidget = new InterfaceKitPhidget
+	var relay: InterfaceKitPhidget = new InterfaceKitPhidget
 }
 
 trait OutputRelaySupport {

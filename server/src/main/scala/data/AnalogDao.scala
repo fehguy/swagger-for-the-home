@@ -41,17 +41,18 @@ object AnalogDao extends TimestampGenerator {
 
   def computeAverages = {
     val sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
-    val r = List(0,1,4,6,7,10,15)
+    val r = List(1,4,6,7,10,15)
  
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {
         var startTime = getAggregate(pos, keyPoint) match {
           case Some(s) => s.timestamp.getTime
-          case None => sdf.parse("2012-10-14:01:00:00").getTime
+          case None => sdf.parse("2012-12-6:01:00:00").getTime
         }
         while(startTime < System.currentTimeMillis) {
           val date = new Date(startTime)
           val data = aggregate(pos, keyPoint, date)
+          println(data)
           if(data._3 > 0){
             val agg = AnalogAggregationPoint(data._2, data._3, data._4, date)
             val dbo = grater[AnalogAggregationPoint].asDBObject(agg)
@@ -63,6 +64,36 @@ object AnalogDao extends TimestampGenerator {
         }
       })
     })
+  }
+
+  // oops!  need an indexed query on this
+  def aggregate(position: Int, resolution: Long, lastTimestamp: Date) = {
+    println("aggregating position " + position)
+    val query = BasicDBObjectBuilder.start(Map(
+      "timestamp" -> new BasicDBObject("$gte", lastTimestamp),
+      "position" -> position
+    ).asJava).get
+
+    val cur = db.getCollection("analog").find(query).sort(new BasicDBObject("timestamp", 1))
+    val endTimestamp = lastTimestamp.getTime + resolution
+
+    var done = false
+    var recordsInspected = 0
+    val records = new ListBuffer[AnalogIO]
+    while(!done && cur.hasNext){
+      recordsInspected += 1
+      val dbo = cur.next.asInstanceOf[BasicDBObject]
+      val event = grater[AnalogIO].asObject(dbo)
+      if(event.timestamp.getTime >= endTimestamp) done = true
+      else records += event
+    }
+    val average = records.length match {
+      case 0 => 0.0
+      case _ => records.map(_.value).sum / records.length
+    }
+    println("inspected " + recordsInspected + " records for position " + position)
+    val stddev = stdDev(records.map(_.value.toDouble).toList, average)
+    (lastTimestamp, position, average, stddev, recordsInspected)
   }
 
   def getAggregate(position: Int, resolution: Long, timestamp: Option[Date] = None) = {
@@ -87,34 +118,6 @@ object AnalogDao extends TimestampGenerator {
 
     if(cur.hasNext) Some(grater[AnalogAggregationPoint].asObject(cur.next))
     else None
-  }
-
-  // oops!  need an indexed query on this
-  def aggregate(position: Int, resolution: Long, lastTimestamp: Date) = {
-    val query = BasicDBObjectBuilder.start(Map(
-      "timestamp" -> new BasicDBObject("$gte", lastTimestamp),
-      "position" -> position
-    ).asJava).get
-
-    val cur = db.getCollection("analog").find(query).sort(new BasicDBObject("timestamp", 1))
-    val endTimestamp = lastTimestamp.getTime + resolution
-
-    var done = false
-    var recordsInspected = 0
-    val records = new ListBuffer[AnalogIO]
-    while(!done && cur.hasNext){
-      recordsInspected += 1
-      val dbo = cur.next.asInstanceOf[BasicDBObject]
-      val event = grater[AnalogIO].asObject(dbo)
-      if(event.timestamp.getTime >= endTimestamp) done = true
-      else records += event
-    }
-    val average = records.length match {
-      case 0 => 0.0
-      case _ => records.map(_.value).sum / records.length
-    }
-    val stddev = stdDev(records.map(_.value.toDouble).toList, average)
-    (lastTimestamp, position, average, stddev, recordsInspected)
   }
 
   def squaredDifference(value1: Double, value2: Double) = pow(value1 - value2, 2.0)

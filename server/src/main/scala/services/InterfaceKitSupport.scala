@@ -24,7 +24,7 @@ trait InterfaceKitSupport extends AnalogConversion {
 
   println("initializing InterfaceKitSupport support")
 
-  initInterfaceKit(interfaceKitDeviceIdMap.keySet)
+  var ikConnection = initInterfaceKit(interfaceKitDeviceIdMap.keySet)
 
   def inputs() = interfaceKitDeviceIdMap.map(m => m._2).flatten.toList
 
@@ -99,12 +99,12 @@ trait InterfaceKitSupport extends AnalogConversion {
 
       ifk.addAttachListener(new AttachListener() {
         def attached(ae: AttachEvent) = {
-          // println("InterfaceKit " + id + " attachment of " + ae)
+          println("InterfaceKit " + id + " attachment of " + ae)
         }
       })
       ifk.addDetachListener(new DetachListener() {
         def detached(ae: DetachEvent) = {
-          // println("InterfaceKit " + id + " detachment of " + ae)
+          println("InterfaceKit " + id + " detachment of " + ae)
         }
       })
       ifk.addErrorListener(new ErrorListener() {
@@ -116,6 +116,19 @@ trait InterfaceKitSupport extends AnalogConversion {
       InterfaceKitSupport.add(id, ifk)
       (id, ifk)
     }).toMap
+  }
+
+  def resetAnalog = {
+    println("resetting analog")
+    try{
+      InterfaceKitSupport.ifks.values.foreach(_.close())
+    }
+    catch {
+      case e: Exception => e.printStackTrace
+    }
+    InterfaceKitSupport.ifks.clear
+
+    initInterfaceKit(interfaceKitDeviceIdMap.keySet)
   }
 
   def disconnectAnalog = {

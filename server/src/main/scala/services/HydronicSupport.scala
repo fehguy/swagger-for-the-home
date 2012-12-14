@@ -78,6 +78,10 @@ object HydronicSupport {
 }
 
 trait HydronicSupport {
+	def resetPhidget() = {
+		PhidgetApiService.resetAnalog
+	}
+
 	def getZones(limit:Option[Int] = Some(5), resolution: String) = {
     resolution match {
     	case "all" => AnalogDao.findAll(resolutionToMs(resolution), limit.getOrElse(5))

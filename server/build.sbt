@@ -4,6 +4,8 @@ assemblySettings
 
 organization := "org.eatbacon"
 
+mainClass in assembly := Some("JettyMain")
+
 name := "sfth"
 
 version := "0.1.0-SNAPSHOT"
@@ -20,7 +22,7 @@ libraryDependencies ++= Seq(
   "org.scalatra"                 % "scalatra-swagger"       % "2.2.0-SNAPSHOT",
   "org.scalatra"                 % "scalatra-json"          % "2.2.0-SNAPSHOT",
   "org.json4s"                  %% "json4s-jackson"         % "3.0.0",
-  "com.wordnik"                  % "mongo-utils_2.9.1"      % "1.1.4",
+  "com.wordnik"                 %% "mongo-utils"            % "1.2.0-SNAPSHOT",
   "com.novus"                   %% "salat"                  % "1.9.1",
   "com.typesafe.akka"            % "akka-actor"             % "2.0.2",
   "org.eclipse.jetty"            % "jetty-webapp"           % "8.1.7.v20120910"     % "compile",

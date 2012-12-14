@@ -2,8 +2,8 @@ import services._
 import apis._
 import org.eatbacon.app._
 
-import com.wordnik.mongo.connection._
 import config._
+import com.wordnik.mongo.connection._
 import javax.servlet.ServletContext
 import org.scalatra.LifeCycle
 
