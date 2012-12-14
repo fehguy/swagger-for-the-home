@@ -39,6 +39,7 @@ object General {
         |-keep public class com.android.vending.licensing.ILicensingService
         |-keep public class org.eatbacon.sfth.AnalogUpdateActivity
         |-keep public class org.eatbacon.sfth.UpdateDataTask
+        |-keep public class org.eatbacon.sfth.ShowChartActivity
         |
         |-keepclasseswithmembernames class * {
         |    native <methods>;
@@ -71,9 +72,11 @@ object General {
     AndroidManifestGenerator.settings ++
     AndroidMarketPublish.settings ++ Seq (
       keyalias in Android := "change-me",
+      resolvers ++= Seq("Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"),
       libraryDependencies ++= Seq(
         "org.scalatest"               %% "scalatest"              % "1.8"     % "test",
         "com.wordnik"                  % "common-utils_2.9.1"     % "1.1.4",
+        "org.achartengine"             % "achartengine"           % "1.0.0",
         "org.json4s"                  %% "json4s-native"          % "3.0.0",
         "com.github.chrisbanes.pulltorefresh" % "library"         % "2.0.1",
         "org.json4s"                  %% "json4s-jackson"         % "3.0.0"

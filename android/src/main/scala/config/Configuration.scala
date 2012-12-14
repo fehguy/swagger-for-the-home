@@ -36,7 +36,8 @@ object Configuration {
     "dbhost" -> "dbh00.mongolab.com",
     "dbport" -> "27007",
     "dbuser" -> "phidgets",
-    "dbpassword" -> "phidgetz",
-    "database" -> "fehguy"
+    "dbpassword" -> "XXX",
+    "database" -> "XXXX",
+    "mongolabApiKey" -> "XXXXX"
 	))
 }
