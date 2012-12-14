@@ -1,6 +1,6 @@
 package data
 
-import config.APP
+import config._
 import models._
 import com.wordnik.util.perf.Profile
 
