@@ -21,6 +21,8 @@ import android.widget._
 import android.util.Log
 
 object RemoteData {
+  val r = List(1,4,6,7,10,15)
+
   implicit val fmts = ModelSerializers.formats
   val values = new java.util.ArrayList[String]()
   var lastValues: List[AnalogIO] = List.empty
@@ -55,7 +57,6 @@ object RemoteData {
   val listeners = new ListBuffer[ArrayAdapter[_]]
 
   def apply() = {
-    val r = List(1,4,6,7,10,15)
     val data = (for(i <- r) yield {
       Profile("getSingleValue", {
         val srcUrl = "https://api.mongolab.com/api/1/databases/%s/collections/analog?apiKey=%s&l=1&s={_id:-1}&q={\"_id\":{\"$regex\":\"^%d_\"}}".format(
@@ -95,6 +96,7 @@ object RemoteData {
     val age = (new java.util.Date().getTime - oldestUpdate.timestamp.getTime) / 1000.0 + 28800
 
     values.add(0, "Updated %s (%d seconds old)".format(sdf.format(new java.util.Date), age.toInt))
+    values.add("See all")
     listeners.foreach(_.notifyDataSetChanged)
     lastValues = data
   }

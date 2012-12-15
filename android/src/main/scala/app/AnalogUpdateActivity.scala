@@ -60,6 +60,18 @@ class AnalogUpdateActivity extends Activity {
           i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
           startActivity(i)
         }
+        else if("See all" == str) {
+          val p = RemoteData.r.mkString(",")
+
+          Log.d(APP.name, "touched all %s, %s".format(p, str))
+          val i = new android.content.Intent(listView1.getContext, classOf[ShowChartActivity])
+          Log.d("AnalogUpdateActivity", "position: " + p)
+          i.putExtra("position", p.toString)
+          i.setAction(Intent.ACTION_MAIN)
+          i.addCategory(Intent.CATEGORY_LAUNCHER)
+          i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+          startActivity(i)
+        }
       }
     })
 
