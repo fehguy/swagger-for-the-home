@@ -29,15 +29,21 @@ trait InterfaceKitSupport extends AnalogConversion {
   def inputs() = interfaceKitDeviceIdMap.map(m => m._2).flatten.toList
 
   println("inputs: " + inputs)
+  var lock : AnyRef = new Object()
 
   def getAnalogInputs() = {
+    lock.synchronized {
+      resetAnalog
+    }
+
     (for(input <- inputs())
       yield {
         try{
-          Some(AnalogIO(new java.util.Date, 
+          Some(AnalogIO(
             input.logicalPosition,
-            Some(input.name),
-            bitsToVoltage(getRawValue(input.deviceId, input.position))))
+            bitsToVoltage(getRawValue(input.deviceId, input.position)),
+            new java.util.Date,
+            Some(input.name)))
         }
         catch {
           case _ => None
@@ -79,7 +85,7 @@ trait InterfaceKitSupport extends AnalogConversion {
    **/
   def getDigitalOutputState(logicalPosition: Int): DigitalIO = {
     (for(input <- inputs())
-      yield DigitalIO(None, logicalPosition, InterfaceKitSupport(input.deviceId).getOutputState(input.position))
+      yield DigitalIO(logicalPosition, InterfaceKitSupport(input.deviceId).getOutputState(input.position), None)
     ).head
   }
 
@@ -93,7 +99,7 @@ trait InterfaceKitSupport extends AnalogConversion {
 
       println("1: initializing id " + id + ", " + ifk + ", status: " + !ifk.isAttached)
 
-      ifk.open(id.toInt)
+      ifk.open(id.toInt, Configurator("remote"), 5001)
       ifk.waitForAttachment
       println("2: initializing id " + id + ", " + ifk + ", status: " + !ifk.isAttached)
 

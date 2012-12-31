@@ -31,7 +31,7 @@ trait OutputRelaySupport {
 	}
 
 	def getRelayOutput(position: Int) = {
-		DigitalIO(None, position, OutputRelaySupport.relay.getOutputState(position))
+		DigitalIO(position, OutputRelaySupport.relay.getOutputState(position), None)
 	}
 
 	def getRelayOutputs: List[DigitalIO]= {
@@ -49,7 +49,7 @@ trait OutputRelaySupport {
 			}
 			case e:String => {
 				println("waiting for output relay attachment (id " + e + ") ...")
-				relay.open(e.toInt)
+				relay.open(e.toInt, Configurator("remote"), 5001)
 			}
 		}
 

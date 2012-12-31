@@ -66,7 +66,6 @@ object AnalogDao extends TimestampGenerator {
     })
   }
 
-  // oops!  need an indexed query on this
   def aggregate(position: Int, resolution: Long, lastTimestamp: Date) = {
     println("aggregating position " + position)
     val query = BasicDBObjectBuilder.start(Map(

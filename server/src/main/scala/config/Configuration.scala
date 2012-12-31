@@ -18,6 +18,8 @@ object Configurator {
 
 	reload
 
+	def config = _config
+
   def apply(i:String) = _config.values.getOrElse(i, {
 		println("key " + i + " not found")
 		""

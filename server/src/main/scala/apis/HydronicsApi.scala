@@ -1,5 +1,6 @@
 package apis
 
+import models.InputZone
 import models.Zone
 import models.AnalogIO
 import services._
@@ -112,6 +113,17 @@ class HydronicsApi (implicit val swagger: Swagger) extends ScalatraServlet
       case false => "hour"
       })
     Profile("/zone/:zoneId (get)", HydronicsApiService.getZone(zoneId, limit, resolution), true)
+  }
+
+  get("/inputDefinition",
+    summary("reads the input definition"),
+    nickname("getInputZones"),
+    responseClass("List[InputZone]"),
+    endpoint("inputDefinition"),
+    notes(""),
+    parameters(
+      )) {
+    Profile("/inputDefinition (get)", HydronicsApiService.getInputZones(), true)
   }
 
   get("/reset",

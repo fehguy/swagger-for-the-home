@@ -17,7 +17,7 @@ trait AnalogSupport {
 	def getAnalogInputs() = {
 		if(!analogAttached) initAnalog()
 		(for(i <- (0 until 8))
-			yield AnalogIO(new java.util.Date, i, None, bitsToVoltage(analog.getVoltage(i)))
+			yield AnalogIO(i, bitsToVoltage(analog.getVoltage(i)), new java.util.Date, None)
 		).toList
 	}
 

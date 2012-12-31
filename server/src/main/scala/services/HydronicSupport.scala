@@ -18,6 +18,13 @@ object HydronicSupport {
 	var aggregationCancellable: Option[Cancellable] = None
 
 	def startUpdate = {
+		Configurator.hasConfig("updateConfig") match {
+			case true => {
+				println("saving config")
+				ConfigurationDao.save(Configurator.config)
+			}
+			case _ => println("not saving config")
+		}
 		Configurator.hasConfig("saveAnalogData") match {
 			case true => {
 				analogSaveCancellable = Some(system.scheduler.schedule(15 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
@@ -78,6 +85,10 @@ object HydronicSupport {
 }
 
 trait HydronicSupport {
+
+	def getInputZones() = {
+		Configurator.config.inputZones
+	}
 	def resetPhidget() = {
 		PhidgetApiService.resetAnalog
 	}

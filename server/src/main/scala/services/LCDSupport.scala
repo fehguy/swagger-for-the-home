@@ -7,11 +7,9 @@ import com.phidgets._
 import com.phidgets.event._
 
 trait LCDSupport {
-	println(Phidget.getLibraryVersion())
-
 	var contrast = 200
 	var backlight = false
-	val lcd = new TextLCDPhidget
+	var lcd: TextLCDPhidget = _
 	var lcdAttached = {
 		Configurator.hasConfig("updateLcd") match {
 			case true => initLcd
@@ -19,25 +17,8 @@ trait LCDSupport {
 		}
 	}
 
-	lcd.addAttachListener(new AttachListener() {
-		def attached(ae: AttachEvent) = {
-			println("LCD attachment of " + ae)
-			lcdAttached = true
-		}
-	})
-	lcd.addDetachListener(new DetachListener() {
-		def detached(ae: DetachEvent) = {
-			println("LCD detachment of " + ae)
-			lcdAttached = false
-		}
-	})
-	lcd.addErrorListener(new ErrorListener() {
-		def error(ee: ErrorEvent) = {
-			println("LCD error event for " + ee)
-		}
-	})
-
 	def initLcd(): Boolean = {
+		lcd = new TextLCDPhidget
 		lcd.openAny()
 		println("waiting for LCD attachment...")
 		lcd.waitForAttachment()
@@ -47,6 +28,24 @@ trait LCDSupport {
     lcd.initialize()
 
     lcdAttached = true
+
+		lcd.addAttachListener(new AttachListener() {
+			def attached(ae: AttachEvent) = {
+				println("LCD attachment of " + ae)
+				lcdAttached = true
+			}
+		})
+		lcd.addDetachListener(new DetachListener() {
+			def detached(ae: DetachEvent) = {
+				println("LCD detachment of " + ae)
+				lcdAttached = false
+			}
+		})
+		lcd.addErrorListener(new ErrorListener() {
+			def error(ee: ErrorEvent) = {
+				println("LCD error event for " + ee)
+			}
+		})
 
     setContrast(contrast)
     setBacklight(backlight)
