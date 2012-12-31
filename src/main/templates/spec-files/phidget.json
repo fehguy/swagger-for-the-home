@@ -5,6 +5,19 @@
   "resourcePath":"/phidget",
   "apis":[
     {
+      "path":"/hydronics.{format}/inputDefinition",
+      "description":"reads the input definition",
+      "operations":[
+        {
+          "httpMethod":"GET",
+          "summary":"reads the input definition",
+          "notes":"",
+          "responseClass":"List[InputZone]",
+          "nickname":"getInputZones"
+        }
+      ]
+    },
+    {
       "path":"/hydronics.{format}/reset",
       "description":"resets the phidget",
       "operations":[
@@ -255,23 +268,40 @@
       "properties":{
         "position":{
           "type":"int",
-          "required":"true",
-          "order":"0"
+          "required":"true"
         },
         "value":{
           "type":"double",
-          "required":"true",
-          "order":"1"
+          "required":"true"
         },
         "timestamp":{
           "type":"Date",
-          "required":"true",
-          "order":"2"
+          "required":"true"
         },
         "name":{
           "type":"String",
-          "required":"false",
-          "order":"3"
+          "required":"false"
+        }
+      }
+    },
+    "InputZone":{
+      "id":"InputZone",
+      "properties":{
+        "deviceId":{
+          "type":"string",
+          "required":true
+        },
+        "position":{
+          "type":"int",
+          "required":true
+        },
+        "logicalPosition":{
+          "type":"int",
+          "required":true
+        },
+        "name":{
+          "type":"string",
+          "required":true
         }
       }
     },
