@@ -37,11 +37,11 @@ case class Configuration(
 
 object Configuration {
 	def default = Configuration(Map(
-    "dbhost" -> "dbh00.mongolab.com",
-    "dbport" -> "27007",
-    "dbuser" -> "phidgets",
-    "dbpassword" -> "phidgetz",
-    "database" -> "fehguy",
-    "mongolabApiKey" -> "4d294b96ac444c5e2b94652f"
+    "dbhost" -> "XXXX",
+    "dbport" -> "XXXX",
+    "dbuser" -> "XXXX",
+    "dbpassword" -> "XXXX",
+    "database" -> "XXXX",
+    "mongolabApiKey" -> "XXXX"
 	))
 }
