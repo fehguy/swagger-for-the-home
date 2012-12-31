@@ -85,10 +85,10 @@ object RemoteData {
         case oldValues: List[AnalogIO] if(oldValues.size > 0) => {
           val old = oldValues.filter(_.position == i.position).head
           val diff = i.value - old.value
-          values.add("%d: %.2f (%.2f)".format(i.position, i.value, diff))
+          values.add("%s: %.2f (%.2f)".format(friendlyName(i.position), i.value, diff))
         }
         case _ => {
-          values.add("%d: %.2f".format(i.position, i.value))
+          values.add("%s: %.2f".format(friendlyName(i.position), i.value))
         }
       }
     })
@@ -99,5 +99,10 @@ object RemoteData {
     values.add("See all")
     listeners.foreach(_.notifyDataSetChanged)
     lastValues = data
+  }
+
+  def friendlyName(pos: Int) = {
+    val map = Configurator._config.inputZones.map(m => (m.logicalPosition, m.name)).toMap
+    map.getOrElse(pos, "Unknown")
   }
 }

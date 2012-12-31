@@ -84,7 +84,7 @@ class ShowChartActivity extends Activity {
     mRenderer.setSelectableBuffer(20)
     mRenderer.setPanEnabled(true)
 
-    Log.d("ShowChartActivity", "position: " + positionString)
+    Log.d("ShowChartActivity", positionString)
     new UpdateChartDataTask(this, positionString).execute(null)
   }
 
@@ -112,7 +112,7 @@ class ShowChartActivity extends Activity {
         r.setFillPoints(true)
         mRenderer.addSeriesRenderer(r)
 
-        val timeSeries = new TimeSeries("input " + position)
+        val timeSeries = new TimeSeries(RemoteData.friendlyName(position))
         val data = RemoteData.valuesForPosition(position, 250)
         data.foreach(m => timeSeries.add(m.timestamp, m.average))
         activity.mDataset.addSeries(timeSeries)

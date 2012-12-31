@@ -1,5 +1,7 @@
 package config
 
+import models.InputZone
+
 import org.json4s._
 import org.json4s.jackson.Serialization._
 import org.json4s.jackson.JsonMethods._
@@ -29,15 +31,17 @@ object Configurator {
 }
 
 case class Configuration(
-	values:Map[String, String])
+	values:Map[String, String],
+	var inputZones: List[InputZone] = List.empty
+)
 
 object Configuration {
 	def default = Configuration(Map(
     "dbhost" -> "dbh00.mongolab.com",
     "dbport" -> "27007",
     "dbuser" -> "phidgets",
-    "dbpassword" -> "XXX",
-    "database" -> "XXXX",
-    "mongolabApiKey" -> "XXXXX"
+    "dbpassword" -> "phidgetz",
+    "database" -> "fehguy",
+    "mongolabApiKey" -> "4d294b96ac444c5e2b94652f"
 	))
 }

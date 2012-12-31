@@ -1,6 +1,6 @@
 package app
 
-import config.APP
+import config._
 import data._
 import service._
 
@@ -34,6 +34,8 @@ class AnalogUpdateActivity extends Activity {
     val textView = findViewById(R.id.textview).asInstanceOf[TextView]
     val listView1 = findViewById(R.id.listView).asInstanceOf[PullToRefreshListView]
 
+    new LoadConfigurationTask().execute()
+
     listView1.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener[ListView]() {
       override def onRefresh(refreshView: PullToRefreshBase[ListView]) = {
         // Do work to refresh the list here.
@@ -49,7 +51,9 @@ class AnalogUpdateActivity extends Activity {
         val str = RemoteData.values.get(position - 1)
 
         if(str.indexOf(":") > 0) {
-          val p = str.split(":")(0).toInt
+
+          val n = str.split(":")(0)
+          val p = posFromName(n)
 
           Log.d(APP.name, "touched item %s, %s".format(p, str))
           val i = new android.content.Intent(listView1.getContext, classOf[ShowChartActivity])
@@ -91,8 +95,12 @@ class AnalogUpdateActivity extends Activity {
   	AnalogUpdateActivity.adapter.notifyDataSetChanged()
   })
 
+  def posFromName(name: String) = {
+    val map = Configurator._config.inputZones.map(m => (m.name, m.logicalPosition)).toMap
+    map.getOrElse(name, -1)
+  }
+
   class UpdateDataTask2(list: PullToRefreshBase[ListView]) extends AsyncTaskImpl[Void, Integer, Long] {
-    var data: List[String] = List("yes", "no")
     override protected def doInBackgroundImpl(values: Void*) = {
       RemoteData()
       0
@@ -103,6 +111,22 @@ class AnalogUpdateActivity extends Activity {
       AnalogUpdateActivity.adapter.notifyDataSetChanged
       super.onPostExecute(result)
     }
+  }
+}
+
+class LoadConfigurationTask() extends AsyncTaskImpl[Void, Integer, Long] {
+  var data: List[String] = List.empty
+
+  override protected def doInBackgroundImpl(values: Void*)  = {
+    ConfigurationDao.reload()
+
+    0
+  }
+
+  override protected def onProgressUpdateImpl(progress: Integer*) = {}
+
+  override protected def onPostExecute(result: Long) = {
+    Log.d("LoadConfigurationTask", Configurator._config.toString)
   }
 }
 
