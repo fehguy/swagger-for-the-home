@@ -14,8 +14,4 @@
     <url-pattern>/admin/lib/*.js</url-pattern>
     <url-pattern>/admin/images/*</url-pattern>
   </servlet-mapping>
-  <context-param>
-    <param-name>org.scalatra.LifeCycle</param-name>
-    <param-value>com.wordnik.swagger.app.SwaggerApp</param-value>
-  </context-param>
 </web-app>

@@ -10,16 +10,14 @@ import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
 import org.json4s._
 import org.json4s.JsonDSL._
-import org.scalatra.json.{JValueResult, NativeJsonSupport}
+import org.scalatra.json.{ JValueResult, JacksonJsonSupport }
 
 import scala.collection.JavaConverters._
 
 class PhidgetApi (implicit val swagger: Swagger) extends ScalatraServlet 
-      with TypedParamSupport 
-      with NativeJsonSupport 
-      with JValueResult 
-      with SwaggerSupport
-      with SwaggerDatatypeConversionSupport {
+    with JacksonJsonSupport
+    with SwaggerSupport
+    with SwaggerDatatypeConversionSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "PhidgetApi"

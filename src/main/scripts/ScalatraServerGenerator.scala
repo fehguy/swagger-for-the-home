@@ -62,7 +62,6 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
     val lb = m("vars").asInstanceOf[ListBuffer[HashMap[String, String]]]
     //  TODO: want the vars ordered by required => optional
     lb.foreach(l => {
-      println(l("name"))
       if(l.contains("required")) {
         l("required") match {
           case "true" =>
@@ -87,29 +86,35 @@ object ScalatraServerGenerator extends BasicScalaGenerator {
               if(map("required") == "false") map += "notRequired" -> "true"
             }
             if(map.contains("allowableValues")) {
-              val allowableValues = map("allowableValues")
-              val quote = map("swaggerDataType") match {
-                case "string" => "\""
-                case _ => ""
-              }
-              val pattern = "([A-Z]*)\\[(.*)\\]".r
-              val str = allowableValues match {
-                case pattern(valueType, values) => {
-                  valueType match {
-                    case "LIST" => {
-                      val l = values.split(",").toList
-                      Some("AllowableValues(" + l.mkString(quote, quote + "," + quote, quote + ")"))
-                    }
-                    case "RANGE" => {
-                      val r = values.split(",")
-                      Some("AllowableValues(Range(" + r(0) + "," + r(1) + ", 1))")
-                    }
+              val allowableValues = map("allowableValues").asInstanceOf[Option[String]]
+              allowableValues match {
+                case Some(allowableValuesString) => {
+                  val quote = map("swaggerDataType") match {
+                    case "string" => "\""
+                    case _ => ""
                   }
+                  val pattern = "([A-Z]*)\\[(.*)\\]".r
+                  val str = allowableValuesString match {
+                    case pattern(valueType, values) => {
+                      valueType match {
+                        case "LIST" => {
+                          val l = values.split(",").toList
+                          Some("AllowableValues(" + l.mkString(quote, quote + "," + quote, quote + ")"))
+                        }
+                        case "RANGE" => {
+                          val r = values.split(",")
+                          Some("AllowableValues(Range(" + r(0) + "," + r(1) + ", 1))")
+                        }
+                      }
+                    }
+                    case _ => None
+                  }
+                  str match {
+                    case Some(s) => map += "allowableValues" -> s
+                    case _ =>
+                  }
+
                 }
-                case _ => None
-              }
-              str match {
-                case Some(s) => map += "allowableValues" -> s
                 case _ =>
               }
             }

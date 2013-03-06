@@ -41,13 +41,15 @@ object AnalogDao extends TimestampGenerator {
 
   def computeAverages = {
     val sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
-    val r = List(1,4,6,7,10,15)
+    val r = Configurator.config.inputZones.map(_.logicalPosition).toList
+
+    println("aggregating over " + r)
  
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {
         var startTime = getAggregate(pos, keyPoint) match {
           case Some(s) => s.timestamp.getTime
-          case None => sdf.parse("2012-12-6:01:00:00").getTime
+          case None => sdf.parse("2012-12-29:01:00:00").getTime
         }
         while(startTime < System.currentTimeMillis) {
           val date = new Date(startTime)
