@@ -21,7 +21,8 @@ import android.widget._
 import android.util.Log
 
 object RemoteData {
-  val r = List(1,4,6,7,10,15)
+  val r = List(1,2,3,4,6,7,10,15)//Configurator._config.inputZones.map(_.logicalPosition).toList
+  // List(1,3,4,6,7,10,15)
 
   implicit val fmts = ModelSerializers.formats
   val values = new java.util.ArrayList[String]()
@@ -92,7 +93,10 @@ object RemoteData {
         }
       }
     })
-    val oldestUpdate = data.minBy{_.timestamp}
+    val oldestUpdate = data match {
+      case data:List[AnalogIO] if(data.size >0) => data.minBy{_.timestamp}
+      case _ => AnalogIO(-1, 0.0, new java.util.Date, Some("none"))
+    }
     val age = (new java.util.Date().getTime - oldestUpdate.timestamp.getTime) / 1000.0 + 28800
 
     values.add(0, "Updated %s (%d seconds old)".format(sdf.format(new java.util.Date), age.toInt))
