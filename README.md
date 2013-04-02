@@ -124,6 +124,10 @@ Make it a daemon by copying the init script into /etc/init.d then
 update-rc.d sfth defaults
 ```
 
+Might as well also update the pi.  This is the best way to do so:
+
+https://github.com/Hexxeh/rpi-update
+
 ### Configuration
 
 The app looks for a single JSON file called config.json in the working directory.  This
