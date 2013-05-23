@@ -2,17 +2,17 @@
 
 Project to make an API for my house.  Based on the following:
 
-* [Raspberri Pi](http://raspberripi.org/) running Debian
+* [Raspberry Pi](http://raspberrypi.org/) running Debian
 
 * [Swagger Scalatra](https://www.scalatra.org).  I was using nodejs first but the phidget support isn't great for it (yet).
 
 ### Getting started
 
 I was running on a Phidgets SBC but it was hitting memory issues when running control algorithms.  So I've switched
-to the Raspberri Pi 512MB device.  It takes a little more work to get started (not that much though).  I'm still using
+to the Raspberry Pi 512MB device.  It takes a little more work to get started (not that much though).  I'm still using
 the Phidgets IO boards.
 
-First, setting up the Raspberri Pi was pretty easy--grab an image of the OS from here:
+First, setting up the Raspberry Pi was pretty easy--grab an image of the OS from here:
 
 [Soft-float Debian “wheezy”](http://www.raspberrypi.org/downloads) is required for the JDK to work properly on the device.  This
 is done by following the OS-X command-line instructions here:
