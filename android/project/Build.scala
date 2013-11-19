@@ -75,7 +75,7 @@ object General {
       resolvers ++= Seq("Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"),
       libraryDependencies ++= Seq(
         "org.scalatest"               %% "scalatest"              % "1.8"     % "test",
-        "com.wordnik"                  % "common-utils_2.9.1"     % "1.1.4",
+        "com.wordnik"                  % "common-utils_2.9.1"     % "1.1.5",
         "org.achartengine"             % "achartengine"           % "1.0.0",
         "org.json4s"                  %% "json4s-native"          % "3.0.0",
         "com.github.chrisbanes.pulltorefresh" % "library"         % "2.0.1",
