@@ -12,7 +12,7 @@ seq(webSettings :_*)
 
 mainClass in assembly := Some("JettyMain")
 
-name := "scalatra-sample"
+name := "swagger-for-the-home"
 
 version := "0.1.0-SNAPSHOT"
 
@@ -59,3 +59,4 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
     case x => old(x)
   }
 }
+
