@@ -32,7 +32,7 @@ Filesystem                              Size   Used  Avail Capacity   iused    i
 sudo diskutil unmount /dev/disk3s1
 Volume NO NAME on disk3s1 unmounted
 
-sudo dd bs=1m if=~./2012-08-08-wheezy-armel.img of=/dev/rdisk3
+sudo dd bs=1m if=./2013-12-20-wheezy-raspbian.img of=/dev/rdisk3
 1850+0 records in
 1850+0 records out
 1939865600 bytes transferred in 32.088743 secs (60453150 bytes/sec)
@@ -72,16 +72,10 @@ Then unpack the libphidget.tar.gz file, cd to the directory and run the commands
 
 ```
 tar -xvf libphidget.tar.gz 
-cd libphidget-2.1.8.20120912/
+cd libphidget-*
 ./configure
 make
 sudo make install
-```
-
-You'll need to install java as well, which is on Oracle's site and now (sigh) requires an account to download.  See here:
-
-```
-http://www.oracle.com/technetwork/java/embedded/downloads/javase/index.html
 ```
 
 Back to the software itself...
@@ -95,7 +89,7 @@ http://www.phidgets.com/downloads/libraries/phidget21jar.zip
 and install it in your local maven repo like such:
 
 ```
-mvn install:install-file -DgroupId=com.phidgets -DartifactId=phidget -Dversion=2.1.0 -Dpackaging=jar -Dfile=phidget21.jar
+mvn install:install-file -DgroupId=com.phidgets -DartifactId=phidget -Dversion=2.1.8 -Dpackaging=jar -Dfile=phidget21.jar
 ```
 
 You can build the assembly like this:
