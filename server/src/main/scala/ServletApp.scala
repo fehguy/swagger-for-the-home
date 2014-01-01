@@ -1,11 +1,14 @@
-package org.eatbacon.app
+package com.wordnik.swagger.app
 
-import com.wordnik.swagger.core.SwaggerSpec
+import _root_.akka.actor.ActorSystem
+
+import org.scalatra.swagger.{ ApiInfo, SwaggerWithAuth, Swagger }
 import org.scalatra.swagger.{JacksonSwaggerBase, Swagger}
 import org.scalatra.ScalatraServlet
 import org.json4s.{DefaultFormats, Formats}
 
-class ResourcesApp(implicit val swagger: Swagger) extends ScalatraServlet with JacksonSwaggerBase {
+class ResourcesApp(implicit protected val system: ActorSystem, val swagger: SwaggerApp)
+  extends ScalatraServlet with JacksonSwaggerBase {
   before() {
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
@@ -23,5 +26,14 @@ class ResourcesApp(implicit val swagger: Swagger) extends ScalatraServlet with J
   }
 }
 
-class SwaggerApp extends Swagger(SwaggerSpec.version, "1")
+class SwaggerApp extends Swagger(apiInfo = ApiSwagger.apiInfo, apiVersion = "1.0", swaggerVersion = "1.2")
 
+object ApiSwagger {
+  val apiInfo = ApiInfo(
+    "My App",
+    "The api server for me",
+    "http://developers.helloreverb.com",
+    "hello@helloreverb.com",
+    "All rights reserved",
+    "http://apache.org/licenses/LICENSE-2.0.html")
+}

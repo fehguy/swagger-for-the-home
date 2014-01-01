@@ -1,7 +1,7 @@
 package data
 
 import config._
-import models._
+import model._
 
 import com.wordnik.mongo.connection._
 import com.mongodb.BasicDBObjectBuilder

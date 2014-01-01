@@ -9,9 +9,9 @@
 
   <servlet-mapping>
     <servlet-name>default</servlet-name>
-    <url-pattern>/admin/*</url-pattern>
-    <url-pattern>/admin/css/*</url-pattern>
-    <url-pattern>/admin/lib/*.js</url-pattern>
-    <url-pattern>/admin/images/*</url-pattern>
+    <url-pattern>/*.html</url-pattern>
+    <url-pattern>/css/*</url-pattern>
+    <url-pattern>/js/*.js</url-pattern>
+    <url-pattern>/images/*</url-pattern>
   </servlet-mapping>
 </web-app>

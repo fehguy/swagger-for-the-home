@@ -1,7 +1,7 @@
 package data
 
 import config._
-import models._
+import model._
 
 import com.wordnik.mongo.connection._
 import com.mongodb.BasicDBObjectBuilder
@@ -33,10 +33,10 @@ object AnalogDao extends TimestampGenerator {
   )
 
   def save(io: AnalogIO) = {
-  	val dbo = grater[AnalogIO].asDBObject(io)
+    val dbo = grater[AnalogIO].asDBObject(io)
     dbo.put("_id", "%d_%s".format(io.position, timestampString()))
     dbo.remove("name")
-  	db.getCollection("analog").save(dbo)
+    db.getCollection("analog").save(dbo)
   }
 
   def computeAverages = {
@@ -49,7 +49,7 @@ object AnalogDao extends TimestampGenerator {
       r.foreach(pos => {
         var startTime = getAggregate(pos, keyPoint) match {
           case Some(s) => s.timestamp.getTime
-          case None => sdf.parse("2012-12-29:01:00:00").getTime
+          case None => sdf.parse("2013-12-31:01:00:00").getTime
         }
         while(startTime < System.currentTimeMillis) {
           val date = new Date(startTime)
