@@ -1,10 +1,9 @@
 package {{package}}
 
+import service._
+
 {{#imports}}import {{import}}
 {{/imports}}
-import services._
-import com.wordnik.util.perf._
-import com.wordnik.swagger.core.ApiPropertiesReader
 
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
@@ -16,104 +15,72 @@ import scala.collection.JavaConverters._
 
 class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet 
     with JacksonJsonSupport
-    with SwaggerSupport
-    with SwaggerDatatypeConversionSupport {
+    with SwaggerSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "{{className}}"
   override protected val applicationName: Option[String] = Some("{{baseName}}")
 
-  def swaggerToModel(cls: Class[_]) = {
-    val docObj = ApiPropertiesReader.read(cls)
-    val name = docObj.getName
-    val fields = for (field <- docObj.getFields.asScala.filter(d => d.paramType != null))
-      yield (field.name -> ModelField(field.name, field.notes, DataType(field.paramType)))
-
-    Model(name, name, fields.toMap)
-  }
-
   before() {
     contentType = formats("json")
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
+
+  error {
+    case e => {
+      Map("message" -> e.getMessage, "code" -> "500")
+    }
+  }
+
 {{#operations}}
 {{#operation}}
   {{newline}}
-  {{httpMethod}}("{{path}}",
-    summary("{{{summary}}}"),
-    nickname("{{nickname}}"),
-    responseClass("{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}void{{/returnType}}"),
-    endpoint("{{basePart}}"),
-    notes("{{{notes}}}"),
-    parameters(
-      {{#allParams}}
-      {{#queryParameter}}
-      Parameter(name = "{{paramName}}", 
-        description = "{{{description}}}",
-        paramType = ParamType.Query,
-        required = {{required}},
-        allowMultiple = {{allowMultiple}},
-        {{#allowableValues}}allowableValues = {{{allowableValues}}},{{newline}}{{/allowableValues}}
-        defaultValue = {{#defaultValue}}Some({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
-        dataType = DataType("{{dataType}}"))
-      {{/queryParameter}}
-      {{#pathParameter}}
-      Parameter(name = "{{paramName}}", 
-        description = "{{{description}}}",
-        dataType = DataType.String,
-        {{#allowableValues}}allowableValues = {{{allowableValues}}},{{newline}}{{/allowableValues}}
-        defaultValue = {{#defaultValue}}Some({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
-        paramType = ParamType.Path)
-      {{/pathParameter}}
-      {{#headerParameter}}
-      Parameter(name = "{{paramName}}",
-        description = "{{{description}}}",
-        dataType = DataType("{{dataType}}"),
-        paramType = ParamType.Header)
-      {{/headerParameter}}
-      {{#bodyParameter}}
-      Parameter(name = "{{paramName}}",
-        description = "{{{description}}}",
-        dataType = DataType("{{dataType}}"),
-        defaultValue = {{#defaultValue}}Some({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
-        paramType = ParamType.Body)
-      {{/bodyParameter}}{{#hasMore}},{{/hasMore}}
-    {{/allParams}}
-    )) {
+
+  val {{nickname}}Operation = (apiOperation[{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Unit{{/returnType}}]("{{nickname}}")
+      summary "{{{summary}}}"
+      parameters(
+        {{#allParams}}
+        {{#queryParameter}}
+        queryParam[{{dataType}}]("{{paramName}}").description(""){{^required}}.optional{{/required}}{{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
+        {{#allowableValues}}.{{allowableValues}}{{/allowableValues}}
+        {{/queryParameter}}
+        {{#pathParameter}}
+        pathParam[{{dataType}}]("{{paramName}}").description(""){{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
+        {{#allowableValues}}.{{allowableValues}}{{/allowableValues}}
+        {{/pathParameter}}
+        {{#headerParameter}}
+        headerParam[{{dataType}}]("{{paramName}}").description(""){{^required}}.optional{{/required}}{{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
+        {{#allowableValues}}.{{allowableValues}}{{/allowableValues}}
+        {{/headerParameter}}
+        {{#bodyParameter}}
+        bodyParam[{{dataType}}]("{{paramName}}").description(""){{^required}}.optional{{/required}}{{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
+        {{/bodyParameter}}
+        {{#hasMore}},{{/hasMore}}
+        {{/allParams}})
+  )
+
+  {{httpMethod}}("{{path}}",operation({{nickname}}Operation)) {
     {{#allParams}}
+    {{#pathParameter}}
+    val {{paramName}}: {{dataType}} = params.getAs[{{dataType}}]("{{paramName}}"){{#required}}.getOrElse(halt(400)){{/required}}
+    {{/pathParameter}}
 
-    val {{paramName}} = {{#bodyParameter}}({
-      val str = parsedBody match {
-        case e: JValue => e
-        case _ => {{#defaultValue}}parse({{{defaultValue}}}){{/defaultValue}}{{^defaultValue}}JNothing{{/defaultValue}}
-      }
+    {{#queryParameter}}
+    val {{paramName}}: {{dataType}} = params.getAs[{{dataType}}]("{{paramName}}"){{#required}}.getOrElse(halt(400)){{/required}}
+    {{/queryParameter}}
 
-      str.extract[{{dataType}}] match {
-        case e: {{dataType}} => {{#notRequired}}Some({{/notRequired}}e{{#notRequired}}){{/notRequired}}{{newline}}
-        case _ => {{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}
-      }
-      {{/bodyParameter}}
+    {{#headerParameter}}
+    val {{paramName}}: {{dataType}} = params.getAs[{{dataType}}]("{{paramName}}"){{#required}}.getOrElse(halt(400)){{/required}}
+    {{/headerParameter}}
 
-      {{#queryParameter}}
-      {{dataType}}DataType(params.contains("{{{paramName}}}") match {
-      case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
-      case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
-      {{/queryParameter}}
-      {{#pathParameter}}
-      {{dataType}}DataType(params.contains("{{{paramName}}}") match {
-      case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
-      case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
-      {{/pathParameter}}
-      {{#headerParameter}}
-      {{dataType}}DataType(params.contains("{{{paramName}}}") match {
-      case true  => {{#notRequired}}Some({{/notRequired}}params("{{{paramName}}}"){{#notRequired}}){{/notRequired}}{{newline}}
-      case false => {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#notRequired}}None{{/notRequired}}{{^notRequired}}halt(400){{/notRequired}}{{/defaultValue}}{{newline}}
-      {{/headerParameter}}
-    })
+    {{#bodyParameter}}
+    val {{paramName}} = parsedBody.extract[{{dataType}}]
+    {{/bodyParameter}}
+    {{newline}}
     {{/allParams}}
-
-    Profile("{{path}} ({{httpMethod}})", {{className}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}), true)
+    {{className}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}})
   }
+
 {{/operation}}
 {{/operations}}
 }
