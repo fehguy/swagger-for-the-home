@@ -142,7 +142,7 @@
               "required": true,
               "allowMultiple": false,
               "type": "boolean",
-              "paramType": "path",
+              "paramType": "query",
               "enum": [
                 "true",
                 "false"
@@ -257,7 +257,8 @@
       "id": "InputZone",
       "required": [
         "position",
-        "deviceId",
+        "inputDeviceId",
+        "outputDeviceId",
         "logicalPosition",
         "name"
       ],
@@ -273,7 +274,11 @@
           "type": "integer",
           "format": "int32"
         },
-        "deviceId": {
+        "inputDeviceId": {
+          "type": "string"
+        },
+        "outputDeviceId": {
+          "description": "The ID of the device controlling this zone",
           "type": "string"
         }
       }
