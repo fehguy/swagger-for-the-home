@@ -6,10 +6,10 @@ package {{package}}
 {{#models}}
 
 {{#model}}
-case class {{classname}} (
-  {{#vars}}
-
-  {{name}}: {{#isNotRequired}}Option[{{/isNotRequired}}{{datatype}}{{#isNotRequired}}]{{/isNotRequired}}  {{#hasMore}},{{/hasMore}}{{#description}}  // {{description}}{{/description}}{{newline}}
+case class {{classname}} ({{#vars}}
+  {{#description}}
+  {{newline}}/**{{newline}} {{description}}{{newline}}*/{{newline}}{{/description}}{{^description}}{{newline}}{{/description}}
+  {{name}}: {{#isNotRequired}}Option[{{/isNotRequired}}{{datatype}}{{#isNotRequired}}]{{/isNotRequired}}  {{#hasMore}},{{/hasMore}}
   {{/vars}}
 )
 {{/model}}
