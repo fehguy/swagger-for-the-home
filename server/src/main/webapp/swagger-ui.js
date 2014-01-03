@@ -1482,13 +1482,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     OperationView.prototype.initialize = function() {};
 
     OperationView.prototype.render = function() {
-      var contentTypeModel, isMethodSubmissionSupported, methods, param, responseContentTypeView, responseSignatureView, signatureModel, statusCode, type, _i, _j, _k, _len, _len1, _len2, _ref5, _ref6, _ref7;
+      var contentTypeModel, isMethodSubmissionSupported, param, responseContentTypeView, responseSignatureView, signatureModel, statusCode, type, _i, _j, _k, _len, _len1, _len2, _ref5, _ref6, _ref7;
       isMethodSubmissionSupported = true;
-      console.log(this.model.supportedSubmitMethods);
-      methods = swaggerUi.options.supportedSubmitMethods;
-      if (methods) {
-        isMethodSubmissionSupported = jQuery.inArray(this.model.method, methods) >= 0;
-      }
       if (!isMethodSubmissionSupported) {
         this.model.isReadOnly = true;
       }

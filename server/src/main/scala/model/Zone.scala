@@ -1,9 +1,5 @@
 package model
 
-case class Zone (
+case class Zone(
   id: Long,
-
-  name: String
-
-  )
-
+  name: String)

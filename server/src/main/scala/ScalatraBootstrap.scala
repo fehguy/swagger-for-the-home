@@ -6,7 +6,7 @@ import service.ScheduleSupport
 import com.wordnik.mongo.connection._
 
 import akka.actor.ActorSystem
-import com.wordnik.swagger.app.{ResourcesApp, SwaggerApp}
+import com.wordnik.swagger.app.{ ResourcesApp, SwaggerApp }
 import javax.servlet.ServletContext
 import org.scalatra.LifeCycle
 
@@ -19,12 +19,12 @@ class ScalatraBootstrap extends LifeCycle {
       context mount (new PhidgetApi, "/phidget/*")
       context mount (new ResourcesApp, "/api-docs/*")
 
-      MongoDBConnectionManager.getConnection("phidgets", 
-        Configurator("dbhost"), 
-        Configurator.asInt("dbport"), 
-        Configurator("database"), 
-        Configurator("dbuser"), 
-        Configurator("dbpassword"), 
+      MongoDBConnectionManager.getConnection("phidgets",
+        Configurator("dbhost"),
+        Configurator.asInt("dbport"),
+        Configurator("database"),
+        Configurator("dbuser"),
+        Configurator("dbpassword"),
         SchemaType.READ_WRITE)
 
       ScheduleSupport.startUpdate

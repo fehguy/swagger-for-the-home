@@ -35,7 +35,7 @@ object ScheduleSupport {
             val inputs = PhidgetApiService.getAnalogInputs()
             inputs.foreach(analog => {
               println("saving data for " + analog.position + ", value " + analog.value)
-              if(analog.value > 0.1) AnalogDao.save(analog)
+              if (analog.value > 0.1) AnalogDao.save(analog)
             })
             println("done saving")
           }
@@ -49,7 +49,7 @@ object ScheduleSupport {
         analogSaveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
           def run() = {
             println("update outputs")
-            val inputs = PhidgetApiService.getRelayOutputs
+            val inputs = PhidgetApiService.getRelayOutputs.flatten
             inputs.foreach(io => DigitalDao.save(io))
           }
         }))
@@ -64,7 +64,7 @@ object ScheduleSupport {
             println("update LCD")
             val inputs = PhidgetApiService.getAnalogInputs()
             inputs.foreach(analog => {
-              val msg = "Channel %d is %.1f F" format(analog.position, analog.value)
+              val msg = "Channel %d is %.1f F" format (analog.position, analog.value)
               PhidgetApiService.setLcd(msg, 0)
               Thread.sleep(2000)
             })
@@ -95,22 +95,22 @@ trait HydronicSupport {
     PhidgetApiService.resetAnalog
   }
 
-  def getZones(limit:Option[Int] = Some(5), resolution: String) = {
+  def getZones(limit: Option[Int] = Some(5), resolution: String) = {
     resolution match {
       case "all" => AnalogDao.findAll(resolutionToMs(resolution), limit.getOrElse(5))
       case _ => AnalogDao.findAggregates(resolutionToMs(resolution), limit.getOrElse(5))
     }
   }
 
-  def getZone(channel: Int, limit:Option[Int] = Some(5), resolution: String) = {
+  def getZone(channel: Int, limit: Option[Int] = Some(5), resolution: String) = {
     AnalogDao.findByChannel(channel, resolutionToMs(resolution), limit.getOrElse(5))
   }
 
   def resolutionToMs(str: String): Long = {
     str match {
       case "hour" => 1000 * 60 * 60
-      case "day" => 24 * 60* 1000 * 60
-      case "week" => 7 * 24 * 60* 1000 * 60
+      case "day" => 24 * 60 * 1000 * 60
+      case "week" => 7 * 24 * 60 * 1000 * 60
       case "all" => 30 * 1000
       case _ => 15 * 1000 * 60
     }

@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit._
 
-import scala.collection.mutable.{ListBuffer, HashMap}
+import scala.collection.mutable.{ ListBuffer, HashMap }
 import scala.collection.JavaConverters._
 import scala.math._
 
@@ -44,18 +44,18 @@ object AnalogDao extends TimestampGenerator {
     val r = Configurator.config.inputZones.map(_.logicalPosition).toList
 
     println("aggregating over " + r)
- 
+
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {
         var startTime = getAggregate(pos, keyPoint) match {
           case Some(s) => s.timestamp.getTime
-          case None => sdf.parse("2013-12-31:01:00:00").getTime
+          case None => sdf.parse("2014-1-02:01:00:00").getTime
         }
-        while(startTime < System.currentTimeMillis) {
+        while (startTime < System.currentTimeMillis) {
           val date = new Date(startTime)
           val data = aggregate(pos, keyPoint, date)
           println(data)
-          if(data._3 > 0){
+          if (data._3 > 0) {
             val agg = AnalogAggregationPoint(data._2, data._3, data._4, date)
             val dbo = grater[AnalogAggregationPoint].asDBObject(agg)
             dbo.put("_id", "%d_%s".format(data._2, timestampString(Some(date))))
@@ -81,11 +81,11 @@ object AnalogDao extends TimestampGenerator {
     var done = false
     var recordsInspected = 0
     val records = new ListBuffer[AnalogIO]
-    while(!done && cur.hasNext){
+    while (!done && cur.hasNext) {
       recordsInspected += 1
       val dbo = cur.next.asInstanceOf[BasicDBObject]
       val event = grater[AnalogIO].asObject(dbo)
-      if(event.timestamp.getTime >= endTimestamp) done = true
+      if (event.timestamp.getTime >= endTimestamp) done = true
       else records += event
     }
     val average = records.length match {
@@ -117,7 +117,7 @@ object AnalogDao extends TimestampGenerator {
     val coll = "analog_" + (resolution / (1000 * 60).toInt)
     val cur = db.getCollection(coll).find(query).sort(new BasicDBObject("_id", -1)).limit(1)
 
-    if(cur.hasNext) Some(grater[AnalogAggregationPoint].asObject(cur.next))
+    if (cur.hasNext) Some(grater[AnalogAggregationPoint].asObject(cur.next))
     else None
   }
 
@@ -138,11 +138,10 @@ object AnalogDao extends TimestampGenerator {
       val coll = "analog_" + (p / (1000 * 60).toInt)
       val cur = db.getCollection(coll).find().sort(new BasicDBObject("_id", -1)).limit(1)
 
-      if(cur.hasNext) {
+      if (cur.hasNext) {
         val event = grater[AnalogAggregationPoint].asObject(cur.next)
         output += p -> Some(event.timestamp)
-      }
-      else
+      } else
         output += p -> None
     })
 
@@ -158,17 +157,17 @@ object AnalogDao extends TimestampGenerator {
     val countsPerZone = new HashMap[Int, Int].empty
 
     var recordsInspected = 0
-    while(!done && cur.hasNext) {
+    while (!done && cur.hasNext) {
       recordsInspected += 1
       val dbo = cur.next.asInstanceOf[BasicDBObject]
       val event = grater[AnalogAggregationPoint].asObject(dbo)
       val eventTs = event.timestamp.getTime
       val c = countsPerZone.getOrElse(event.position, 0) + 1
-      if(c < limit) {
+      if (c < limit) {
         countsPerZone += event.position -> c
         output += event
       }
-      if(countsPerZone.map(m => m._2).min > limit) {
+      if (countsPerZone.map(m => m._2).min > limit) {
         println("done with limit " + countsPerZone)
         done = true
       }
@@ -190,13 +189,13 @@ object AnalogDao extends TimestampGenerator {
     val countsPerZone = new HashMap[Int, Int].empty
 
     var recordsInspected = 0
-    while(!done && cur.hasNext){
+    while (!done && cur.hasNext) {
       recordsInspected += 1
       val dbo = cur.next.asInstanceOf[BasicDBObject]
       val event = grater[AnalogIO].asObject(dbo)
       val lastEventTs = lastTsPerZone.getOrElse(event.position, 0L)
       val eventTs = event.timestamp.getTime
-      if(Math.abs(eventTs - lastEventTs) > resolution){
+      if (Math.abs(eventTs - lastEventTs) > resolution) {
         output += grater[AnalogIO].asObject(dbo)
         lastTsPerZone += event.position -> eventTs
       }
@@ -207,7 +206,7 @@ object AnalogDao extends TimestampGenerator {
 
   def findByChannel(channelId: Int, resolution: Long, limit: Int) = {
     val query = BasicDBObjectBuilder.start(Map(
-      "_id" -> Pattern.compile("^" +  channelId)
+      "_id" -> Pattern.compile("^" + channelId)
     ).asJava).get
 
     val cur = db.getCollection("analog").find(query).sort(new BasicDBObject("_id", -1))
@@ -216,7 +215,7 @@ object AnalogDao extends TimestampGenerator {
     val output = new ListBuffer[AnalogIO]
     var done = false
 
-    while(!done && cur.hasNext){
+    while (!done && cur.hasNext) {
       val dbo = cur.next.asInstanceOf[BasicDBObject]
 
       // fix old data
@@ -228,11 +227,11 @@ object AnalogDao extends TimestampGenerator {
       val event = grater[AnalogIO].asObject(dbo)
       val ts = event.timestamp.getTime
 
-      if(Math.abs(ts - lastTs) > resolution){
+      if (Math.abs(ts - lastTs) > resolution) {
         output += grater[AnalogIO].asObject(dbo)
         lastTs = ts
       }
-      if(output.size >= limit) done = true
+      if (output.size >= limit) done = true
     }
     output.toList
   }

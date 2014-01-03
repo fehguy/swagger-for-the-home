@@ -15,17 +15,17 @@ trait AnalogSupport {
   def bitsToVoltage(input: Double): Double = input.toDouble * 1000.0 / 4095.0
 
   def getAnalogInputs() = {
-    if(!analogAttached) initAnalog()
-    (for(i <- (0 until 8))
+    if (!analogAttached) initAnalog()
+    (for (i <- (0 until 8))
       yield AnalogIO(position = i,
-        value = bitsToVoltage(analog.getVoltage(i)),
-        timestamp = new java.util.Date,
-        name = None)
+      value = bitsToVoltage(analog.getVoltage(i)),
+      timestamp = new java.util.Date,
+      name = None)
     ).toList
   }
 
   def setAnalogOutput(io: AnalogIO) = {
-    if(!analogAttached) initAnalog()
+    if (!analogAttached) initAnalog()
     analog.setVoltage(io.position, io.value)
   }
 
