@@ -41,7 +41,7 @@ object ModelSerializers {
       implicit val fmts: Formats = formats
 
       InputZone(
-        deviceId = (json \ "deviceId").extract[String],
+        inputDeviceId = (json \ "inputDeviceId").extract[String],
         position = (json \ "position").extract[Int],
         logicalPosition = (json \ "logicalPosition").extract[Int],
         name = (json \ "name").extract[String]
@@ -49,7 +49,7 @@ object ModelSerializers {
     }, {
       case x: InputZone =>
         implicit val fmts = formats
-        ("deviceId" -> x.deviceId) ~
+        ("inputDeviceId" -> x.inputDeviceId) ~
         ("position" -> x.position) ~
         ("logicalPosition" -> x.logicalPosition) ~
         ("name" -> x.name)

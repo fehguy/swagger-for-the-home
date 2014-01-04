@@ -15,7 +15,7 @@ case class AnalogSample(position: Int,
   name: Option[String]= None)
 
 case class InputZone (
-  deviceId: String,
+  inputDeviceId: String,
   position: Int,
   logicalPosition: Int,
   name: String)
