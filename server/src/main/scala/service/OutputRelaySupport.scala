@@ -70,13 +70,9 @@ trait OutputRelaySupport {
   }
 
   def getRelayOutputs = {
-    Configurator.hasConfig("relay") match {
-      case true =>
-        (for (position <- 0 to 7) yield {
-          getRelayOutput(position)
-        }).toList
-      case false => List()
-    }
+    (for (position <- 0 to 7) yield {
+      getRelayOutput(position)
+    }).toList
   }
 
   def initRelay(ids: Set[String]): Map[String, InterfaceKitPhidget] = {

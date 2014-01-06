@@ -76,7 +76,7 @@ class PhidgetApi(implicit val swagger: Swagger) extends ScalatraServlet
   val setOutputRelayOperation = (apiOperation[DigitalIO]("setOutputRelay")
     summary "sets a relay for a specific position"
     parameters (
-      queryParam[Boolean]("state").description("").allowableValues(true, false), pathParam[Int]("position").description("").defaultValue(0).allowableValues(0, 1, 2, 3, 4, 5, 6, 7))
+      queryParam[Boolean]("state").description("").allowableValues(true, false), pathParam[Int]("position").description("").defaultValue(0).allowableValues(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15))
   )
 
   post("/relay/output/:position", operation(setOutputRelayOperation)) {
@@ -88,7 +88,7 @@ class PhidgetApi(implicit val swagger: Swagger) extends ScalatraServlet
   val getRelayOutputOperation = (apiOperation[DigitalIO]("getRelayOutput")
     summary "gets an output state"
     parameters (
-      pathParam[Int]("position").description("").defaultValue(0).allowableValues(0, 1, 2, 3, 4, 5, 6, 7))
+      pathParam[Int]("position").description("").defaultValue(0).allowableValues(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15))
   )
 
   get("/relay/output/:position", operation(getRelayOutputOperation)) {

@@ -104,7 +104,7 @@ trait InterfaceKitSupport extends AnalogConversion {
       if (Configurator.hasConfig("remote"))
         ifk.open(id.toInt, Configurator("remote"), 5001)
       else {
-        // println("opening local ifk")
+        println("opening local ifk " + id)
         ifk.open(id.toInt)
       }
 
