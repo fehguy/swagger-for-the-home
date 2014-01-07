@@ -6,11 +6,13 @@ Project to make an API for my house.  Based on the following:
 
 * [Swagger Scalatra](https://www.scalatra.org).  I was using nodejs first but the phidget support isn't great for it (yet).
 
+In this project, there is a full [Android](https://github.com/fehguy/swagger-for-the-home/tree/master/android) app to interact with the system via Mongolab REST api.
+
+![Graph](https://raw.github.com/fehguy/swagger-for-the-home/master/android/graph.png) ![Table view](https://raw.github.com/fehguy/swagger-for-the-home/master/android/table.png)
+
 ### Getting started
 
-I was running on a Phidgets SBC but it was hitting memory issues when running control algorithms.  So I've switched
-to the Raspberry Pi 512MB device.  It takes a little more work to get started (not that much though).  I'm still using
-the Phidgets IO boards.
+I was running on a Phidgets SBC but it was hitting memory issues when running control algorithms.  So I've switched to the Raspberry Pi 512MB device.  It takes a little more work to get started (not that much though).  I'm still using the Phidgets IO boards.
 
 First, setting up the Raspberry Pi was pretty easy--grab an image of the OS from here:
 
