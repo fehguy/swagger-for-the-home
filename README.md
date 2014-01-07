@@ -147,19 +147,22 @@ For example:
   "inputZones": [
     {
       "logicalPosition": 0,
-      "deviceId": "ABCD",
+      "inputDeviceId": "ABCD",
+      "outputDeviceId": "IJKL",
       "position": 0,
       "name": "kids room"
     },
     {
       "logicalPosition": 1,
-      "deviceId": "ABCD",
+      "inputDeviceId": "ABCD",
+      "outputDeviceId": "IJKL",
       "position": 1,
       "name": "garage"
     },
     {
       "logicalPosition": 4,
-      "deviceId": "EFGH",
+      "inputDeviceId": "EFGH",
+      "outputDeviceId": "IJKL",
       "position": 0,
       "name": "guest house"
     }
