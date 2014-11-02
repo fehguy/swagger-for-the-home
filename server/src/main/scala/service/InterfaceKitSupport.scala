@@ -27,7 +27,6 @@ trait InterfaceKitSupport extends AnalogConversion {
 
   def inputs() = interfaceKitDeviceIdMap.map(m => m._2).flatten.toList
 
-  // println("inputs: " + inputs)
   var lock: AnyRef = new Object()
 
   def getAnalogInputs() = {
@@ -53,9 +52,7 @@ trait InterfaceKitSupport extends AnalogConversion {
 
     try {
       if (!inputBoard.isAttached) {
-        // println("not attached!  waiting...")
         inputBoard.waitForAttachment(10000)
-        // println("done waiting")
       }
       inputBoard.getSensorRawValue(position)
     } catch {
@@ -67,39 +64,11 @@ trait InterfaceKitSupport extends AnalogConversion {
   }
 
   /**
-   * sets the output value for the digital IO based on logical position
-   */
-  // def setDigitalOutput(io: DigitalIO) = {
-  //   interfaceKitDeviceIdMap.map(m => {
-  //     inputs.filter(input => input.logicalPosition == io.position).foreach(i => {
-  //       InterfaceKitSupport(i.inputDeviceId).setOutputState(io.position, io.value)
-  //     })
-  //   })
-  //   ApiResponse("set output on " + io, 200)
-  // }
-
-  /**
-   * gets output state for the given logical position
-   */
-  // def getDigitalOutputState(logicalPosition: Int): DigitalIO = {
-  //   (for (input <- inputs())
-  //     yield DigitalIO(
-  //     position = logicalPosition,
-  //     value = InterfaceKitSupport(input.inputDeviceId).getOutputState(input.position),
-  //     name = None,
-  //     timestamp = None)
-  //   ).head
-  // }
-
-  /**
    * initializes all boards
    */
   def initInterfaceKit(ids: Set[String]): Map[String, InterfaceKitPhidget] = {
     (for (id <- ids) yield {
-      // println("initializing id " + id)
       val ifk = new InterfaceKitPhidget
-
-      // println("1: initializing id " + id + ", " + ifk + ", status: " + !ifk.isAttached)
 
       if (Configurator.hasConfig("remote"))
         ifk.open(id.toInt, Configurator("remote"), 5001)
@@ -109,23 +78,19 @@ trait InterfaceKitSupport extends AnalogConversion {
       }
 
       ifk.waitForAttachment
-      // println("2: initializing id " + id + ", " + ifk + ", status: " + !ifk.isAttached)
 
       ifk.addAttachListener(new AttachListener() {
         def attached(ae: AttachEvent) = {
           InterfaceKitSupport.attachmentState += id -> true
-          // println("InterfaceKit " + id + " attachment of " + ae)
         }
       })
       ifk.addDetachListener(new DetachListener() {
         def detached(ae: DetachEvent) = {
           InterfaceKitSupport.attachmentState += id -> false
-          // println("InterfaceKit " + id + " detachment of " + ae)
         }
       })
       ifk.addErrorListener(new ErrorListener() {
         def error(ee: ErrorEvent) = {
-          // println("InterfaceKit " + id + " " + ee)
         }
       })
 
@@ -135,7 +100,6 @@ trait InterfaceKitSupport extends AnalogConversion {
   }
 
   def resetAnalog = {
-    // println("resetting analog")
     try {
       InterfaceKitSupport.ifks.values.foreach(_.close())
     } catch {

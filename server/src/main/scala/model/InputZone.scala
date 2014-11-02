@@ -5,8 +5,5 @@ case class InputZone(
   logicalPosition: Int,
   position: Int,
   inputDeviceId: String,
-  /**
-   * The ID of the device controlling this zone
-   */
   outputDeviceId: String)
 

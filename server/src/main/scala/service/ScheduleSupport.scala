@@ -31,13 +31,13 @@ object ScheduleSupport {
       case true => {
         analogSaveCancellable = Some(system.scheduler.schedule(15 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
           def run() = {
-            println("save analog")
+            // println("save analog")
             val inputs = PhidgetApiService.getAnalogInputs()
             inputs.foreach(analog => {
-              println("saving data for " + analog.position + ", value " + analog.value)
+              // println("saving data for " + analog.position + ", value " + analog.value)
               if (analog.value > 0.1) AnalogDao.save(analog)
             })
-            println("done saving")
+            // println("done saving")
           }
         }))
       }
@@ -48,7 +48,7 @@ object ScheduleSupport {
       case true => {
         analogSaveCancellable = Some(system.scheduler.schedule(30 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
           def run() = {
-            println("update outputs")
+            // println("update outputs")
             val inputs = PhidgetApiService.getRelayOutputs.flatten
             inputs.foreach(io => DigitalDao.save(io))
           }

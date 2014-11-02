@@ -17,6 +17,7 @@ class ScalatraBootstrap extends LifeCycle {
     implicit val system = ActorSystem("mySystem")
     try {
       context mount (new PhidgetApi, "/phidget/*")
+      context mount (new ZwaveApi, "/zwave/*")
       context mount (new ResourcesApp, "/api-docs/*")
 
       MongoDBConnectionManager.getConnection("phidgets",

@@ -16,14 +16,13 @@ object OutputRelaySupport {
 }
 
 trait OutputRelaySupport {
-  println("really!")
   val relayDeviceIdMap: Map[String, List[InputZone]] = Configurator.inputZones.groupBy(_.outputDeviceId)
-
+  println(relayDeviceIdMap)
   initRelay(relayDeviceIdMap.keySet)
 
   def setAllRelayOutput(state: Boolean) = {
     (for (zone <- relayDeviceIdMap.values.flatten) yield {
-      setOutputRelay(state, zone.position)
+      setOutputRelay(state, zone.logicalPosition)
     }).toList
   }
 
@@ -45,10 +44,8 @@ trait OutputRelaySupport {
   }
 
   def getRelayOutput(logicalPosition: Int): Option[DigitalIO] = {
-    println("getting relay for " + logicalPosition)
     relayDeviceIdMap.values.flatten.filter(_.logicalPosition == logicalPosition).toList match {
       case e if (e.size == 1) => {
-        println(e)
         val zone = e.head
         val relay = OutputRelaySupport.relays(zone.outputDeviceId)
 
@@ -63,14 +60,13 @@ trait OutputRelaySupport {
           name = None))
       }
       case _ => {
-        println("none found")
         None
       }
     }
   }
 
   def getRelayOutputs = {
-    (for (position <- 0 to 7) yield {
+    (for (position <- 0 to 15) yield {
       getRelayOutput(position)
     }).toList
   }

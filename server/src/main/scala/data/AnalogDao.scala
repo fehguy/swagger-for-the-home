@@ -43,8 +43,6 @@ object AnalogDao extends TimestampGenerator {
     val sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
     val r = Configurator.config.inputZones.map(_.logicalPosition).toList
 
-    println("aggregating over " + r)
-
     keyPoints.foreach(keyPoint => {
       r.foreach(pos => {
         var startTime = getAggregate(pos, keyPoint) match {
@@ -54,7 +52,6 @@ object AnalogDao extends TimestampGenerator {
         while (startTime < System.currentTimeMillis) {
           val date = new Date(startTime)
           val data = aggregate(pos, keyPoint, date)
-          println(data)
           if (data._3 > 0) {
             val agg = AnalogAggregationPoint(data._2, data._3, data._4, date)
             val dbo = grater[AnalogAggregationPoint].asDBObject(agg)
@@ -69,7 +66,6 @@ object AnalogDao extends TimestampGenerator {
   }
 
   def aggregate(position: Int, resolution: Long, lastTimestamp: Date) = {
-    println("aggregating position " + position)
     val query = BasicDBObjectBuilder.start(Map(
       "timestamp" -> new BasicDBObject("$gte", lastTimestamp),
       "position" -> position
@@ -92,7 +88,6 @@ object AnalogDao extends TimestampGenerator {
       case 0 => 0.0
       case _ => records.map(_.value).sum / records.length
     }
-    println("inspected " + recordsInspected + " records for position " + position)
     val stddev = stdDev(records.map(_.value.toDouble).toList, average)
     (lastTimestamp, position, average, stddev, recordsInspected)
   }

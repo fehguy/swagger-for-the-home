@@ -23,7 +23,7 @@ object JettyMain {
     val webApp = new WebAppContext
     webApp setContextPath "/"
     webApp setResourceBase webapp
-    webApp setDescriptor (webapp + "/WEB-INF/web.xml");
+    webApp setDescriptor (webapp+"/WEB-INF/web.xml");
 
     server setHandler webApp
 
