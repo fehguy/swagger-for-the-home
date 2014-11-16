@@ -127,10 +127,49 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>2.1</version>
       </plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>${maven-plugin-version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmArgs>
+            <jvmArg>-Xms64m</jvmArg>
+            <jvmArg>-Xmx1024m</jvmArg>
+          </jvmArgs>
+          <launchers>
+            <launcher>
+              <id>scaltra</id>
+              <mainClass>ScalatraServerGenerator</mainClass>
+              <args>
+                <arg>http://192.168.2.30:8080/api-docs</arg>
+                <arg>special-key</arg>
+              </args>
+              <jvmArgs>
+              </jvmArgs>
+            </launcher>
+            <launcher>
+              <id>objc</id>
+              <mainClass>ObjcPetstoreCodegen</mainClass>
+              <args>
+                <arg>http://192.168.2.30:8080/api-docs</arg>
+                <arg>special-key</arg>
+              </args>
+              <jvmArgs>
+              </jvmArgs>
+            </launcher>
+          </launchers>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-  <profiles>
-  </profiles>
   <reporting>
     <outputDirectory>target/site</outputDirectory>
     <plugins>
@@ -150,14 +189,15 @@
   <dependencies>
     <dependency>
       <groupId>com.wordnik</groupId>
-      <artifactId>swagger-codegen_2.9.1</artifactId>
+      <artifactId>swagger-codegen_2.10.2</artifactId>
       <version>${swagger-codegen-version}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
   <repositories />
   <properties>
-    <swagger-codegen-version>2.0.0</swagger-codegen-version>
-    <scala-version>2.9.1-1</scala-version>
+    <swagger-codegen-version>2.0.18-SNAPSHOT</swagger-codegen-version>
+    <scala-version>2.10.4</scala-version>
+    <maven-plugin-version>3.1.6</maven-plugin-version>
   </properties>
 </project>

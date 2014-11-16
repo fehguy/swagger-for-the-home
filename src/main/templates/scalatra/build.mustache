@@ -21,8 +21,8 @@ version := "0.1.0-SNAPSHOT"
 scalaVersion := "2.10.0"
 
 libraryDependencies ++= Seq(
-  "com.wordnik"             %% "mongo-utils"                    % "1.3.0-SNAPSHOT",
-  "com.wordnik"             %% "common-utils"                   % "1.3.0-SNAPSHOT",
+  "com.wordnik"             %% "mongo-utils"                    % "1.3.0",
+  "com.wordnik"             %% "common-utils"                   % "1.3.0",
   "com.novus"               %% "salat"                          % "1.9.4",
   "com.phidgets"             % "phidget"                        % "2.1.8",
   "org.scalatest"           %% "scalatest"                      % "2.0"               % "test",

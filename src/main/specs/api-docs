@@ -5,6 +5,10 @@
     {
       "path": "/phidget",
       "description": "Phydgets API"
+    },
+    {
+      "path": "/zwave",
+      "description": "Z-Wave API"
     }
   ]
 }

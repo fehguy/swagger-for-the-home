@@ -21,7 +21,7 @@ import android.widget._
 import android.util.Log
 
 object RemoteData {
-  val r = List(1,2,3,4,6,7,8,10,15)//Configurator._config.inputZones.map(_.logicalPosition).toList
+  val r = List(1,2,3,4,6,7,8,9,10,11,12,15)//Configurator._config.inputZones.map(_.logicalPosition).toList
   // List(1,3,4,6,7,10,15)
 
   implicit val fmts = ModelSerializers.formats

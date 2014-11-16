@@ -1,0 +1,4 @@
+platform :ios, '6.0'
+xcodeproj 'SFTHClient/SFTHClient.xcodeproj'
+pod 'AFNetworking', '~> 1.0'
+

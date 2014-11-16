@@ -1,0 +1,600 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C30200EC20143442F85D205 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C3DC2805F081877369A5DC /* libPods.a */; };
+		EA31DF0D1A05EC300080E1AA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = EA31DEF81A05EC300080E1AA /* Podfile */; };
+		EA31DF0E1A05EC300080E1AA /* SWGAnalogIO.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DEFA1A05EC300080E1AA /* SWGAnalogIO.m */; };
+		EA31DF0F1A05EC300080E1AA /* SWGApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DEFC1A05EC300080E1AA /* SWGApiClient.m */; };
+		EA31DF101A05EC300080E1AA /* SWGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DEFE1A05EC300080E1AA /* SWGDate.m */; };
+		EA31DF111A05EC300080E1AA /* SWGDigitalIO.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DF001A05EC300080E1AA /* SWGDigitalIO.m */; };
+		EA31DF121A05EC300080E1AA /* SWGFile.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DF021A05EC300080E1AA /* SWGFile.m */; };
+		EA31DF131A05EC300080E1AA /* SWGInputZone.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DF041A05EC300080E1AA /* SWGInputZone.m */; };
+		EA31DF141A05EC300080E1AA /* SWGObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DF061A05EC300080E1AA /* SWGObject.m */; };
+		EA31DF151A05EC300080E1AA /* SWGPhidgetApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DF081A05EC300080E1AA /* SWGPhidgetApi.m */; };
+		EA31DF161A05EC300080E1AA /* SWGZwaveApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DF0A1A05EC300080E1AA /* SWGZwaveApi.m */; };
+		EA31DF171A05EC300080E1AA /* SWGZWaveDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31DF0C1A05EC300080E1AA /* SWGZWaveDevice.m */; };
+		EAD7266E1A05EBEC0001FA51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD7266D1A05EBEC0001FA51 /* main.m */; };
+		EAD726711A05EBEC0001FA51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726701A05EBEC0001FA51 /* AppDelegate.m */; };
+		EAD726741A05EBEC0001FA51 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726731A05EBEC0001FA51 /* FirstViewController.m */; };
+		EAD726771A05EBEC0001FA51 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726761A05EBEC0001FA51 /* SecondViewController.m */; };
+		EAD7267A1A05EBEC0001FA51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD726781A05EBEC0001FA51 /* Main.storyboard */; };
+		EAD7267C1A05EBEC0001FA51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD7267B1A05EBEC0001FA51 /* Images.xcassets */; };
+		EAD7267F1A05EBEC0001FA51 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD7267D1A05EBEC0001FA51 /* LaunchScreen.xib */; };
+		EAD7268B1A05EBEC0001FA51 /* SFTHClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD7268A1A05EBEC0001FA51 /* SFTHClientTests.m */; };
+		EADD2CEF1A184C97002301AA /* portal-sleep-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EADD2CEE1A184C97002301AA /* portal-sleep-icon.png */; };
+		EADD2CF11A185938002301AA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF01A185938002301AA /* CoreFoundation.framework */; };
+		EADD2CF31A18593F002301AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF21A18593F002301AA /* Foundation.framework */; };
+		EADD2CF51A18594A002301AA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF41A18594A002301AA /* MobileCoreServices.framework */; };
+		EADD2CF71A185957002301AA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF61A185957002301AA /* SystemConfiguration.framework */; };
+		EADD2CFA1A187E76002301AA /* SWGDeviceState.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2CF91A187E76002301AA /* SWGDeviceState.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAD726851A05EBEC0001FA51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD726601A05EBEC0001FA51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAD726671A05EBEC0001FA51;
+			remoteInfo = SFTHClient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0792E25DE1F3BAA253DF3E4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		66C3DC2805F081877369A5DC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D814A246C17394CA26D28DAA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EA31DEF81A05EC300080E1AA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		EA31DEF91A05EC300080E1AA /* SWGAnalogIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGAnalogIO.h; sourceTree = "<group>"; };
+		EA31DEFA1A05EC300080E1AA /* SWGAnalogIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGAnalogIO.m; sourceTree = "<group>"; };
+		EA31DEFB1A05EC300080E1AA /* SWGApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGApiClient.h; sourceTree = "<group>"; };
+		EA31DEFC1A05EC300080E1AA /* SWGApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGApiClient.m; sourceTree = "<group>"; };
+		EA31DEFD1A05EC300080E1AA /* SWGDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDate.h; sourceTree = "<group>"; };
+		EA31DEFE1A05EC300080E1AA /* SWGDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDate.m; sourceTree = "<group>"; };
+		EA31DEFF1A05EC300080E1AA /* SWGDigitalIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDigitalIO.h; sourceTree = "<group>"; };
+		EA31DF001A05EC300080E1AA /* SWGDigitalIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDigitalIO.m; sourceTree = "<group>"; };
+		EA31DF011A05EC300080E1AA /* SWGFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGFile.h; sourceTree = "<group>"; };
+		EA31DF021A05EC300080E1AA /* SWGFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGFile.m; sourceTree = "<group>"; };
+		EA31DF031A05EC300080E1AA /* SWGInputZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGInputZone.h; sourceTree = "<group>"; };
+		EA31DF041A05EC300080E1AA /* SWGInputZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGInputZone.m; sourceTree = "<group>"; };
+		EA31DF051A05EC300080E1AA /* SWGObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGObject.h; sourceTree = "<group>"; };
+		EA31DF061A05EC300080E1AA /* SWGObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGObject.m; sourceTree = "<group>"; };
+		EA31DF071A05EC300080E1AA /* SWGPhidgetApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGPhidgetApi.h; sourceTree = "<group>"; };
+		EA31DF081A05EC300080E1AA /* SWGPhidgetApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGPhidgetApi.m; sourceTree = "<group>"; };
+		EA31DF091A05EC300080E1AA /* SWGZwaveApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGZwaveApi.h; sourceTree = "<group>"; };
+		EA31DF0A1A05EC300080E1AA /* SWGZwaveApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZwaveApi.m; sourceTree = "<group>"; };
+		EA31DF0B1A05EC300080E1AA /* SWGZWaveDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGZWaveDevice.h; sourceTree = "<group>"; };
+		EA31DF0C1A05EC300080E1AA /* SWGZWaveDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZWaveDevice.m; sourceTree = "<group>"; };
+		EAD726681A05EBEC0001FA51 /* SFTHClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFTHClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD7266C1A05EBEC0001FA51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAD7266D1A05EBEC0001FA51 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EAD7266F1A05EBEC0001FA51 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EAD726701A05EBEC0001FA51 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EAD726721A05EBEC0001FA51 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		EAD726731A05EBEC0001FA51 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		EAD726751A05EBEC0001FA51 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		EAD726761A05EBEC0001FA51 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		EAD726791A05EBEC0001FA51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EAD7267B1A05EBEC0001FA51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EAD7267E1A05EBEC0001FA51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EAD726841A05EBEC0001FA51 /* SFTHClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFTHClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD726891A05EBEC0001FA51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAD7268A1A05EBEC0001FA51 /* SFTHClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFTHClientTests.m; sourceTree = "<group>"; };
+		EADD2CEE1A184C97002301AA /* portal-sleep-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "portal-sleep-icon.png"; sourceTree = "<group>"; };
+		EADD2CF01A185938002301AA /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		EADD2CF21A18593F002301AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EADD2CF41A18594A002301AA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		EADD2CF61A185957002301AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EADD2CF81A187E76002301AA /* SWGDeviceState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDeviceState.h; sourceTree = "<group>"; };
+		EADD2CF91A187E76002301AA /* SWGDeviceState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDeviceState.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EAD726651A05EBEC0001FA51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EADD2CF71A185957002301AA /* SystemConfiguration.framework in Frameworks */,
+				EADD2CF51A18594A002301AA /* MobileCoreServices.framework in Frameworks */,
+				EADD2CF31A18593F002301AA /* Foundation.framework in Frameworks */,
+				EADD2CF11A185938002301AA /* CoreFoundation.framework in Frameworks */,
+				1C30200EC20143442F85D205 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAD726811A05EBEC0001FA51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3684CE424A81F8D53D97528C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0792E25DE1F3BAA253DF3E4D /* Pods.debug.xcconfig */,
+				D814A246C17394CA26D28DAA /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A9E3C16C5A87258D0C2EDC4F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EADD2CF61A185957002301AA /* SystemConfiguration.framework */,
+				EADD2CF41A18594A002301AA /* MobileCoreServices.framework */,
+				EADD2CF21A18593F002301AA /* Foundation.framework */,
+				EADD2CF01A185938002301AA /* CoreFoundation.framework */,
+				66C3DC2805F081877369A5DC /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA31DEF71A05EC300080E1AA /* client */ = {
+			isa = PBXGroup;
+			children = (
+				EA31DEF81A05EC300080E1AA /* Podfile */,
+				EA31DEF91A05EC300080E1AA /* SWGAnalogIO.h */,
+				EA31DEFA1A05EC300080E1AA /* SWGAnalogIO.m */,
+				EA31DEFB1A05EC300080E1AA /* SWGApiClient.h */,
+				EA31DEFC1A05EC300080E1AA /* SWGApiClient.m */,
+				EA31DEFD1A05EC300080E1AA /* SWGDate.h */,
+				EA31DEFE1A05EC300080E1AA /* SWGDate.m */,
+				EADD2CF81A187E76002301AA /* SWGDeviceState.h */,
+				EADD2CF91A187E76002301AA /* SWGDeviceState.m */,
+				EA31DEFF1A05EC300080E1AA /* SWGDigitalIO.h */,
+				EA31DF001A05EC300080E1AA /* SWGDigitalIO.m */,
+				EA31DF011A05EC300080E1AA /* SWGFile.h */,
+				EA31DF021A05EC300080E1AA /* SWGFile.m */,
+				EA31DF031A05EC300080E1AA /* SWGInputZone.h */,
+				EA31DF041A05EC300080E1AA /* SWGInputZone.m */,
+				EA31DF051A05EC300080E1AA /* SWGObject.h */,
+				EA31DF061A05EC300080E1AA /* SWGObject.m */,
+				EA31DF071A05EC300080E1AA /* SWGPhidgetApi.h */,
+				EA31DF081A05EC300080E1AA /* SWGPhidgetApi.m */,
+				EA31DF091A05EC300080E1AA /* SWGZwaveApi.h */,
+				EA31DF0A1A05EC300080E1AA /* SWGZwaveApi.m */,
+				EA31DF0B1A05EC300080E1AA /* SWGZWaveDevice.h */,
+				EA31DF0C1A05EC300080E1AA /* SWGZWaveDevice.m */,
+			);
+			name = client;
+			path = ../../client;
+			sourceTree = "<group>";
+		};
+		EAD7265F1A05EBEC0001FA51 = {
+			isa = PBXGroup;
+			children = (
+				EAD7266A1A05EBEC0001FA51 /* SFTHClient */,
+				EAD726871A05EBEC0001FA51 /* SFTHClientTests */,
+				EAD726691A05EBEC0001FA51 /* Products */,
+				3684CE424A81F8D53D97528C /* Pods */,
+				A9E3C16C5A87258D0C2EDC4F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EAD726691A05EBEC0001FA51 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAD726681A05EBEC0001FA51 /* SFTHClient.app */,
+				EAD726841A05EBEC0001FA51 /* SFTHClientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAD7266A1A05EBEC0001FA51 /* SFTHClient */ = {
+			isa = PBXGroup;
+			children = (
+				EADD2CEE1A184C97002301AA /* portal-sleep-icon.png */,
+				EA31DEF71A05EC300080E1AA /* client */,
+				EAD7266F1A05EBEC0001FA51 /* AppDelegate.h */,
+				EAD726701A05EBEC0001FA51 /* AppDelegate.m */,
+				EAD726721A05EBEC0001FA51 /* FirstViewController.h */,
+				EAD726731A05EBEC0001FA51 /* FirstViewController.m */,
+				EAD726751A05EBEC0001FA51 /* SecondViewController.h */,
+				EAD726761A05EBEC0001FA51 /* SecondViewController.m */,
+				EAD726781A05EBEC0001FA51 /* Main.storyboard */,
+				EAD7267B1A05EBEC0001FA51 /* Images.xcassets */,
+				EAD7267D1A05EBEC0001FA51 /* LaunchScreen.xib */,
+				EAD7266B1A05EBEC0001FA51 /* Supporting Files */,
+			);
+			path = SFTHClient;
+			sourceTree = "<group>";
+		};
+		EAD7266B1A05EBEC0001FA51 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAD7266C1A05EBEC0001FA51 /* Info.plist */,
+				EAD7266D1A05EBEC0001FA51 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAD726871A05EBEC0001FA51 /* SFTHClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				EAD7268A1A05EBEC0001FA51 /* SFTHClientTests.m */,
+				EAD726881A05EBEC0001FA51 /* Supporting Files */,
+			);
+			path = SFTHClientTests;
+			sourceTree = "<group>";
+		};
+		EAD726881A05EBEC0001FA51 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAD726891A05EBEC0001FA51 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EAD726671A05EBEC0001FA51 /* SFTHClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAD7268E1A05EBEC0001FA51 /* Build configuration list for PBXNativeTarget "SFTHClient" */;
+			buildPhases = (
+				1722DBBA2CEAEAC65246B915 /* Check Pods Manifest.lock */,
+				EAD726641A05EBEC0001FA51 /* Sources */,
+				EAD726651A05EBEC0001FA51 /* Frameworks */,
+				EAD726661A05EBEC0001FA51 /* Resources */,
+				6BA0BE65A2867918F0EB429D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SFTHClient;
+			productName = SFTHClient;
+			productReference = EAD726681A05EBEC0001FA51 /* SFTHClient.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EAD726831A05EBEC0001FA51 /* SFTHClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAD726911A05EBEC0001FA51 /* Build configuration list for PBXNativeTarget "SFTHClientTests" */;
+			buildPhases = (
+				EAD726801A05EBEC0001FA51 /* Sources */,
+				EAD726811A05EBEC0001FA51 /* Frameworks */,
+				EAD726821A05EBEC0001FA51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAD726861A05EBEC0001FA51 /* PBXTargetDependency */,
+			);
+			name = SFTHClientTests;
+			productName = SFTHClientTests;
+			productReference = EAD726841A05EBEC0001FA51 /* SFTHClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EAD726601A05EBEC0001FA51 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Eatbacon;
+				TargetAttributes = {
+					EAD726671A05EBEC0001FA51 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					EAD726831A05EBEC0001FA51 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = EAD726671A05EBEC0001FA51;
+					};
+				};
+			};
+			buildConfigurationList = EAD726631A05EBEC0001FA51 /* Build configuration list for PBXProject "SFTHClient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EAD7265F1A05EBEC0001FA51;
+			productRefGroup = EAD726691A05EBEC0001FA51 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EAD726671A05EBEC0001FA51 /* SFTHClient */,
+				EAD726831A05EBEC0001FA51 /* SFTHClientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EAD726661A05EBEC0001FA51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD7267A1A05EBEC0001FA51 /* Main.storyboard in Resources */,
+				EAD7267F1A05EBEC0001FA51 /* LaunchScreen.xib in Resources */,
+				EA31DF0D1A05EC300080E1AA /* Podfile in Resources */,
+				EAD7267C1A05EBEC0001FA51 /* Images.xcassets in Resources */,
+				EADD2CEF1A184C97002301AA /* portal-sleep-icon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAD726821A05EBEC0001FA51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1722DBBA2CEAEAC65246B915 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6BA0BE65A2867918F0EB429D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EAD726641A05EBEC0001FA51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA31DF111A05EC300080E1AA /* SWGDigitalIO.m in Sources */,
+				EAD726771A05EBEC0001FA51 /* SecondViewController.m in Sources */,
+				EAD726711A05EBEC0001FA51 /* AppDelegate.m in Sources */,
+				EA31DF161A05EC300080E1AA /* SWGZwaveApi.m in Sources */,
+				EA31DF141A05EC300080E1AA /* SWGObject.m in Sources */,
+				EAD726741A05EBEC0001FA51 /* FirstViewController.m in Sources */,
+				EA31DF0F1A05EC300080E1AA /* SWGApiClient.m in Sources */,
+				EA31DF151A05EC300080E1AA /* SWGPhidgetApi.m in Sources */,
+				EA31DF0E1A05EC300080E1AA /* SWGAnalogIO.m in Sources */,
+				EA31DF171A05EC300080E1AA /* SWGZWaveDevice.m in Sources */,
+				EA31DF121A05EC300080E1AA /* SWGFile.m in Sources */,
+				EA31DF101A05EC300080E1AA /* SWGDate.m in Sources */,
+				EADD2CFA1A187E76002301AA /* SWGDeviceState.m in Sources */,
+				EA31DF131A05EC300080E1AA /* SWGInputZone.m in Sources */,
+				EAD7266E1A05EBEC0001FA51 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAD726801A05EBEC0001FA51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD7268B1A05EBEC0001FA51 /* SFTHClientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAD726861A05EBEC0001FA51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAD726671A05EBEC0001FA51 /* SFTHClient */;
+			targetProxy = EAD726851A05EBEC0001FA51 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EAD726781A05EBEC0001FA51 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAD726791A05EBEC0001FA51 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EAD7267D1A05EBEC0001FA51 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAD7267E1A05EBEC0001FA51 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EAD7268C1A05EBEC0001FA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EAD7268D1A05EBEC0001FA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EAD7268F1A05EBEC0001FA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0792E25DE1F3BAA253DF3E4D /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SFTHClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EAD726901A05EBEC0001FA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D814A246C17394CA26D28DAA /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SFTHClient/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EAD726921A05EBEC0001FA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SFTHClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFTHClient.app/SFTHClient";
+			};
+			name = Debug;
+		};
+		EAD726931A05EBEC0001FA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SFTHClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFTHClient.app/SFTHClient";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EAD726631A05EBEC0001FA51 /* Build configuration list for PBXProject "SFTHClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAD7268C1A05EBEC0001FA51 /* Debug */,
+				EAD7268D1A05EBEC0001FA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAD7268E1A05EBEC0001FA51 /* Build configuration list for PBXNativeTarget "SFTHClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAD7268F1A05EBEC0001FA51 /* Debug */,
+				EAD726901A05EBEC0001FA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAD726911A05EBEC0001FA51 /* Build configuration list for PBXNativeTarget "SFTHClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAD726921A05EBEC0001FA51 /* Debug */,
+				EAD726931A05EBEC0001FA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EAD726601A05EBEC0001FA51 /* Project object */;
+}

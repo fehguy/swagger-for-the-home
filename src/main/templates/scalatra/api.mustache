@@ -42,15 +42,15 @@ class {{className}} (implicit val swagger: Swagger) extends ScalatraServlet
         {{#allParams}}
         {{#queryParameter}}
         queryParam[{{dataType}}]("{{paramName}}").description(""){{^required}}.optional{{/required}}{{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
-        {{#allowableValues}}.{{allowableValues}}{{/allowableValues}}
+        {{#allowableValues}}.{{{allowableValues}}}{{/allowableValues}}
         {{/queryParameter}}
         {{#pathParameter}}
         pathParam[{{dataType}}]("{{paramName}}").description(""){{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
-        {{#allowableValues}}.{{allowableValues}}{{/allowableValues}}
+        {{#allowableValues}}.{{{allowableValues}}}{{/allowableValues}}
         {{/pathParameter}}
         {{#headerParameter}}
         headerParam[{{dataType}}]("{{paramName}}").description(""){{^required}}.optional{{/required}}{{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
-        {{#allowableValues}}.{{allowableValues}}{{/allowableValues}}
+        {{#allowableValues}}.{{{allowableValues}}}{{/allowableValues}}
         {{/headerParameter}}
         {{#bodyParameter}}
         bodyParam[{{dataType}}]("{{paramName}}").description(""){{^required}}.optional{{/required}}{{#defaultValue}}.defaultValue({{{defaultValue}}}){{/defaultValue}}
