@@ -1,17 +1,26 @@
 package service
 
+import model._
+
 import akka.actor._
 import akka.actor.Actor
 import akka.actor.Props
-import scala.concurrent.duration._
-import java.util.concurrent.TimeUnit
 
+import org.json4s._
+import org.json4s.jackson.Serialization._
+import org.json4s.jackson.JsonMethods._
+
+import java.util.concurrent.TimeUnit
 import java.net.{ HttpURLConnection, URL }
 import java.io.{ DataOutputStream, BufferedReader, InputStreamReader }
 
 import scala.collection.mutable.HashMap
+import scala.concurrent.duration._
 
 object ZwaveApiService {
+  val switches = Set(2, 5, 6)
+  val dimmers = Set(3, 4, 8)
+
   val switchTimers: HashMap[Int, Long] = new HashMap[Int, Long]
   val dimmerTimers: HashMap[Int, Long] = new HashMap[Int, Long]
 
@@ -46,8 +55,48 @@ object ZwaveApiService {
 
   }
 
-  def getSwitchState(deviceId: Int) = {
+  def getDeviceState(deviceId: Int) = {
+    val url = new URL("http://192.168.2.90:8083/ZWaveAPI/Data/100")
+    val connection = url.openConnection().asInstanceOf[HttpURLConnection]
+    connection.setDoOutput(true)
+    connection.setDoInput(true)
+    connection.setInstanceFollowRedirects(false)
+    connection.setRequestMethod("POST")
+    connection.setRequestProperty("Content-Length", "0")
+    connection.setUseCaches(false)
 
+    val wr = new DataOutputStream(connection.getOutputStream())
+    wr.flush()
+
+    val reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))
+    var line: String = ""
+    val buffer = new StringBuffer
+    while (line != null) {
+      line = reader.readLine()
+      if (line != null)
+        buffer.append(line)
+    }
+
+    val isSwitch = switches.contains(deviceId)
+    val isDimmer = dimmers.contains(deviceId)
+    val state = {
+      if (isSwitch) {
+        val json = parse(buffer.toString)
+        (json \ "devices" \ deviceId.toString \ "instances" \ "0" \ "commandClasses" \ "37" \ "data" \ "level" \ "value") match {
+          case JInt(e) => e.toInt
+          case _ => 0
+        }
+      } else if (isDimmer) {
+        val json = parse(buffer.toString)
+        (json \ "devices" \ deviceId.toString \ "instances" \ "0" \ "commandClasses" \ "38" \ "data" \ "level" \ "value") match {
+          case JInt(e) => e.toInt
+          case _ => 0
+        }
+      } else {
+        0
+      }
+    }
+    DeviceState(deviceId, state)
   }
 
   def setDimmerValue(deviceId: Int, value: Int) = {

@@ -1,7 +1,7 @@
 import api._
 
 import config._
-import service.ScheduleSupport
+import service.{ ScheduleSupport, ZwaveApiService }
 
 import com.wordnik.mongo.connection._
 
@@ -29,6 +29,7 @@ class ScalatraBootstrap extends LifeCycle {
         SchemaType.READ_WRITE)
 
       ScheduleSupport.startUpdate
+      ZwaveApiService.startUpdate
     } catch {
       case e: Throwable => e.printStackTrace()
     }

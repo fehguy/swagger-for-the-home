@@ -1,8 +1,10 @@
 package api
 
+import model.DeviceState
+import model.ZWaveDevice
+
 import service._
 
-import model.ZWaveDevice
 import org.scalatra.{ TypedParamSupport, ScalatraServlet }
 import org.scalatra.swagger._
 import org.json4s._
@@ -33,8 +35,8 @@ class ZwaveApi(implicit val swagger: Swagger) extends ScalatraServlet
     }
   }
 
-  val getSwitchStateOperation = (apiOperation[Unit]("getSwitchState")
-    summary "http://192.168.2.90:8083/ZWaveAPI/Run/devices[2].instances[0].commandClasses[0x25].Set(0)"
+  val getSwitchStateOperation = (apiOperation[DeviceState]("getSwitchState")
+    summary "Gets state for a switch"
     parameters (
       pathParam[Int]("deviceId").description(""))
   )
@@ -42,7 +44,7 @@ class ZwaveApi(implicit val swagger: Swagger) extends ScalatraServlet
   get("/device/:deviceId", operation(getSwitchStateOperation)) {
     val deviceId: Int = params.getAs[Int]("deviceId").getOrElse(halt(400))
 
-    ZwaveApiService.getSwitchState(deviceId)
+    ZwaveApiService.getDeviceState(deviceId)
   }
 
   val getDevicesOperation = (apiOperation[List[ZWaveDevice]]("getDevices")
@@ -52,21 +54,6 @@ class ZwaveApi(implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/devices", operation(getDevicesOperation)) {
     ZwaveApiService.getDevices()
-  }
-
-  val dimmerOnWithTimerOperation = (apiOperation[Unit]("dimmerOnWithTimer")
-    summary "Updates"
-    parameters (
-      pathParam[Int]("deviceId").description("").allowableValues(dimmers),
-      queryParam[Int]("timer").description("").optional.defaultValue(30).allowableValues(5, 15, 30, 60))
-  )
-
-  post("/dimmer/:deviceId/timer", operation(dimmerOnWithTimerOperation)) {
-    val deviceId: Int = params.getAs[Int]("deviceId").getOrElse(halt(400))
-
-    val timer: Int = params.getAsOrElse[Int]("timer", halt(400))
-
-    ZwaveApiService.dimmerOnWithTimer(deviceId, timer)
   }
 
   val setDimmerValueOperation = (apiOperation[Unit]("setDimmerValue")
@@ -83,19 +70,25 @@ class ZwaveApi(implicit val swagger: Swagger) extends ScalatraServlet
     ZwaveApiService.setDimmerValue(deviceId, value)
   }
 
-  val switchOnWithTimerOperation = (apiOperation[Unit]("setSwitchValueWithTimer")
+  val dimmerOnWithTimerOperation = (apiOperation[Unit]("dimmerOnWithTimer")
     summary "Updates"
     parameters (
-      pathParam[Int]("deviceId").description("").allowableValues(switches),
-      queryParam[Int]("timer").description("").required.defaultValue(30).allowableValues(List(5, 15, 30, 60)))
+      pathParam[Int]("deviceId")
+      .description("")
+      .allowableValues(dimmers),
+      queryParam[Int]("timer")
+      .description("")
+      .optional
+      .defaultValue(30)
+      .allowableValues(5, 15, 30, 60))
   )
 
-  post("/switch/:deviceId/timer", operation(switchOnWithTimerOperation)) {
-    val deviceId: Int = params.getAsOrElse[Int]("deviceId", halt(400))
+  post("/dimmer/:deviceId/timer", operation(dimmerOnWithTimerOperation)) {
+    val deviceId: Int = params.getAs[Int]("deviceId").getOrElse(halt(400))
 
     val timer: Int = params.getAsOrElse[Int]("timer", halt(400))
 
-    ZwaveApiService.switchOnWithTimer(deviceId, timer)
+    ZwaveApiService.dimmerOnWithTimer(deviceId, timer)
   }
 
   val setSwitchValueOperation = (apiOperation[Unit]("setSwitchValue")
@@ -114,6 +107,25 @@ class ZwaveApi(implicit val swagger: Swagger) extends ScalatraServlet
     val value: Int = params.getAs[Int]("value").getOrElse(halt(400))
 
     ZwaveApiService.setSwitchValue(deviceId, value)
+  }
+
+  val switchOnWithTimerOperation = (apiOperation[Unit]("setSwitchValueWithTimer")
+    summary "Updates"
+    parameters (
+      pathParam[Int]("deviceId")
+      .description("")
+      .allowableValues(switches),
+      queryParam[Int]("timer").description("")
+      .required
+      .defaultValue(30)
+      .allowableValues(List(5, 15, 30, 60)))
+  )
+
+  post("/switch/:deviceId/timer", operation(switchOnWithTimerOperation)) {
+    val deviceId: Int = params.getAsOrElse[Int]("deviceId", halt(400))
+    val timer: Int = params.getAsOrElse[Int]("timer", halt(400))
+
+    ZwaveApiService.switchOnWithTimer(deviceId, timer)
   }
 
 }
