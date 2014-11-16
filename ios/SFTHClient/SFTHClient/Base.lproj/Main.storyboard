@@ -17,25 +17,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Living Room table light" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5j-uj-jbd">
-                                <rect key="frame" x="16" y="127" width="176" height="21"/>
+                                <rect key="frame" x="16" y="155" width="176" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bathroom Hallway light" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qQ-rn-Zs7">
-                                <rect key="frame" x="16" y="169" width="178" height="21"/>
+                                <rect key="frame" x="16" y="197" width="178" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IGg-sD-Oh4">
-                                <rect key="frame" x="213" y="122" width="51" height="31"/>
+                                <rect key="frame" x="213" y="150" width="51" height="31"/>
                                 <connections>
                                     <action selector="switch1ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="55N-KW-ixy"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVf-4Q-pXu">
-                                <rect key="frame" x="275" y="121" width="34" height="34"/>
+                                <rect key="frame" x="275" y="149" width="34" height="34"/>
                                 <state key="normal" title="Button" backgroundImage="portal-sleep-icon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -44,13 +44,13 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWJ-7T-gjh">
-                                <rect key="frame" x="213" y="164" width="51" height="31"/>
+                                <rect key="frame" x="213" y="192" width="51" height="31"/>
                                 <connections>
                                     <action selector="switch2ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="au0-Fn-urm"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfH-LQ-2yc">
-                                <rect key="frame" x="275" y="163" width="34" height="34"/>
+                                <rect key="frame" x="275" y="191" width="34" height="34"/>
                                 <state key="normal" title="Button_2" backgroundImage="portal-sleep-icon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -59,19 +59,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Basement Main" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnG-vL-0SC">
-                                <rect key="frame" x="16" y="211" width="120" height="21"/>
+                                <rect key="frame" x="16" y="239" width="120" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-j6-vnv">
-                                <rect key="frame" x="213" y="206" width="51" height="31"/>
+                                <rect key="frame" x="213" y="234" width="51" height="31"/>
                                 <connections>
                                     <action selector="switch3ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="GBy-sl-DLT"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjE-SP-ych">
-                                <rect key="frame" x="275" y="205" width="34" height="34"/>
+                                <rect key="frame" x="275" y="233" width="34" height="34"/>
                                 <state key="normal" title="Button_2" backgroundImage="portal-sleep-icon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -80,24 +80,33 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tony's Ofice" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPU-be-vTY">
-                                <rect key="frame" x="16" y="253" width="95" height="21"/>
+                                <rect key="frame" x="16" y="281" width="95" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TKm-Pg-Eci">
-                                <rect key="frame" x="213" y="248" width="51" height="31"/>
+                                <rect key="frame" x="213" y="276" width="51" height="31"/>
                                 <connections>
                                     <action selector="switch4ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="7sj-gG-Pvk"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-As-nJI">
-                                <rect key="frame" x="275" y="247" width="34" height="34"/>
+                                <rect key="frame" x="275" y="275" width="34" height="34"/>
                                 <state key="normal" title="Button_2" backgroundImage="portal-sleep-icon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="switch4Timer:" destination="9pv-A4-QxB" eventType="touchUpInside" id="7DB-ns-G1r"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xC7-rn-12Q">
+                                <rect key="frame" x="14" y="28" width="293" height="107"/>
+                                <state key="normal" title="Button" image="logo_swagger.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refreshState" destination="9pv-A4-QxB" eventType="touchUpInside" id="gI7-2f-Vke"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -177,6 +186,7 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
+        <image name="logo_swagger.png" width="1000" height="375"/>
         <image name="portal-sleep-icon.png" width="100" height="100"/>
         <image name="second" width="30" height="30"/>
     </resources>

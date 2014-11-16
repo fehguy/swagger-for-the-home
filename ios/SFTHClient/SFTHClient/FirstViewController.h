@@ -33,7 +33,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch* switch3;
 @property (nonatomic, retain) IBOutlet UISwitch* switch4;
 
--(void) refreshState;
+-(IBAction)refreshState;
 
 @end
 

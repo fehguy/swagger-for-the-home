@@ -33,6 +33,7 @@
 		EADD2CF51A18594A002301AA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF41A18594A002301AA /* MobileCoreServices.framework */; };
 		EADD2CF71A185957002301AA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF61A185957002301AA /* SystemConfiguration.framework */; };
 		EADD2CFA1A187E76002301AA /* SWGDeviceState.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2CF91A187E76002301AA /* SWGDeviceState.m */; };
+		EADD2CFC1A18891F002301AA /* logo_swagger.png in Resources */ = {isa = PBXBuildFile; fileRef = EADD2CFB1A18891F002301AA /* logo_swagger.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		EADD2CF61A185957002301AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EADD2CF81A187E76002301AA /* SWGDeviceState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDeviceState.h; sourceTree = "<group>"; };
 		EADD2CF91A187E76002301AA /* SWGDeviceState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDeviceState.m; sourceTree = "<group>"; };
+		EADD2CFB1A18891F002301AA /* logo_swagger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_swagger.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 		EAD7266A1A05EBEC0001FA51 /* SFTHClient */ = {
 			isa = PBXGroup;
 			children = (
+				EADD2CFB1A18891F002301AA /* logo_swagger.png */,
 				EADD2CEE1A184C97002301AA /* portal-sleep-icon.png */,
 				EA31DEF71A05EC300080E1AA /* client */,
 				EAD7266F1A05EBEC0001FA51 /* AppDelegate.h */,
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD7267A1A05EBEC0001FA51 /* Main.storyboard in Resources */,
+				EADD2CFC1A18891F002301AA /* logo_swagger.png in Resources */,
 				EAD7267F1A05EBEC0001FA51 /* LaunchScreen.xib in Resources */,
 				EA31DF0D1A05EC300080E1AA /* Podfile in Resources */,
 				EAD7267C1A05EBEC0001FA51 /* Images.xcassets in Resources */,
