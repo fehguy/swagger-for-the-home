@@ -71,7 +71,7 @@
 		EA31DF0A1A05EC300080E1AA /* SWGZwaveApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZwaveApi.m; sourceTree = "<group>"; };
 		EA31DF0B1A05EC300080E1AA /* SWGZWaveDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGZWaveDevice.h; sourceTree = "<group>"; };
 		EA31DF0C1A05EC300080E1AA /* SWGZWaveDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZWaveDevice.m; sourceTree = "<group>"; };
-		EAD726681A05EBEC0001FA51 /* SFTHClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFTHClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD726681A05EBEC0001FA51 /* Swagger Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swagger Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD7266C1A05EBEC0001FA51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD7266D1A05EBEC0001FA51 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EAD7266F1A05EBEC0001FA51 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 		EAD726691A05EBEC0001FA51 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EAD726681A05EBEC0001FA51 /* SFTHClient.app */,
+				EAD726681A05EBEC0001FA51 /* Swagger Home.app */,
 				EAD726841A05EBEC0001FA51 /* SFTHClientTests.xctest */,
 			);
 			name = Products;
@@ -256,7 +256,7 @@
 			);
 			name = SFTHClient;
 			productName = SFTHClient;
-			productReference = EAD726681A05EBEC0001FA51 /* SFTHClient.app */;
+			productReference = EAD726681A05EBEC0001FA51 /* Swagger Home.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EAD726831A05EBEC0001FA51 /* SFTHClientTests */ = {
@@ -517,7 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SFTHClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Swagger Home";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -529,7 +529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SFTHClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Swagger Home";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
