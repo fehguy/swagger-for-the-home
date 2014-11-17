@@ -13,6 +13,17 @@
     UISwitch* switch9;
     UISwitch* switch10;
 
+    
+    UILabel* label1;
+    UILabel* label2;
+    UILabel* label3;
+    UILabel* label4;
+    UILabel* label5;
+    UILabel* label6;
+    UILabel* label7;
+    UILabel* label8;
+    UILabel* label9;
+    UILabel* label10;
 }
 
 -(IBAction)switch1ValueChanged:(id)sender;
@@ -58,5 +69,16 @@
 @property (nonatomic, retain) IBOutlet UISwitch* switch9;
 @property (nonatomic, retain) IBOutlet UISwitch* switch10;
 
-@end
 
+@property (nonatomic, retain) IBOutlet UILabel* label1;
+@property (nonatomic, retain) IBOutlet UILabel* label2;
+@property (nonatomic, retain) IBOutlet UILabel* label3;
+@property (nonatomic, retain) IBOutlet UILabel* label4;
+@property (nonatomic, retain) IBOutlet UILabel* label5;
+@property (nonatomic, retain) IBOutlet UILabel* label6;
+@property (nonatomic, retain) IBOutlet UILabel* label7;
+@property (nonatomic, retain) IBOutlet UILabel* label8;
+@property (nonatomic, retain) IBOutlet UILabel* label9;
+@property (nonatomic, retain) IBOutlet UILabel* label10;
+
+@end

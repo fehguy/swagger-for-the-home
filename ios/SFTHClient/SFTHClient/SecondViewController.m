@@ -23,6 +23,43 @@
 - (void)refreshState {
     SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
 
+    [api getAnalogInputsWithCompletionBlock:^(NSArray *output, NSError *error) {
+        if(output) {
+            for(SWGAnalogIO * io in output) {
+                if([[io position] isEqualToNumber:@4]) {
+                    self.label1.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@6]) {
+                    self.label2.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@7]) {
+                    self.label3.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@9]) {
+                    self.label4.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@12]) {
+                    self.label5.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@10]) {
+                    self.label6.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@11]) {
+                    self.label7.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@3]) {
+                    self.label8.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@2]) {
+                    self.label9.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+                if([[io position] isEqualToNumber:@8]) {
+                    self.label10.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                }
+            }
+        }
+    }];
+
     [api getRelayOutputWithCompletionBlock:@4 completionHandler:^(SWGDigitalIO *output, NSError *error) {
         if(output) {
             if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])

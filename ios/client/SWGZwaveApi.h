@@ -13,7 +13,7 @@
 +(NSString*) getBasePath;
 /**
 
- http://192.168.2.90:8083/ZWaveAPI/Run/devices[2].instances[0].commandClasses[0x25].Set(0)
+ Gets state for a switch
  
  @param deviceId 
  */
