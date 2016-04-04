@@ -9,7 +9,7 @@
 
 
 @implementation SWGPhidgetApi
-static NSString * basePath = @"http://192.168.2.30:8080";
+static NSString * basePath = @"http://10.0.0.30:8080";
 
 +(SWGPhidgetApi*) apiWithHeader:(NSString*)headerValue key:(NSString*)key {
     static SWGPhidgetApi* singletonAPI = nil;
@@ -352,6 +352,51 @@ static NSString * basePath = @"http://192.168.2.30:8080";
                             result = [[SWGDigitalIO alloc]initWithValues: data];
                         }
                         completionBlock(result , nil);}];
+    
+
+}
+
+-(NSNumber*) relayOnWithTimerWithCompletionBlock:(NSString*) name
+        timer:(NSNumber*) timer
+        completionHandler: (void (^)(NSError* error))completionBlock{
+
+    NSMutableString* requestUrl = [NSMutableString stringWithFormat:@"%@/phidget/relay/zone/{name}/timer", basePath];
+
+    // remove format in URL if needed
+    if ([requestUrl rangeOfString:@".{format}"].location != NSNotFound)
+        [requestUrl replaceCharactersInRange: [requestUrl rangeOfString:@".{format}"] withString:@".json"];
+
+    [requestUrl replaceCharactersInRange: [requestUrl rangeOfString:[NSString stringWithFormat:@"%@%@%@", @"{", @"name", @"}"]] withString: [SWGApiClient escape:name]];
+    NSString* requestContentType = @"application/json";
+    NSString* responseContentType = @"application/json";
+
+        NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if(timer != nil)
+        queryParams[@"timer"] = timer;
+    NSMutableDictionary* headerParams = [[NSMutableDictionary alloc] init];
+    id bodyDictionary = nil;
+        if(name == nil) {
+        // error
+    }
+    if(timer == nil) {
+        // error
+    }
+    SWGApiClient* client = [SWGApiClient sharedClientFromPool:basePath];
+
+    return [client stringWithCompletionBlock:requestUrl 
+                                             method:@"POST" 
+                                        queryParams:queryParams 
+                                               body:bodyDictionary 
+                                       headerParams:headerParams
+                                 requestContentType: requestContentType
+                                responseContentType: responseContentType
+                                    completionBlock:^(NSString *data, NSError *error) {
+                        if (error) {
+                            completionBlock(error);
+                            return;
+                        }
+                        completionBlock(nil);
+                    }];
     
 
 }

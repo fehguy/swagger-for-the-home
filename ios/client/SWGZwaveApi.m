@@ -8,7 +8,7 @@
 
 
 @implementation SWGZwaveApi
-static NSString * basePath = @"http://192.168.2.30:8080";
+static NSString * basePath = @"http://10.0.0.30:8080";
 
 +(SWGZwaveApi*) apiWithHeader:(NSString*)headerValue key:(NSString*)key {
     static SWGZwaveApi* singletonAPI = nil;

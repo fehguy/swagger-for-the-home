@@ -8,37 +8,49 @@
 
 /* Begin PBXBuildFile section */
 		1C30200EC20143442F85D205 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C3DC2805F081877369A5DC /* libPods.a */; };
-		EA3151091A19BC3E0029E91B /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151081A19BC3E0029E91B /* ThirdViewController.m */; };
-		EA3151281A19BE4B0029E91B /* SWGAnalogIO.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31510B1A19BE4B0029E91B /* SWGAnalogIO.m */; };
-		EA3151291A19BE4B0029E91B /* SWGApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31510D1A19BE4B0029E91B /* SWGApiClient.m */; };
-		EA31512A1A19BE4B0029E91B /* SWGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31510F1A19BE4B0029E91B /* SWGDate.m */; };
-		EA31512B1A19BE4B0029E91B /* SWGDeviceState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151111A19BE4B0029E91B /* SWGDeviceState.m */; };
-		EA31512C1A19BE4B0029E91B /* SWGDigitalIO.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151131A19BE4B0029E91B /* SWGDigitalIO.m */; };
-		EA31512D1A19BE4B0029E91B /* SWGEnvironmentApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151151A19BE4B0029E91B /* SWGEnvironmentApi.m */; };
-		EA31512E1A19BE4B0029E91B /* SWGFile.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151171A19BE4B0029E91B /* SWGFile.m */; };
-		EA31512F1A19BE4B0029E91B /* SWGInputZone.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151191A19BE4B0029E91B /* SWGInputZone.m */; };
-		EA3151301A19BE4B0029E91B /* SWGObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31511B1A19BE4B0029E91B /* SWGObject.m */; };
-		EA3151311A19BE4B0029E91B /* SWGPhidgetApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31511D1A19BE4B0029E91B /* SWGPhidgetApi.m */; };
-		EA3151321A19BE4B0029E91B /* SWGTemperature.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31511F1A19BE4B0029E91B /* SWGTemperature.m */; };
-		EA3151331A19BE4B0029E91B /* SWGTemperatureForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151211A19BE4B0029E91B /* SWGTemperatureForecast.m */; };
-		EA3151341A19BE4B0029E91B /* SWGWeatherDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151231A19BE4B0029E91B /* SWGWeatherDescription.m */; };
-		EA3151351A19BE4B0029E91B /* SWGZwaveApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151251A19BE4B0029E91B /* SWGZwaveApi.m */; };
-		EA3151361A19BE4B0029E91B /* SWGZWaveDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151271A19BE4B0029E91B /* SWGZWaveDevice.m */; };
-		EA31DF0D1A05EC300080E1AA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = EA31DEF81A05EC300080E1AA /* Podfile */; };
-		EAD7266E1A05EBEC0001FA51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD7266D1A05EBEC0001FA51 /* main.m */; };
-		EAD726711A05EBEC0001FA51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726701A05EBEC0001FA51 /* AppDelegate.m */; };
-		EAD726741A05EBEC0001FA51 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726731A05EBEC0001FA51 /* FirstViewController.m */; };
-		EAD726771A05EBEC0001FA51 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726761A05EBEC0001FA51 /* SecondViewController.m */; };
+		EA6791881CB1C1B3001E8AED /* JSONValueTransformer+ISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791651CB1C1B3001E8AED /* JSONValueTransformer+ISO8601.m */; };
+		EA6791891CB1C1B3001E8AED /* SWGApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791671CB1C1B3001E8AED /* SWGApiClient.m */; };
+		EA67918A1CB1C1B3001E8AED /* SWGApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791691CB1C1B3001E8AED /* SWGApiResponse.m */; };
+		EA67918B1CB1C1B3001E8AED /* SWGConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67916B1CB1C1B3001E8AED /* SWGConfiguration.m */; };
+		EA67918C1CB1C1B3001E8AED /* SWGDefaultApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67916D1CB1C1B3001E8AED /* SWGDefaultApi.m */; };
+		EA67918D1CB1C1B3001E8AED /* SWGEnvironmentApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67916F1CB1C1B3001E8AED /* SWGEnvironmentApi.m */; };
+		EA67918E1CB1C1B3001E8AED /* SWGJSONRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791711CB1C1B3001E8AED /* SWGJSONRequestSerializer.m */; };
+		EA67918F1CB1C1B3001E8AED /* SWGJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791731CB1C1B3001E8AED /* SWGJSONResponseSerializer.m */; };
+		EA6791901CB1C1B3001E8AED /* SWGLightingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791751CB1C1B3001E8AED /* SWGLightingSummary.m */; };
+		EA6791911CB1C1B3001E8AED /* SWGLightingZone.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791771CB1C1B3001E8AED /* SWGLightingZone.m */; };
+		EA6791921CB1C1B3001E8AED /* SWGLightingZoneStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791791CB1C1B3001E8AED /* SWGLightingZoneStatus.m */; };
+		EA6791931CB1C1B3001E8AED /* SWGObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67917B1CB1C1B3001E8AED /* SWGObject.m */; };
+		EA6791941CB1C1B3001E8AED /* SWGQueryParamCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67917D1CB1C1B3001E8AED /* SWGQueryParamCollection.m */; };
+		EA6791951CB1C1B3001E8AED /* SWGTemperatueZoneStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67917F1CB1C1B3001E8AED /* SWGTemperatueZoneStatus.m */; };
+		EA6791961CB1C1B3001E8AED /* SWGTemperatureSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791811CB1C1B3001E8AED /* SWGTemperatureSummary.m */; };
+		EA6791971CB1C1B3001E8AED /* SWGTemperatureZone.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791831CB1C1B3001E8AED /* SWGTemperatureZone.m */; };
+		EA6791981CB1C1B3001E8AED /* SWGZonesApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791851CB1C1B3001E8AED /* SWGZonesApi.m */; };
+		EA6791991CB1C1B3001E8AED /* SWGZWaveApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6791871CB1C1B3001E8AED /* SWGZWaveApi.m */; };
+		EA67919C1CB1C5CE001E8AED /* SWGDeviceState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67919B1CB1C5CE001E8AED /* SWGDeviceState.m */; };
+		EA6A7BF61A8C8E9000DD9740 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A7BF51A8C8E9000DD9740 /* CoreBluetooth.framework */; };
+		EA6A7BF81A8C8E9800DD9740 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6A7BF71A8C8E9800DD9740 /* CoreLocation.framework */; };
+		EA9386CC1A1A4A230001C1E8 /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = EAD7266F1A05EBEC0001FA51 /* AppDelegate.h */; };
+		EA9386CD1A1A4A230001C1E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726701A05EBEC0001FA51 /* AppDelegate.m */; };
+		EA9386CE1A1A4A230001C1E8 /* FirstViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = EAD726721A05EBEC0001FA51 /* FirstViewController.h */; };
+		EA9386CF1A1A4A230001C1E8 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726731A05EBEC0001FA51 /* FirstViewController.m */; };
+		EA9386D01A1A4A230001C1E8 /* SecondViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = EAD726751A05EBEC0001FA51 /* SecondViewController.h */; };
+		EA9386D11A1A4A230001C1E8 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD726761A05EBEC0001FA51 /* SecondViewController.m */; };
+		EA9386D21A1A4A230001C1E8 /* ThirdViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = EA3151071A19BC3E0029E91B /* ThirdViewController.h */; };
+		EA9386D31A1A4A230001C1E8 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151081A19BC3E0029E91B /* ThirdViewController.m */; };
+		EA9386D41A1A4A230001C1E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD7266D1A05EBEC0001FA51 /* main.m */; };
+		EAB373011A3BABDA007AFB51 /* logo_sad_swagger.png in Resources */ = {isa = PBXBuildFile; fileRef = EAB373001A3BABDA007AFB51 /* logo_sad_swagger.png */; };
+		EAB373071A3BB62E007AFB51 /* SwaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB373061A3BB62E007AFB51 /* SwaggerController.m */; };
+		EAB794501CB1F8B20034D7F5 /* SWGHeaterState.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB7944F1CB1F8B20034D7F5 /* SWGHeaterState.m */; };
 		EAD7267A1A05EBEC0001FA51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD726781A05EBEC0001FA51 /* Main.storyboard */; };
 		EAD7267C1A05EBEC0001FA51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD7267B1A05EBEC0001FA51 /* Images.xcassets */; };
 		EAD7267F1A05EBEC0001FA51 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD7267D1A05EBEC0001FA51 /* LaunchScreen.xib */; };
-		EAD7268B1A05EBEC0001FA51 /* SFTHClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD7268A1A05EBEC0001FA51 /* SFTHClientTests.m */; };
 		EADD2CEF1A184C97002301AA /* portal-sleep-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EADD2CEE1A184C97002301AA /* portal-sleep-icon.png */; };
 		EADD2CF11A185938002301AA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF01A185938002301AA /* CoreFoundation.framework */; };
 		EADD2CF31A18593F002301AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF21A18593F002301AA /* Foundation.framework */; };
 		EADD2CF51A18594A002301AA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF41A18594A002301AA /* MobileCoreServices.framework */; };
 		EADD2CF71A185957002301AA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADD2CF61A185957002301AA /* SystemConfiguration.framework */; };
 		EADD2CFC1A18891F002301AA /* logo_swagger.png in Resources */ = {isa = PBXBuildFile; fileRef = EADD2CFB1A18891F002301AA /* logo_swagger.png */; };
+		EAE786EF1A1DC62200C989DC /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE786EE1A1DC62200C989DC /* FourthViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,36 +69,51 @@
 		D814A246C17394CA26D28DAA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EA3151071A19BC3E0029E91B /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
 		EA3151081A19BC3E0029E91B /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
-		EA31510B1A19BE4B0029E91B /* SWGAnalogIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGAnalogIO.m; sourceTree = "<group>"; };
-		EA31510D1A19BE4B0029E91B /* SWGApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGApiClient.m; sourceTree = "<group>"; };
-		EA31510F1A19BE4B0029E91B /* SWGDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDate.m; sourceTree = "<group>"; };
-		EA3151111A19BE4B0029E91B /* SWGDeviceState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDeviceState.m; sourceTree = "<group>"; };
-		EA3151131A19BE4B0029E91B /* SWGDigitalIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDigitalIO.m; sourceTree = "<group>"; };
-		EA3151141A19BE4B0029E91B /* SWGEnvironmentApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGEnvironmentApi.h; sourceTree = "<group>"; };
-		EA3151151A19BE4B0029E91B /* SWGEnvironmentApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGEnvironmentApi.m; sourceTree = "<group>"; };
-		EA3151171A19BE4B0029E91B /* SWGFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGFile.m; sourceTree = "<group>"; };
-		EA3151191A19BE4B0029E91B /* SWGInputZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGInputZone.m; sourceTree = "<group>"; };
-		EA31511B1A19BE4B0029E91B /* SWGObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGObject.m; sourceTree = "<group>"; };
-		EA31511D1A19BE4B0029E91B /* SWGPhidgetApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGPhidgetApi.m; sourceTree = "<group>"; };
-		EA31511E1A19BE4B0029E91B /* SWGTemperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGTemperature.h; sourceTree = "<group>"; };
-		EA31511F1A19BE4B0029E91B /* SWGTemperature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGTemperature.m; sourceTree = "<group>"; };
-		EA3151201A19BE4B0029E91B /* SWGTemperatureForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGTemperatureForecast.h; sourceTree = "<group>"; };
-		EA3151211A19BE4B0029E91B /* SWGTemperatureForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGTemperatureForecast.m; sourceTree = "<group>"; };
-		EA3151221A19BE4B0029E91B /* SWGWeatherDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGWeatherDescription.h; sourceTree = "<group>"; };
-		EA3151231A19BE4B0029E91B /* SWGWeatherDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGWeatherDescription.m; sourceTree = "<group>"; };
-		EA3151251A19BE4B0029E91B /* SWGZwaveApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZwaveApi.m; sourceTree = "<group>"; };
-		EA3151271A19BE4B0029E91B /* SWGZWaveDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZWaveDevice.m; sourceTree = "<group>"; };
-		EA31DEF81A05EC300080E1AA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		EA31DEF91A05EC300080E1AA /* SWGAnalogIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGAnalogIO.h; sourceTree = "<group>"; };
-		EA31DEFB1A05EC300080E1AA /* SWGApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGApiClient.h; sourceTree = "<group>"; };
-		EA31DEFD1A05EC300080E1AA /* SWGDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDate.h; sourceTree = "<group>"; };
-		EA31DEFF1A05EC300080E1AA /* SWGDigitalIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDigitalIO.h; sourceTree = "<group>"; };
-		EA31DF011A05EC300080E1AA /* SWGFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGFile.h; sourceTree = "<group>"; };
-		EA31DF031A05EC300080E1AA /* SWGInputZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGInputZone.h; sourceTree = "<group>"; };
-		EA31DF051A05EC300080E1AA /* SWGObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGObject.h; sourceTree = "<group>"; };
-		EA31DF071A05EC300080E1AA /* SWGPhidgetApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGPhidgetApi.h; sourceTree = "<group>"; };
-		EA31DF091A05EC300080E1AA /* SWGZwaveApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGZwaveApi.h; sourceTree = "<group>"; };
-		EA31DF0B1A05EC300080E1AA /* SWGZWaveDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGZWaveDevice.h; sourceTree = "<group>"; };
+		EA6791641CB1C1B3001E8AED /* JSONValueTransformer+ISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONValueTransformer+ISO8601.h"; sourceTree = "<group>"; };
+		EA6791651CB1C1B3001E8AED /* JSONValueTransformer+ISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONValueTransformer+ISO8601.m"; sourceTree = "<group>"; };
+		EA6791661CB1C1B3001E8AED /* SWGApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGApiClient.h; sourceTree = "<group>"; };
+		EA6791671CB1C1B3001E8AED /* SWGApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGApiClient.m; sourceTree = "<group>"; };
+		EA6791681CB1C1B3001E8AED /* SWGApiResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGApiResponse.h; sourceTree = "<group>"; };
+		EA6791691CB1C1B3001E8AED /* SWGApiResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGApiResponse.m; sourceTree = "<group>"; };
+		EA67916A1CB1C1B3001E8AED /* SWGConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGConfiguration.h; sourceTree = "<group>"; };
+		EA67916B1CB1C1B3001E8AED /* SWGConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGConfiguration.m; sourceTree = "<group>"; };
+		EA67916C1CB1C1B3001E8AED /* SWGDefaultApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDefaultApi.h; sourceTree = "<group>"; };
+		EA67916D1CB1C1B3001E8AED /* SWGDefaultApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDefaultApi.m; sourceTree = "<group>"; };
+		EA67916E1CB1C1B3001E8AED /* SWGEnvironmentApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGEnvironmentApi.h; sourceTree = "<group>"; };
+		EA67916F1CB1C1B3001E8AED /* SWGEnvironmentApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGEnvironmentApi.m; sourceTree = "<group>"; };
+		EA6791701CB1C1B3001E8AED /* SWGJSONRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGJSONRequestSerializer.h; sourceTree = "<group>"; };
+		EA6791711CB1C1B3001E8AED /* SWGJSONRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGJSONRequestSerializer.m; sourceTree = "<group>"; };
+		EA6791721CB1C1B3001E8AED /* SWGJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGJSONResponseSerializer.h; sourceTree = "<group>"; };
+		EA6791731CB1C1B3001E8AED /* SWGJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGJSONResponseSerializer.m; sourceTree = "<group>"; };
+		EA6791741CB1C1B3001E8AED /* SWGLightingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGLightingSummary.h; sourceTree = "<group>"; };
+		EA6791751CB1C1B3001E8AED /* SWGLightingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGLightingSummary.m; sourceTree = "<group>"; };
+		EA6791761CB1C1B3001E8AED /* SWGLightingZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGLightingZone.h; sourceTree = "<group>"; };
+		EA6791771CB1C1B3001E8AED /* SWGLightingZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGLightingZone.m; sourceTree = "<group>"; };
+		EA6791781CB1C1B3001E8AED /* SWGLightingZoneStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGLightingZoneStatus.h; sourceTree = "<group>"; };
+		EA6791791CB1C1B3001E8AED /* SWGLightingZoneStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGLightingZoneStatus.m; sourceTree = "<group>"; };
+		EA67917A1CB1C1B3001E8AED /* SWGObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGObject.h; sourceTree = "<group>"; };
+		EA67917B1CB1C1B3001E8AED /* SWGObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGObject.m; sourceTree = "<group>"; };
+		EA67917C1CB1C1B3001E8AED /* SWGQueryParamCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGQueryParamCollection.h; sourceTree = "<group>"; };
+		EA67917D1CB1C1B3001E8AED /* SWGQueryParamCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGQueryParamCollection.m; sourceTree = "<group>"; };
+		EA67917E1CB1C1B3001E8AED /* SWGTemperatueZoneStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGTemperatueZoneStatus.h; sourceTree = "<group>"; };
+		EA67917F1CB1C1B3001E8AED /* SWGTemperatueZoneStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGTemperatueZoneStatus.m; sourceTree = "<group>"; };
+		EA6791801CB1C1B3001E8AED /* SWGTemperatureSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGTemperatureSummary.h; sourceTree = "<group>"; };
+		EA6791811CB1C1B3001E8AED /* SWGTemperatureSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGTemperatureSummary.m; sourceTree = "<group>"; };
+		EA6791821CB1C1B3001E8AED /* SWGTemperatureZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGTemperatureZone.h; sourceTree = "<group>"; };
+		EA6791831CB1C1B3001E8AED /* SWGTemperatureZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGTemperatureZone.m; sourceTree = "<group>"; };
+		EA6791841CB1C1B3001E8AED /* SWGZonesApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGZonesApi.h; sourceTree = "<group>"; };
+		EA6791851CB1C1B3001E8AED /* SWGZonesApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZonesApi.m; sourceTree = "<group>"; };
+		EA6791861CB1C1B3001E8AED /* SWGZWaveApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGZWaveApi.h; sourceTree = "<group>"; };
+		EA6791871CB1C1B3001E8AED /* SWGZWaveApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGZWaveApi.m; sourceTree = "<group>"; };
+		EA67919A1CB1C5CE001E8AED /* SWGDeviceState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDeviceState.h; sourceTree = "<group>"; };
+		EA67919B1CB1C5CE001E8AED /* SWGDeviceState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGDeviceState.m; sourceTree = "<group>"; };
+		EA6A7BF51A8C8E9000DD9740 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		EA6A7BF71A8C8E9800DD9740 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EAB373001A3BABDA007AFB51 /* logo_sad_swagger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_sad_swagger.png; sourceTree = "<group>"; };
+		EAB373051A3BB62E007AFB51 /* SwaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwaggerController.h; sourceTree = "<group>"; };
+		EAB373061A3BB62E007AFB51 /* SwaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwaggerController.m; sourceTree = "<group>"; };
+		EAB7944E1CB1F8B20034D7F5 /* SWGHeaterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGHeaterState.h; sourceTree = "<group>"; };
+		EAB7944F1CB1F8B20034D7F5 /* SWGHeaterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGHeaterState.m; sourceTree = "<group>"; };
 		EAD726681A05EBEC0001FA51 /* Swagger Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swagger Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD7266C1A05EBEC0001FA51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD7266D1A05EBEC0001FA51 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -101,14 +128,14 @@
 		EAD7267E1A05EBEC0001FA51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EAD726841A05EBEC0001FA51 /* SFTHClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFTHClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD726891A05EBEC0001FA51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EAD7268A1A05EBEC0001FA51 /* SFTHClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFTHClientTests.m; sourceTree = "<group>"; };
 		EADD2CEE1A184C97002301AA /* portal-sleep-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "portal-sleep-icon.png"; sourceTree = "<group>"; };
 		EADD2CF01A185938002301AA /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		EADD2CF21A18593F002301AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EADD2CF41A18594A002301AA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EADD2CF61A185957002301AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		EADD2CF81A187E76002301AA /* SWGDeviceState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGDeviceState.h; sourceTree = "<group>"; };
 		EADD2CFB1A18891F002301AA /* logo_swagger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_swagger.png; sourceTree = "<group>"; };
+		EAE786ED1A1DC62200C989DC /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
+		EAE786EE1A1DC62200C989DC /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6A7BF81A8C8E9800DD9740 /* CoreLocation.framework in Frameworks */,
+				EA6A7BF61A8C8E9000DD9740 /* CoreBluetooth.framework in Frameworks */,
 				EADD2CF71A185957002301AA /* SystemConfiguration.framework in Frameworks */,
 				EADD2CF51A18594A002301AA /* MobileCoreServices.framework in Frameworks */,
 				EADD2CF31A18593F002301AA /* Foundation.framework in Frameworks */,
@@ -146,6 +175,8 @@
 		A9E3C16C5A87258D0C2EDC4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA6A7BF71A8C8E9800DD9740 /* CoreLocation.framework */,
+				EA6A7BF51A8C8E9000DD9740 /* CoreBluetooth.framework */,
 				EADD2CF61A185957002301AA /* SystemConfiguration.framework */,
 				EADD2CF41A18594A002301AA /* MobileCoreServices.framework */,
 				EADD2CF21A18593F002301AA /* Foundation.framework */,
@@ -155,32 +186,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA31DEF71A05EC300080E1AA /* client */ = {
+		EA6790F71CB1C15B001E8AED /* client */ = {
 			isa = PBXGroup;
 			children = (
-				EA31DEF81A05EC300080E1AA /* Podfile */,
-				EA31DEF91A05EC300080E1AA /* SWGAnalogIO.h */,
-				EA31DEFD1A05EC300080E1AA /* SWGDate.h */,
-				EADD2CF81A187E76002301AA /* SWGDeviceState.h */,
-				EA31DEFF1A05EC300080E1AA /* SWGDigitalIO.h */,
-				EA3151141A19BE4B0029E91B /* SWGEnvironmentApi.h */,
-				EA3151151A19BE4B0029E91B /* SWGEnvironmentApi.m */,
-				EA31DF011A05EC300080E1AA /* SWGFile.h */,
-				EA31DF031A05EC300080E1AA /* SWGInputZone.h */,
-				EA31DF051A05EC300080E1AA /* SWGObject.h */,
-				EA31DF071A05EC300080E1AA /* SWGPhidgetApi.h */,
-				EA31511E1A19BE4B0029E91B /* SWGTemperature.h */,
-				EA31511F1A19BE4B0029E91B /* SWGTemperature.m */,
-				EA3151201A19BE4B0029E91B /* SWGTemperatureForecast.h */,
-				EA3151211A19BE4B0029E91B /* SWGTemperatureForecast.m */,
-				EA3151221A19BE4B0029E91B /* SWGWeatherDescription.h */,
-				EA3151231A19BE4B0029E91B /* SWGWeatherDescription.m */,
-				EA31DF091A05EC300080E1AA /* SWGZwaveApi.h */,
-				EA31DF0B1A05EC300080E1AA /* SWGZWaveDevice.h */,
-				EA31DEFB1A05EC300080E1AA /* SWGApiClient.h */,
+				EAB7944E1CB1F8B20034D7F5 /* SWGHeaterState.h */,
+				EAB7944F1CB1F8B20034D7F5 /* SWGHeaterState.m */,
+				EA6791641CB1C1B3001E8AED /* JSONValueTransformer+ISO8601.h */,
+				EA6791651CB1C1B3001E8AED /* JSONValueTransformer+ISO8601.m */,
+				EA6791661CB1C1B3001E8AED /* SWGApiClient.h */,
+				EA6791671CB1C1B3001E8AED /* SWGApiClient.m */,
+				EA6791681CB1C1B3001E8AED /* SWGApiResponse.h */,
+				EA6791691CB1C1B3001E8AED /* SWGApiResponse.m */,
+				EA67916A1CB1C1B3001E8AED /* SWGConfiguration.h */,
+				EA67916B1CB1C1B3001E8AED /* SWGConfiguration.m */,
+				EA67916C1CB1C1B3001E8AED /* SWGDefaultApi.h */,
+				EA67916D1CB1C1B3001E8AED /* SWGDefaultApi.m */,
+				EA67919A1CB1C5CE001E8AED /* SWGDeviceState.h */,
+				EA67919B1CB1C5CE001E8AED /* SWGDeviceState.m */,
+				EA67916E1CB1C1B3001E8AED /* SWGEnvironmentApi.h */,
+				EA67916F1CB1C1B3001E8AED /* SWGEnvironmentApi.m */,
+				EA6791701CB1C1B3001E8AED /* SWGJSONRequestSerializer.h */,
+				EA6791711CB1C1B3001E8AED /* SWGJSONRequestSerializer.m */,
+				EA6791721CB1C1B3001E8AED /* SWGJSONResponseSerializer.h */,
+				EA6791731CB1C1B3001E8AED /* SWGJSONResponseSerializer.m */,
+				EA6791741CB1C1B3001E8AED /* SWGLightingSummary.h */,
+				EA6791751CB1C1B3001E8AED /* SWGLightingSummary.m */,
+				EA6791761CB1C1B3001E8AED /* SWGLightingZone.h */,
+				EA6791771CB1C1B3001E8AED /* SWGLightingZone.m */,
+				EA6791781CB1C1B3001E8AED /* SWGLightingZoneStatus.h */,
+				EA6791791CB1C1B3001E8AED /* SWGLightingZoneStatus.m */,
+				EA67917A1CB1C1B3001E8AED /* SWGObject.h */,
+				EA67917B1CB1C1B3001E8AED /* SWGObject.m */,
+				EA67917C1CB1C1B3001E8AED /* SWGQueryParamCollection.h */,
+				EA67917D1CB1C1B3001E8AED /* SWGQueryParamCollection.m */,
+				EA67917E1CB1C1B3001E8AED /* SWGTemperatueZoneStatus.h */,
+				EA67917F1CB1C1B3001E8AED /* SWGTemperatueZoneStatus.m */,
+				EA6791801CB1C1B3001E8AED /* SWGTemperatureSummary.h */,
+				EA6791811CB1C1B3001E8AED /* SWGTemperatureSummary.m */,
+				EA6791821CB1C1B3001E8AED /* SWGTemperatureZone.h */,
+				EA6791831CB1C1B3001E8AED /* SWGTemperatureZone.m */,
+				EA6791841CB1C1B3001E8AED /* SWGZonesApi.h */,
+				EA6791851CB1C1B3001E8AED /* SWGZonesApi.m */,
+				EA6791861CB1C1B3001E8AED /* SWGZWaveApi.h */,
+				EA6791871CB1C1B3001E8AED /* SWGZWaveApi.m */,
 			);
 			name = client;
-			path = ../../client;
 			sourceTree = "<group>";
 		};
 		EAD7265F1A05EBEC0001FA51 = {
@@ -206,9 +256,10 @@
 		EAD7266A1A05EBEC0001FA51 /* SFTHClient */ = {
 			isa = PBXGroup;
 			children = (
+				EA6790F71CB1C15B001E8AED /* client */,
+				EAB373001A3BABDA007AFB51 /* logo_sad_swagger.png */,
 				EADD2CFB1A18891F002301AA /* logo_swagger.png */,
 				EADD2CEE1A184C97002301AA /* portal-sleep-icon.png */,
-				EA31DEF71A05EC300080E1AA /* client */,
 				EAD7266F1A05EBEC0001FA51 /* AppDelegate.h */,
 				EAD726701A05EBEC0001FA51 /* AppDelegate.m */,
 				EAD726721A05EBEC0001FA51 /* FirstViewController.h */,
@@ -217,10 +268,14 @@
 				EAD726761A05EBEC0001FA51 /* SecondViewController.m */,
 				EA3151071A19BC3E0029E91B /* ThirdViewController.h */,
 				EA3151081A19BC3E0029E91B /* ThirdViewController.m */,
+				EAE786ED1A1DC62200C989DC /* FourthViewController.h */,
+				EAE786EE1A1DC62200C989DC /* FourthViewController.m */,
 				EAD726781A05EBEC0001FA51 /* Main.storyboard */,
 				EAD7267B1A05EBEC0001FA51 /* Images.xcassets */,
 				EAD7267D1A05EBEC0001FA51 /* LaunchScreen.xib */,
 				EAD7266B1A05EBEC0001FA51 /* Supporting Files */,
+				EAB373051A3BB62E007AFB51 /* SwaggerController.h */,
+				EAB373061A3BB62E007AFB51 /* SwaggerController.m */,
 			);
 			path = SFTHClient;
 			sourceTree = "<group>";
@@ -237,7 +292,6 @@
 		EAD726871A05EBEC0001FA51 /* SFTHClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				EAD7268A1A05EBEC0001FA51 /* SFTHClientTests.m */,
 				EAD726881A05EBEC0001FA51 /* Supporting Files */,
 			);
 			path = SFTHClientTests;
@@ -263,6 +317,7 @@
 				EAD726651A05EBEC0001FA51 /* Frameworks */,
 				EAD726661A05EBEC0001FA51 /* Resources */,
 				6BA0BE65A2867918F0EB429D /* Copy Pods Resources */,
+				99D6EAE6AA2143F81C8B9E13 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -302,6 +357,12 @@
 				TargetAttributes = {
 					EAD726671A05EBEC0001FA51 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = RGV7LG27C8;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					EAD726831A05EBEC0001FA51 = {
 						CreatedOnToolsVersion = 6.1;
@@ -336,8 +397,8 @@
 				EAD7267A1A05EBEC0001FA51 /* Main.storyboard in Resources */,
 				EADD2CFC1A18891F002301AA /* logo_swagger.png in Resources */,
 				EAD7267F1A05EBEC0001FA51 /* LaunchScreen.xib in Resources */,
-				EA31DF0D1A05EC300080E1AA /* Podfile in Resources */,
 				EAD7267C1A05EBEC0001FA51 /* Images.xcassets in Resources */,
+				EAB373011A3BABDA007AFB51 /* logo_sad_swagger.png in Resources */,
 				EADD2CEF1A184C97002301AA /* portal-sleep-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +442,21 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
+		99D6EAE6AA2143F81C8B9E13 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -388,26 +464,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAD726771A05EBEC0001FA51 /* SecondViewController.m in Sources */,
-				EA3151351A19BE4B0029E91B /* SWGZwaveApi.m in Sources */,
-				EAD726711A05EBEC0001FA51 /* AppDelegate.m in Sources */,
-				EA3151341A19BE4B0029E91B /* SWGWeatherDescription.m in Sources */,
-				EAD726741A05EBEC0001FA51 /* FirstViewController.m in Sources */,
-				EA3151281A19BE4B0029E91B /* SWGAnalogIO.m in Sources */,
-				EA3151291A19BE4B0029E91B /* SWGApiClient.m in Sources */,
-				EA31512E1A19BE4B0029E91B /* SWGFile.m in Sources */,
-				EA31512A1A19BE4B0029E91B /* SWGDate.m in Sources */,
-				EA3151091A19BC3E0029E91B /* ThirdViewController.m in Sources */,
-				EA3151321A19BE4B0029E91B /* SWGTemperature.m in Sources */,
-				EA3151301A19BE4B0029E91B /* SWGObject.m in Sources */,
-				EA31512C1A19BE4B0029E91B /* SWGDigitalIO.m in Sources */,
-				EA31512D1A19BE4B0029E91B /* SWGEnvironmentApi.m in Sources */,
-				EA3151331A19BE4B0029E91B /* SWGTemperatureForecast.m in Sources */,
-				EA31512B1A19BE4B0029E91B /* SWGDeviceState.m in Sources */,
-				EA3151361A19BE4B0029E91B /* SWGZWaveDevice.m in Sources */,
-				EA3151311A19BE4B0029E91B /* SWGPhidgetApi.m in Sources */,
-				EA31512F1A19BE4B0029E91B /* SWGInputZone.m in Sources */,
-				EAD7266E1A05EBEC0001FA51 /* main.m in Sources */,
+				EA6791941CB1C1B3001E8AED /* SWGQueryParamCollection.m in Sources */,
+				EA6791981CB1C1B3001E8AED /* SWGZonesApi.m in Sources */,
+				EA6791951CB1C1B3001E8AED /* SWGTemperatueZoneStatus.m in Sources */,
+				EA67918E1CB1C1B3001E8AED /* SWGJSONRequestSerializer.m in Sources */,
+				EA67918B1CB1C1B3001E8AED /* SWGConfiguration.m in Sources */,
+				EA67918C1CB1C1B3001E8AED /* SWGDefaultApi.m in Sources */,
+				EA6791901CB1C1B3001E8AED /* SWGLightingSummary.m in Sources */,
+				EA67918A1CB1C1B3001E8AED /* SWGApiResponse.m in Sources */,
+				EA6791991CB1C1B3001E8AED /* SWGZWaveApi.m in Sources */,
+				EAB373071A3BB62E007AFB51 /* SwaggerController.m in Sources */,
+				EAE786EF1A1DC62200C989DC /* FourthViewController.m in Sources */,
+				EA9386CC1A1A4A230001C1E8 /* AppDelegate.h in Sources */,
+				EA9386CD1A1A4A230001C1E8 /* AppDelegate.m in Sources */,
+				EA9386CE1A1A4A230001C1E8 /* FirstViewController.h in Sources */,
+				EA6791921CB1C1B3001E8AED /* SWGLightingZoneStatus.m in Sources */,
+				EA9386CF1A1A4A230001C1E8 /* FirstViewController.m in Sources */,
+				EA6791931CB1C1B3001E8AED /* SWGObject.m in Sources */,
+				EA9386D01A1A4A230001C1E8 /* SecondViewController.h in Sources */,
+				EA6791911CB1C1B3001E8AED /* SWGLightingZone.m in Sources */,
+				EA67918F1CB1C1B3001E8AED /* SWGJSONResponseSerializer.m in Sources */,
+				EA6791971CB1C1B3001E8AED /* SWGTemperatureZone.m in Sources */,
+				EA67918D1CB1C1B3001E8AED /* SWGEnvironmentApi.m in Sources */,
+				EA9386D11A1A4A230001C1E8 /* SecondViewController.m in Sources */,
+				EA6791881CB1C1B3001E8AED /* JSONValueTransformer+ISO8601.m in Sources */,
+				EA9386D21A1A4A230001C1E8 /* ThirdViewController.h in Sources */,
+				EAB794501CB1F8B20034D7F5 /* SWGHeaterState.m in Sources */,
+				EA9386D31A1A4A230001C1E8 /* ThirdViewController.m in Sources */,
+				EA6791891CB1C1B3001E8AED /* SWGApiClient.m in Sources */,
+				EA9386D41A1A4A230001C1E8 /* main.m in Sources */,
+				EA6791961CB1C1B3001E8AED /* SWGTemperatureSummary.m in Sources */,
+				EA67919C1CB1C5CE001E8AED /* SWGDeviceState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +502,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAD7268B1A05EBEC0001FA51 /* SFTHClientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,9 +620,12 @@
 			baseConfigurationReference = 0792E25DE1F3BAA253DF3E4D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SFTHClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Swagger Home";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -546,9 +635,12 @@
 			baseConfigurationReference = D814A246C17394CA26D28DAA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SFTHClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Swagger Home";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SWGConfiguration.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    // Override point for customization after application launch.
+    
+    SWGConfiguration *config = [SWGConfiguration sharedConfig];
+    [config setHost:@"http://10.0.0.225:8080/api"];
+    [config setDebug:true];
     return YES;
 }
 

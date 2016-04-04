@@ -77,4 +77,15 @@
         name:(NSString*) name 
         completionHandler: (void (^)(SWGDigitalIO* output, NSError* error))completionBlock;
 
+/**
+
+ Sets a relay with a timer
+ 
+ @param name 
+ @param timer 
+ */
+-(NSNumber*) relayOnWithTimerWithCompletionBlock :(NSString*) name 
+        timer:(NSNumber*) timer 
+        completionHandler: (void (^)(NSError* error))completionBlock;
+
 @end

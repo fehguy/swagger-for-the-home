@@ -16,329 +16,439 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    connected = false;
     [self refreshState];
-    // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)makeHappy {
+    UIImage* image = [UIImage imageNamed:@"logo_swagger"];
+    [self.logoButton setImage:image forState:UIControlStateNormal];
+    [self.logoButton setNeedsLayout];
+    
+    connected = true;
+}
+
+- (void)makeSad {
+    UIImage* image = [UIImage imageNamed:@"logo_sad_swagger"];
+    [self.logoButton setImage:image forState:UIControlStateNormal];
+    [self.logoButton setNeedsLayout];
+    
+    connected = false;
 }
 
 - (void)refreshState {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-
-    [api getAnalogInputsWithCompletionBlock:^(NSArray *output, NSError *error) {
+    SWGEnvironmentApi * api = [[SWGEnvironmentApi alloc] init];
+    
+    [api temperatureSummaryWithCompletionHandler:^(SWGTemperatureSummary *output, NSError *error) {
         if(output) {
-            for(SWGAnalogIO * io in output) {
-                if([[io position] isEqualToNumber:@4]) {
-                    self.label1.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+            [self makeHappy];
+            NSArray<SWGTemperatueZoneStatus>* status = output.zoneStatus;
+            for(SWGTemperatueZoneStatus * zoneStatus in status) {
+                NSString * str = [zoneStatus _id];
+                
+                bool eq = [str isEqual:@"library"];
+                if([[zoneStatus _id] isEqual:@"living-room" ]) {
+                    self.label1.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@6]) {
-                    self.label2.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"kitchen"]) {
+                    self.label2.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@7]) {
-                    self.label3.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"library"]) {
+                    self.label3.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@9]) {
-                    self.label4.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"kids-rooms"]) {
+                    self.label4.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@12]) {
-                    self.label5.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"dining-room"]) {
+                    self.label5.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@10]) {
-                    self.label6.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"master-bedroom"]) {
+                    self.label6.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@11]) {
-                    self.label7.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"master-bathroom"]) {
+                    self.label7.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@3]) {
-                    self.label8.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"basement-main"]) {
+                    self.label8.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@2]) {
-                    self.label9.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"exercise-room"]) {
+                    self.label9.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
-                if([[io position] isEqualToNumber:@8]) {
-                    self.label10.text = [NSString stringWithFormat:@"%.1lfC", [[io value] doubleValue ]];
+                else if([[zoneStatus _id] isEqual:@"laundry-room"]) {
+                    self.label10.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
                 }
+                else if([[zoneStatus _id] isEqual:@"office-guest-room"]) {
+                    self.label11.text = [NSString stringWithFormat:@"%.1lfF", [[zoneStatus value] doubleValue ]];
+                }
+
             }
         }
+        else {
+            [self makeSad];
+        }
     }];
-
-    [api getRelayOutputWithCompletionBlock:@4 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    
+    [api getHeaterStateWithZoneId:@"living-room" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch1 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch1 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
-    
-    [api getRelayOutputWithCompletionBlock:@6 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"kitchen" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch2 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch2 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    [api getRelayOutputWithCompletionBlock:@7 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"library" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch3 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch3 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    [api getRelayOutputWithCompletionBlock:@9 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"kids-rooms" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch4 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch4 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    [api getRelayOutputWithCompletionBlock:@12 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"dining-room" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch5 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch5 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    [api getRelayOutputWithCompletionBlock:@10 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"master-bedroom" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch6 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch6 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    
-    [api getRelayOutputWithCompletionBlock:@11 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"master-bathroom" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch7 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch7 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    [api getRelayOutputWithCompletionBlock:@3 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"basement-main" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch8 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch8 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    [api getRelayOutputWithCompletionBlock:@2 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"exercise-room" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch9 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch9 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
     
-    [api getRelayOutputWithCompletionBlock:@8 completionHandler:^(SWGDigitalIO *output, NSError *error) {
+    [api getHeaterStateWithZoneId:@"laundry-room" completionHandler:^(SWGHeaterState *output, NSError *error) {
         if(output) {
-            if([[output value] isEqualToNumber:[[NSNumber alloc] initWithBool:TRUE]])
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
                 [self.switch10 setOn:YES animated:YES];
-            else
+            }
+            else {
                 [self.switch10 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
+        }
+    }];
+    
+    [api getHeaterStateWithZoneId:@"office-guest-room" completionHandler:^(SWGHeaterState *output, NSError *error) {
+        if(output) {
+            [self makeHappy];
+            if([[output state] isEqual: @"on"]) {
+                [self.switch11 setOn:YES animated:YES];
+            }
+            else {
+                [self.switch11 setOn:NO animated:NO];
+            }
+        }
+        else {
+            [self makeSad];
         }
     }];
 }
+
+-(void) setHeaterStateForZone: (NSString*) zoneId
+                        state: (NSString*) state {
+    SWGEnvironmentApi * api = [[SWGEnvironmentApi alloc] init];
+
+    [api setHeaterStateWithZoneId: zoneId
+                            state: state
+                completionHandler:^(SWGApiResponse *output, NSError *error) {
+                    if(output) {
+                        [self makeHappy];
+                        NSLog(@"ok!");
+                    }
+                    else {
+                        [self makeSad];
+                    }
+                }];
+
+}
+
 
 -(IBAction)switch1ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@4
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"living-room" state: state];
 }
-
 
 -(IBAction)switch2ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@6
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"kitchen" state: state];
 }
-
 
 -(IBAction)switch3ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@7
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
-}
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"library" state: state];
 
+}
 
 -(IBAction)switch4ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@9
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
-}
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"kids-rooms" state: state];
 
+}
 
 -(IBAction)switch5ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@12
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
-}
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"dining-room" state: state];
 
+}
 
 -(IBAction)switch6ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@10
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"master-bedroom" state: state];
 }
-
 
 -(IBAction)switch7ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@11
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"master-bathroom" state: state];
 }
-
 
 -(IBAction)switch8ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@1
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"basement-main" state: state];
 }
-
 
 -(IBAction)switch9ValueChanged:(id)sender {
-    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
-    
-    UISwitch* l_switch = (UISwitch*) sender;
-    
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
     }
-    
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@3
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"exercise-room" state: state];
+
 }
 
-
 -(IBAction)switch10ValueChanged:(id)sender {
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
+    }
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"laundry-room" state: state];
+}
+
+-(IBAction)switch11ValueChanged:(id)sender {
+    NSString* state = NULL;
+    if([((UISwitch*) sender) isOn]) {
+        state = @"on";
+    }
+    else {
+        state = @"off";
+    }
+    [self setHeaterStateForZone:@"office-guest-room" state: state];
+}
+
+-(IBAction) basementFloorTimer:(id)sender {
+    /*
     SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
     
-    UISwitch* l_switch = (UISwitch*) sender;
+    [api relayOnWithTimerWithCompletionBlock:@"basement" timer:@360 completionHandler:^(NSError *error) {
+        if(error) {
+            NSLog(@"%@", error);
+            [self makeSad];
+        }
+        else {
+            NSLog(@"ok!");
+            [self makeHappy];
+            [self refreshState];
+        }
+    }];
+     */
+}
+
+-(IBAction) mainFloorTimer:(id)sender {
+    /*
+    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
     
-    BOOL state = FALSE;
-    if([l_switch isOn]) {
-        state = TRUE;
-    }
+    [api relayOnWithTimerWithCompletionBlock:@"middle-floor" timer:@360 completionHandler:^(NSError *error) {
+        if(error) {
+            NSLog(@"%@", error);
+            [self makeSad];
+        }
+        else {
+            NSLog(@"ok!");
+            [self makeHappy];
+            [self refreshState];
+        }
+    }];
+     */
+}
+
+-(IBAction) secondFloorTimer:(id)sender {
+    /*
+    SWGPhidgetApi * api = [[SWGPhidgetApi alloc] init];
     
-    [api setOutputRelayWithCompletionBlock:[[NSNumber alloc] initWithBool:state] position:@2
-                         completionHandler:^(SWGDigitalIO *output, NSError *error) {
-                             if(output) {
-                                 NSLog(@"ok!");
-                             }
-                         }];
+    [api relayOnWithTimerWithCompletionBlock:@"upstairs" timer:@360 completionHandler:^(NSError *error) {
+        if(error) {
+            NSLog(@"%@", error);
+            [self makeSad];
+        }
+        else {
+            NSLog(@"ok!");
+            [self makeHappy];
+            [self refreshState];
+        }
+    }];
+     */
 }
 
 - (void)didReceiveMemoryWarning {

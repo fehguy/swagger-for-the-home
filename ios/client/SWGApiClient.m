@@ -294,6 +294,7 @@ static bool loggingEnabled = false;
         }
     }
     [request setValue:[headerParams valueForKey:responseContentType] forHTTPHeaderField:@"Accept"];
+    [request setTimeoutInterval:10.0];
     
     // Always disable cookies!
     [request setHTTPShouldHandleCookies:NO];

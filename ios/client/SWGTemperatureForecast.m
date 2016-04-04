@@ -36,7 +36,9 @@
         _humidity = dict[@"humidity"]; 
         id weather_dict = dict[@"weather"];
         if([weather_dict isKindOfClass:[NSArray class]]) {
+
             NSMutableArray * objs = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)weather_dict count]];
+
             if([(NSArray*)weather_dict count] > 0) {
                 for (NSDictionary* dict in (NSArray*)weather_dict) {
                     SWGWeatherDescription* d = [[SWGWeatherDescription alloc] initWithValues:dict];

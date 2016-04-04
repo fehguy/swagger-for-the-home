@@ -7,7 +7,7 @@
 
 
 @implementation SWGEnvironmentApi
-static NSString * basePath = @"http://192.168.2.30:8080";
+static NSString * basePath = @"http://10.0.0.30:8080";
 
 +(SWGEnvironmentApi*) apiWithHeader:(NSString*)headerValue key:(NSString*)key {
     static SWGEnvironmentApi* singletonAPI = nil;

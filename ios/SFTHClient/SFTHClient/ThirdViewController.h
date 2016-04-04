@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SWGPhidgetApi.h"
+#import "SWGEnvironmentAPi.h"
 
 @interface ThirdViewController : UIViewController {
+    bool connected;
+
+    UIButton* logoButton;
+
     UILabel* label1;
     UILabel* label2;
     UILabel* label3;
@@ -19,6 +23,8 @@
 }
 
 -(IBAction)refreshState;
+
+@property (nonatomic, retain) IBOutlet UIButton* logoButton;
 
 @property (nonatomic, retain) IBOutlet UILabel* label1;
 @property (nonatomic, retain) IBOutlet UILabel* label2;
