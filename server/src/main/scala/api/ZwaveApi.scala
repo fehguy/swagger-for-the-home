@@ -17,8 +17,8 @@ class ZwaveApi(implicit val swagger: Swagger) extends ScalatraServlet
     with JacksonJsonSupport
     with SwaggerSupport {
 
-  val dimmers = List(3, 4, 8)
-  val switches = List(2, 5, 6)
+  val dimmers = List(3, 4, 8, 10, 11)
+  val switches = List(2, 5, 6, 9)
   protected implicit val jsonFormats: Formats = DefaultFormats
 
   protected val applicationDescription: String = "ZwaveApi"

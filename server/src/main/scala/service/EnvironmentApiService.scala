@@ -13,9 +13,8 @@ object EnvironmentApiService {
   implicit val formats = DefaultFormats
 
   def getForecast(days: Int) = {
-    println("forcast: " + days)
     val url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=Palo%20Alto&cnt=" + days + "&mode=json&units=imperial")
-    println(url)
+
     val connection = url.openConnection().asInstanceOf[HttpURLConnection]
     connection.setDoOutput(true)
     connection.setDoInput(true)

@@ -69,7 +69,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-j6-vnv">
                                 <rect key="frame" x="213" y="355" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch3ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="GBy-sl-DLT"/>
+                                    <action selector="switch3ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="JDa-sQ-4Aa"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjE-SP-ych">
@@ -90,7 +90,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TKm-Pg-Eci">
                                 <rect key="frame" x="213" y="313" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch4ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="7sj-gG-Pvk"/>
+                                    <action selector="switch4ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="efj-Ra-ThM"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-As-nJI">
@@ -111,7 +111,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O79-Ba-f4e">
                                 <rect key="frame" x="213" y="149" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch5ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="nPf-Uc-nG2"/>
+                                    <action selector="switch5ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="lV1-Rh-hgz"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4U-g2-gqz">
@@ -132,7 +132,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uqw-0T-Bh5">
                                 <rect key="frame" x="213" y="230" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch6ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="bfl-8f-zFH"/>
+                                    <action selector="switch6ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="dg5-FT-1kW"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8K-D3-HNj">
@@ -153,7 +153,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9q-HC-yKi">
                                 <rect key="frame" x="213" y="397" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch7ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="6Px-xq-LyT"/>
+                                    <action selector="switch7ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="jmd-zH-hou"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFg-HI-wvl">
@@ -183,7 +183,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ry-e4-EmQ">
                                 <rect key="frame" x="213" y="439" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch8ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="1EE-73-paV"/>
+                                    <action selector="switch8ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="IHe-Vt-6To"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Umv-WA-TLd">
@@ -204,7 +204,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dns-3O-Aep">
                                 <rect key="frame" x="213" y="481" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch9ValueChanged:" destination="9pv-A4-QxB" eventType="touchUpInside" id="VJ4-0J-4AV"/>
+                                    <action selector="switch9ValueChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="nZq-Bs-7ht"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zI-Kc-97H">
@@ -231,6 +231,7 @@
                         <outlet property="switch6" destination="Uqw-0T-Bh5" id="Qxq-WO-WTu"/>
                         <outlet property="switch7" destination="P9q-HC-yKi" id="pwx-mW-8rG"/>
                         <outlet property="switch8" destination="2Ry-e4-EmQ" id="hJ9-5Z-94p"/>
+                        <outlet property="switch9" destination="Dns-3O-Aep" id="YdB-Kw-bfo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

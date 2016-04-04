@@ -114,7 +114,7 @@
 		EAB373061A3BB62E007AFB51 /* SwaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwaggerController.m; sourceTree = "<group>"; };
 		EAB7944E1CB1F8B20034D7F5 /* SWGHeaterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWGHeaterState.h; sourceTree = "<group>"; };
 		EAB7944F1CB1F8B20034D7F5 /* SWGHeaterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWGHeaterState.m; sourceTree = "<group>"; };
-		EAD726681A05EBEC0001FA51 /* Swagger Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swagger Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD726681A05EBEC0001FA51 /* SFTHClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFTHClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD7266C1A05EBEC0001FA51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD7266D1A05EBEC0001FA51 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EAD7266F1A05EBEC0001FA51 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 		EAD726691A05EBEC0001FA51 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EAD726681A05EBEC0001FA51 /* Swagger Home.app */,
+				EAD726681A05EBEC0001FA51 /* SFTHClient.app */,
 				EAD726841A05EBEC0001FA51 /* SFTHClientTests.xctest */,
 			);
 			name = Products;
@@ -325,7 +325,7 @@
 			);
 			name = SFTHClient;
 			productName = SFTHClient;
-			productReference = EAD726681A05EBEC0001FA51 /* Swagger Home.app */;
+			productReference = EAD726681A05EBEC0001FA51 /* SFTHClient.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EAD726831A05EBEC0001FA51 /* SFTHClientTests */ = {
@@ -352,7 +352,7 @@
 		EAD726601A05EBEC0001FA51 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Eatbacon;
 				TargetAttributes = {
 					EAD726671A05EBEC0001FA51 = {
@@ -555,6 +555,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -620,12 +621,13 @@
 			baseConfigurationReference = 0792E25DE1F3BAA253DF3E4D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: tony@eatbacon.org (897AY8373U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tony@eatbacon.org (897AY8373U)";
 				INFOPLIST_FILE = SFTHClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Swagger Home";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.eatbacon.swaggerhome;
+				PRODUCT_NAME = SFTHClient;
+				PROVISIONING_PROFILE = "c7c36f87-08be-455e-ba52-a7978889605e";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -635,12 +637,13 @@
 			baseConfigurationReference = D814A246C17394CA26D28DAA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: tony@eatbacon.org (897AY8373U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tony@eatbacon.org (897AY8373U)";
 				INFOPLIST_FILE = SFTHClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Swagger Home";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.eatbacon.swaggerhome;
+				PRODUCT_NAME = SFTHClient;
+				PROVISIONING_PROFILE = "c7c36f87-08be-455e-ba52-a7978889605e";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -659,6 +662,7 @@
 				);
 				INFOPLIST_FILE = SFTHClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.eatbacon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFTHClient.app/SFTHClient";
 			};
@@ -674,6 +678,7 @@
 				);
 				INFOPLIST_FILE = SFTHClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.eatbacon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFTHClient.app/SFTHClient";
 			};

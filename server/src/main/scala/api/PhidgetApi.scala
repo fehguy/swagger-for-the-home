@@ -97,7 +97,6 @@ class PhidgetApi(implicit val swagger: Swagger) extends ScalatraServlet
 
   post("/relay/output/:position", operation(setOutputRelayOperation)) {
     val state: Boolean = params.getAs[Boolean]("state").getOrElse(halt(400))
-
     val position: Int = params.getAs[Int]("position").getOrElse(halt(400))
 
     PhidgetApiService.setOutputRelay(state, position)
@@ -107,15 +106,35 @@ class PhidgetApi(implicit val swagger: Swagger) extends ScalatraServlet
     summary "gets an output state"
     parameters (
       queryParam[Boolean]("state").description("").required,
-      pathParam[String]("name").description("").defaultValue("basement").allowableValues("basement", "middle-floor", "upstairs"))
+      pathParam[String]("name").description("")
+      .defaultValue("basement")
+      .allowableValues("basement", "middle-floor", "upstairs"))
   )
 
   post("/relay/zone/:name", operation(updateRelayZoneOperation)) {
     val state: Boolean = params.getAsOrElse[Boolean]("state", halt(400))
-
     val name: String = params.getAs[String]("name").getOrElse(halt(400))
 
     PhidgetApiService.updateRelayZone(state, name)
   }
 
+  val relayOnWithTimerOperation = (apiOperation[Unit]("relayOnWithTimer")
+    summary "Sets a relay with a timer"
+    parameters (
+      pathParam[String]("name").description("")
+      .defaultValue("basement")
+      .allowableValues("basement", "middle-floor", "upstairs"),
+      queryParam[Int]("timer").description("")
+      .required
+      .defaultValue(30)
+      .allowableValues(List(5, 15, 30, 60))
+    )
+  )
+
+  post("/relay/zone/:name/timer", operation(relayOnWithTimerOperation)) {
+    val timer: Int = params.getAsOrElse[Int]("timer", halt(400))
+    val name: String = params.getAs[String]("name").getOrElse(halt(400))
+
+    PhidgetApiService.relayOnWithTimer(name, timer)
+  }
 }

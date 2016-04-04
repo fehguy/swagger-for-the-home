@@ -170,7 +170,7 @@
                     [self setSwitchForZone: self.switch5 state:[zone level]];
                 }
                 else if([[zone _id] isEqual:@"living-room-table-light"]) {
-                    [self setSwitchForZone: self.switch2 state:[zone level]];
+                    [self setSwitchForZone: self.switch1 state:[zone level]];
                 }
                 else if([[zone _id] isEqual:@"living-room-bay-window"]) {
                     [self setSwitchForZone: self.switch6 state:[zone level]];
@@ -324,19 +324,10 @@
     
     int state = 0;
     if([l_switch isOn]) {
-        state = 255;
+        state = 99;
     }
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    [api setSwitchValueWithCompletionBlock:@2 value:[[NSNumber alloc] initWithInt:state] completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    [self setDimmerStateForZone: @"christmas-tree-light"
+                          state: [[NSNumber alloc] initWithInt: state]];
 }
 
 -(IBAction) switch5Timer:(id)sender {

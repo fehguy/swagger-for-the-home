@@ -8,6 +8,12 @@ import com.phidgets.event._
 
 import java.util.Date
 
+import akka.actor._
+import akka.actor.Actor
+import akka.actor.Props
+import scala.concurrent.duration._
+import java.util.concurrent.TimeUnit
+
 import scala.collection.mutable.HashMap
 
 object OutputRelaySupport {
@@ -16,9 +22,30 @@ object OutputRelaySupport {
 }
 
 trait OutputRelaySupport {
+  val system = ActorSystem("RelaySupportScheduler")
+  val relayTimers: HashMap[Int, Long] = new HashMap[Int, Long]
+
+  import system.dispatcher
   val relayDeviceIdMap: Map[String, List[InputZone]] = Configurator.inputZones.groupBy(_.outputDeviceId)
-  println(relayDeviceIdMap)
+
   initRelay(relayDeviceIdMap.keySet)
+
+  var outputRelayCancellable: Option[Cancellable] = None
+
+  def startRelayUpdate = {
+    outputRelayCancellable = Some(system.scheduler.schedule(15 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
+      def run() = {
+        relayTimers.map(m => {
+          if (m._2 < System.currentTimeMillis) {
+            setOutputRelay(false, m._1)
+            relayTimers.remove(m._1)
+            println("shut off switch for " + m._1)
+          } else
+            println("not time for switch " + m._1)
+        })
+      }
+    }))
+  }
 
   def setAllRelayOutput(state: Boolean) = {
     (for (zone <- relayDeviceIdMap.values.flatten) yield {
@@ -109,6 +136,19 @@ trait OutputRelaySupport {
       OutputRelaySupport.relays += id -> relay
       (id, relay)
     }).toMap
+  }
+
+  def relayOnWithTimer(name: String, timer: Int) = {
+    val ids: Set[Int] = name match {
+      case "basement" => Set(1, 2, 3, 8)
+      case "middle-floor" => Set(4, 6, 7, 9, 12)
+      case "upstairs" => Set(10, 11)
+      case _ => Set()
+    }
+    for (i <- ids) {
+      setOutputRelay(true, i)
+      relayTimers += i -> (System.currentTimeMillis + (timer * 60000))
+    }
   }
 
   def disconnectRelay = {

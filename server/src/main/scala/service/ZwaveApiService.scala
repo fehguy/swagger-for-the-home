@@ -18,8 +18,8 @@ import scala.collection.mutable.HashMap
 import scala.concurrent.duration._
 
 object ZwaveApiService {
-  val switches = Set(2, 5, 6)
-  val dimmers = Set(3, 4, 8)
+  val switches = Set(2, 5, 6, 9)
+  val dimmers = Set(3, 4, 8, 10, 11)
 
   val switchTimers: HashMap[Int, Long] = new HashMap[Int, Long]
   val dimmerTimers: HashMap[Int, Long] = new HashMap[Int, Long]
@@ -28,6 +28,7 @@ object ZwaveApiService {
   import system.dispatcher
 
   var zwaveSchedulerCancellable: Option[Cancellable] = None
+
   def startUpdate = {
     zwaveSchedulerCancellable = Some(system.scheduler.schedule(15 seconds, Duration.create(30, TimeUnit.SECONDS), new Runnable {
       def run() = {
@@ -56,7 +57,7 @@ object ZwaveApiService {
   }
 
   def getDeviceState(deviceId: Int) = {
-    val url = new URL("http://192.168.2.90:8083/ZWaveAPI/Data/100")
+    val url = new URL("http://10.0.0.90:8083/ZWaveAPI/Data/100")
     val connection = url.openConnection().asInstanceOf[HttpURLConnection]
     connection.setDoOutput(true)
     connection.setDoInput(true)
@@ -100,7 +101,7 @@ object ZwaveApiService {
   }
 
   def setDimmerValue(deviceId: Int, value: Int) = {
-    val url = new URL("http://192.168.2.90:8083/ZWaveAPI/Run/devices[%d].instances[0].commandClasses[0x26].Set(%d)".format(deviceId, value))
+    val url = new URL("http://10.0.0.90:8083/ZWaveAPI/Run/devices[%d].instances[0].commandClasses[0x26].Set(%d)".format(deviceId, value))
     val connection = url.openConnection().asInstanceOf[HttpURLConnection]
     connection.setDoOutput(true)
     connection.setDoInput(true)
@@ -128,7 +129,7 @@ object ZwaveApiService {
   }
 
   def setSwitchValue(deviceId: Int, value: Int) = {
-    val url = new URL("http://192.168.2.90:8083/ZWaveAPI/Run/devices[%d].instances[0].commandClasses[0x25].Set(%d)".format(deviceId, value))
+    val url = new URL("http://10.0.0.90:8083/ZWaveAPI/Run/devices[%d].instances[0].commandClasses[0x25].Set(%d)".format(deviceId, value))
     val connection = url.openConnection().asInstanceOf[HttpURLConnection]
     connection.setDoOutput(true)
     connection.setDoInput(true)

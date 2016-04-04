@@ -19,6 +19,7 @@ class ScalatraBootstrap extends LifeCycle {
       context mount (new PhidgetApi, "/phidget/*")
       context mount (new EnvironmentApi, "/environment/*")
       context mount (new ZwaveApi, "/zwave/*")
+      context mount (new SonosApi, "/sonos/*")
       context mount (new ResourcesApp, "/api-docs/*")
 
       MongoDBConnectionManager.getConnection("phidgets",
