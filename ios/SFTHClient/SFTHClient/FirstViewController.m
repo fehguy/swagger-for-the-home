@@ -217,19 +217,13 @@
 
 -(IBAction) switch1Timer:(id)sender {
     [self.switch1 setOn:YES animated:YES];
-/*
-    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-    [api setSwitchValueWithTimerWithCompletionBlock:@6 timer:@15 completionHandler:^(NSError *error) {
-        if(error) {
-            NSLog(@"%@", error);
-            [self makeSad];
-        }
-        else {
-            NSLog(@"ok!");
-            [self makeHappy];
+    
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    [api setSwitchTimerWithDeviceId:@"living-room-table-light" value:@"on" minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
         }
     }];
- */
 }
 
 -(IBAction) switch2ValueChanged:(id)sender {
@@ -245,20 +239,14 @@
 
 -(IBAction) switch2Timer:(id)sender {
     [self.switch2 setOn:YES animated:YES];
-    /*
-    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-
-    [api dimmerOnWithTimerWithCompletionBlock:@8 timer:@15 completionHandler:^(NSError *error) {
-        if(error) {
-            NSLog(@"%@", error);
-            [self makeSad];
-        }
-        else {
-            NSLog(@"ok!");
-            [self makeHappy];
+    
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    
+    [api setDimmerTimerWithDeviceId:@"bathroom-hallway" value:@99 minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
         }
     }];
-     */
 }
 
 
@@ -276,18 +264,13 @@
 -(IBAction) switch3Timer:(id)sender {
     [self.switch2 setOn:YES animated:YES];
     
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    
-//    [api dimmerOnWithTimerWithCompletionBlock:@4 timer:@15 completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+
+    [api setDimmerTimerWithDeviceId:@"basement-main" value:@99 minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
+        }
+    }];
 }
 
 -(IBAction) switch4ValueChanged:(id)sender {
@@ -305,18 +288,13 @@
 -(IBAction) switch4Timer:(id)sender {
     [self.switch4 setOn:YES animated:YES];
     
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    
-//    [api dimmerOnWithTimerWithCompletionBlock:@3 timer:@15 completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    
+    [api setDimmerTimerWithDeviceId:@"office-light" value:@99 minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
+        }
+    }];
 }
 
 -(IBAction) switch5ValueChanged:(id)sender {
@@ -333,18 +311,12 @@
 -(IBAction) switch5Timer:(id)sender {
     [self.switch4 setOn:YES animated:YES];
     
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    
-//    [api setSwitchValueWithTimerWithCompletionBlock:@2 timer:@15 completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    [api setSwitchTimerWithDeviceId:@"christmas-tree-light" value:@"on" minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
+        }
+    }];
 }
 
 -(IBAction) switch6ValueChanged:(id)sender {
@@ -361,18 +333,13 @@
 -(IBAction) switch6Timer:(id)sender {
     [self.switch6 setOn:YES animated:YES];
     
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    
-//    [api dimmerOnWithTimerWithCompletionBlock:@1 timer:@15 completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    
+    [api setDimmerTimerWithDeviceId:@"living-room-bay-window" value:@99 minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
+        }
+    }];
 }
 
 -(IBAction) switch7ValueChanged:(id)sender {
@@ -389,18 +356,13 @@
 -(IBAction) switch7Timer:(id)sender {
     [self.switch7 setOn:YES animated:YES];
     
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    
-//    [api dimmerOnWithTimerWithCompletionBlock:@11 timer:@15 completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    
+    [api setDimmerTimerWithDeviceId:@"basement-bathroom" value:@99 minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
+        }
+    }];
 }
 
 -(IBAction) switch8ValueChanged:(id)sender {
@@ -416,18 +378,12 @@
 -(IBAction) switch8Timer:(id)sender {
     [self.switch8 setOn:YES animated:YES];
     
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    
-//    [api setSwitchValueWithTimerWithCompletionBlock:@5 timer:@15 completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    [api setSwitchTimerWithDeviceId:@"fishtank-light" value:@"on" minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
+        }
+    }];
 }
     
 -(IBAction) switch9ValueChanged:(id)sender {
@@ -444,18 +400,12 @@
 -(IBAction) switch9Timer:(id)sender {
     [self.switch9 setOn:YES animated:YES];
     
-//    SWGZwaveApi * api = [[SWGZwaveApi alloc] init];
-//    
-//    [api setSwitchValueWithTimerWithCompletionBlock:@20 timer:@20 completionHandler:^(NSError *error) {
-//        if(error) {
-//            NSLog(@"%@", error);
-//            [self makeSad];
-//        }
-//        else {
-//            NSLog(@"ok!");
-//            [self makeHappy];
-//        }
-//    }];
+    SWGZWaveApi * api = [[SWGZWaveApi alloc] init];
+    [api setSwitchTimerWithDeviceId:@"patio-lights" value:@"on" minutes:@10 completionHandler:^(SWGApiResponse *output, NSError *error) {
+        if(output) {
+            NSLog(@"%@", output);
+        }
+    }];
 }
 
 @end

@@ -213,7 +213,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="switch8Timer:" destination="9pv-A4-QxB" eventType="touchUpInside" id="eNC-pe-2ZC"/>
+                                    <action selector="switch9Timer:" destination="9pv-A4-QxB" eventType="touchUpInside" id="jIV-ik-nT2"/>
                                 </connections>
                             </button>
                         </subviews>

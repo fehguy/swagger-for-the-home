@@ -64,6 +64,23 @@
 ///
 ///
 /// 
+/// sets a dimmer to a specific value on a timer
+///
+/// @param deviceId 
+/// @param value 
+/// @param minutes 
+/// 
+///
+/// @return SWGApiResponse*
+-(NSNumber*) setDimmerTimerWithDeviceId: (NSString*) deviceId
+    value: (NSNumber*) value
+    minutes: (NSNumber*) minutes
+    completionHandler: (void (^)(SWGApiResponse* output, NSError* error)) handler;
+
+
+///
+///
+/// 
 /// 
 ///
 /// @param deviceId 
@@ -73,6 +90,23 @@
 /// @return SWGApiResponse*
 -(NSNumber*) setSwitchWithDeviceId: (NSString*) deviceId
     value: (NSString*) value
+    completionHandler: (void (^)(SWGApiResponse* output, NSError* error)) handler;
+
+
+///
+///
+/// 
+/// sets a switch to a specific value on a timer
+///
+/// @param deviceId 
+/// @param value 
+/// @param minutes 
+/// 
+///
+/// @return SWGApiResponse*
+-(NSNumber*) setSwitchTimerWithDeviceId: (NSString*) deviceId
+    value: (NSString*) value
+    minutes: (NSNumber*) minutes
     completionHandler: (void (^)(SWGApiResponse* output, NSError* error)) handler;
 
 
