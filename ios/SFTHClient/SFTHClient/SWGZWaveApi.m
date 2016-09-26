@@ -81,7 +81,7 @@ static SWGZWaveApi* singletonAPI = nil;
 
     
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/lighting"];
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/lightingSummary"];
 
     // remove format in URL if needed
     if ([resourcePath rangeOfString:@".{format}"].location != NSNotFound) {
